@@ -1,98 +1,75 @@
-# Documentation Blueprint Templates Repository
+# Central Documentation Blueprint Repository
 
-Welcome to the centralized home of the **Decoupled Specs & Distributed Roadmaps** documentation framework. 
+Welcome to the central repository for distributing documentation templates under the **Decoupled Specs & Distributed Roadmaps** framework. 
 
-This repository serves as a **master template distributor**. It defines our organization's standards for specification versioning, technical tracking, and development workflows.
-
-> [!NOTE]
-> When starting a new service or upgrading an existing one, developers copy templates directly from this repository into their project codebases.
+This repository serves strictly as a **central master distributor** for our organization's documentation standards. The rules, directory structures, and workflows for individual project services are defined inside the blueprint files themselves.
 
 ---
 
-## 1. How this Repository Works
+## 🧭 Repository Navigation
 
-This repository contains the official, versioned documentation blueprints and examples. It is organized as follows:
+For all rules and instructions regarding how to structure, write, and version documentation inside individual service codebases, please go directly to the active blueprint:
 
-* **[00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md):** The master framework specification. This file defines the rules, folder structures, and developer workflows that all services must follow.
-* **[CHANGELOG.md](./CHANGELOG.md):** The historical record of the blueprint framework's evolution (e.g., transitions from V1 to V2).
-* **[v1_example_service/](./v1_example_service/):** A fully realized, functional simulation of a service (**Product Catalog Service**) implementing the Version 1.0 guidelines.
-
-### Standard Workflow for New Projects
-1. Create a `docs/` folder in your new service's repository.
-2. Copy the active master blueprint (`00_Documentation_Blueprint.md`) from the root of this repository and paste it into your service's `docs/` folder as `00_Documentation_Blueprint.md`.
-3. Create your service-specific specification skeleton files (e.g., `01_BRD.md`, `02_PRD.md`) using the guidelines defined in the blueprint.
+* **[Active Master Blueprint (Version 1)](./00_Documentation_Blueprint.md):** The authoritative specification detailing directory structures, file boundaries (BRD, User Stories, etc.), implementation roadmaps, and development workflows.
+* **[Active Example Service](./example/example_service/):** The fully compliant, active reference implementation conforming perfectly to the current active blueprint.
+* **[Archived Blueprint Directory](./archive/):** Frozen historical major versions of the blueprint framework and their corresponding example codebases.
 
 ---
 
-## 2. General Blueprint Upgrade Strategy
+## 📌 Repository Directory Layout & Naming Conventions
 
-When the central organization publishes a new major version of the Documentation Blueprint, services are expected to upgrade their local documentation folders to maintain standard compliance. 
+This repository is structured as follows, adhering to explicit naming conventions for active versus archived examples:
 
-Follow this generalized, timeless workflow to upgrade a project:
+* **Active Example Convention:** Conforming to the active blueprint at `./example/example_service/`.
+* **Archived Example Convention:** Frozen at `./archive/v<major>/v<major>_example_service/`.
 
-### Step 1: Identify What Changed
-1. Open this repository's central **[CHANGELOG.md](./CHANGELOG.md)**.
-2. Locate the difference between your project's current blueprint version and the new target version.
-3. Review the **Added**, **Changed**, **Fixed**, and **Removed** sections to note any new mandatory files, renamed documents, or updated section criteria.
-
-### Step 2: Update the Local Blueprint File
-1. In your project's documentation directory (e.g., `docs/`), replace your local `00_Documentation_Blueprint.md` with the latest version from this repository.
-2. The version header at the top (e.g., `Blueprint Version: X`) acts as the compliance statement for your project.
-
-### Step 3: Refactor Specification Files
-* **For Added Files:** Copy any new skeleton templates introduced by the upgrade and populate them with your service's data.
-* **For Changed/Renamed Files:** Rename files according to the new directory structure, and adjust the content schema (e.g., adding new required subsections like Stakeholders, Service Boundaries, or Edge Cases).
-* **For Removed Files:** Safely delete obsolete documentation files or consolidate them as instructed by the changelog.
-
-### Step 4: Align Local Codebase Tracking
-* Adjust local service tracking files (such as `ROADMAP.md` or `CHANGELOG.md`) to comply with the new definition of responsibilities.
-* For example, ensure your roadmap is strictly future-oriented and your history is decoupled cleanly if the new blueprint mandates it.
-
-### Step 5: Verify and Commit
-1. Verify traceability across all updated and newly introduced documents.
-2. Run a local build or validation check to ensure Mermaid diagrams render correctly.
-3. Commit all changes atomically with a descriptive commit message:
-   ```bash
-   git commit -m "docs(blueprint): upgrade documentation schema to Version X"
-   ```
+```text
+documentation-blueprint/
+├── 00_Documentation_Blueprint.md  # Active master blueprint framework (Version 1)
+├── CHANGELOG.md                  # Central history of framework upgrades (Major-only)
+├── README.md                     # Repository entrypoint guide (this file)
+├── plan.v2.blueprint.md          # Temporary design file for upcoming Version 2 (pending draft)
+├── example/                      # Container for active reference implementation
+│   └── example_service/          # Active Version 1 example codebase structure
+└── archive/                      # Historical archive directory
+    └── v1/                       # Archive of Version 1 standard
+        ├── 00_Documentation_Blueprint.md
+        └── v1_example_service/   # Historical Version 1 example service
+```
 
 ---
 
-## 3. Architectural Versioning & Layering Strategy
+## ⚡ Blueprint Update & Contribution Workflow
 
-To prevent version lock and maintain a strict separation of concerns, the documentation framework implements a decoupled, multi-layered versioning hierarchy. Under this design, the blueprint framework intentionally restricts itself to **Major-only version increments** (e.g., `1`, `2`, `3`), completely omitting minor and patch segments.
+To propose or execute a major paradigm shift to our centralized documentation standards, follow this step-by-step workflow:
 
-### 3.1 The Master Blueprint Framework (Structural Standard)
-The master blueprint (`00_Documentation_Blueprint.md`) defines the meta-standard—governing directory layouts, file schema boundaries, and operational workflows for all services. Because this document governs structural rules rather than service-specific domain logic, it is versioned using major integers representing paradigm-shifting framework evolutions (e.g., introducing a new mandatory specification artifact). Minor adjustments, formatting refinements, or typographical corrections are applied in-place without version increments to maintain zero administrative overhead.
-
-### 3.2 Central Specifications: High-Level Semantics (Functional Domain)
-When copied into a service documentation directory (e.g., `my-service-docs/`), the templates serve as the centralized, high-level source of truth (BRD, PRD, and User Stories). 
-* **Scope & Boundaries:** These specifications define *what* is being built and *why*, representing stable functional capabilities.
-* **Versioning:** These artifacts align with the **Project Version** (`MAJOR.MINOR`), incrementing on major workflow redesigns or minor feature additions, completely isolated from internal code refactoring or deployable revisions.
-* **Abstraction:** The high-level specification layer is intentionally kept abstract and free from low-level implementation details to prevent cognitive noise and maintain analyst-developer alignment.
-
-### 3.3 Service Codebases: Low-Level Implementation (Technical Execution)
-Technical execution details reside exclusively within the individual codebase repositories (`my-service-backend/`, `my-service-frontend/`).
-* **Technical Constraints:** Detailed configuration, programming languages, database structures, local runtime instructions, validation logic, and local roadmap tables live locally in the codebase.
-* **Changelogs & Revisions:** Because software development involves high-frequency commits, optimizations, dependency updates, and bug fixes, codebases use full semantic versioning (**`MAJOR.MINOR.PATCH`**).
-* **Isolation:** Isolating low-level execution data to local repositories prevents continuous deployment revisions and minor technical details from polluting the high-level business specifications.
+1. **Step 1: Create a temporary plan file**  
+   Create a new design file in the root of the repository named `plan.v<major>.blueprint.md` (e.g., `plan.v2.blueprint.md`). Use this file to outline, draft, and refine proposed requirements and guidelines for the next major version.
+2. **Step 2: Archive the active blueprint & active examples (Copy-then-Update)**  
+   Before modifying the active root blueprint or active example folders for a new major version, copy the active `00_Documentation_Blueprint.md` into `archive/v<previous_major>/00_Documentation_Blueprint.md` and copy the active root `./example/example_service/` folder into `archive/v<previous_major>/v<previous_major>_example_service/`. This copy-before-overwrite process preserves legacy history before any root updates begin.
+3. **Step 3: Update the root blueprint & examples**  
+   Apply the finalized design changes to the root `00_Documentation_Blueprint.md`. Always update or regenerate the corresponding example implementations inside the root `./example/example_service/` folder to be fully compliant with the new standard.
+4. **Step 4: Update central CHANGELOG**  
+   Document all additions, changes, fixes, and removals in the root `CHANGELOG.md` under the newly released version block.
+5. **Step 5: Cleanup and Release**  
+   Delete the temporary `plan.v<major>.blueprint.md` file from the repository *before* making the final release commit.
 
 ---
 
-### 3.4 Blueprint Archiving & Retrieval Standard
+## 📢 Current Release State
 
-To prevent directory clutter and maintain a single active source of truth in the root folder, this template repository implements a **Directory-Based Archiving Model**:
+* **Active Specification Version:** The current active blueprint version is strictly **Version 1**, as defined by the root [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
+* **Active Reference Example:** The reference implementation at [example/example_service/](./example/example_service/) conforms 100% to this active standard.
+* **Upcoming Release (Version 2):** Framework Version 2 is currently in a **pending draft target** state. All proposed changes reside in the temporary [plan.v2.blueprint.md](./plan.v2.blueprint.md) file.
 
-* **Active Master:** The root `00_Documentation_Blueprint.md` file always represents the latest, active major version of the framework.
-* **Archived Versions:** Historical major versions of the blueprint framework (including their corresponding guideline files and project examples) are permanently frozen and archived under the `./archive/v*` directory (e.g., `./archive/v1/`).
-* **Retrieval & Bootstrapping:** To start or align a legacy service with a previous blueprint standard, developers or AI agents copy templates directly from the corresponding directory inside the `./archive/v*` folder.
+> [!NOTE]  
+> The root [CHANGELOG.md](./CHANGELOG.md) contains a draft entry block for `[2] - 2026-06-01`. This is a **pending draft target** and is only considered officially released and active when the upgrade plan is fully merged into the root `00_Documentation_Blueprint.md` and the temporary planning file is deleted.
 
 ---
 
-## 4. Contributing to the Blueprint Framework
+## 🏷️ Framework Versioning Rules
 
-To propose updates or changes to the documentation standards:
-1. Create a branch in this repository.
-2. Edit `00_Documentation_Blueprint.md` with your suggested structural changes.
-3. Update `CHANGELOG.md` in the root folder, documenting your changes under the next major version release draft.
-4. Submit a Pull Request for review by the architectural board.
+The central blueprint framework itself adheres strictly to **Major-only versioning** (e.g. `1`, `2`, `3`).
+
+* **No Minor or Patch Segments:** Minor segments (like `X.Y` or `X.Y.Z`) are never used for the blueprint framework. Formatting adjustments, typographic corrections, or minor clarifications are made directly in-place without version increments.
+* **Separation of Concerns:** Any other versioning systems used by individual projects (such as `MAJOR.MINOR` for high-level business capabilities or `MAJOR.MINOR.PATCH` for codebase release tagging) are defined and governed exclusively within the active [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md). This repository `README.md` does not duplicate or redefine those implementation rules.
