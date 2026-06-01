@@ -60,7 +60,7 @@ Extract backend-specific and frontend-specific technical criteria from the user 
 When you or an AI agent builds a feature:
 1. **Implement the Code**: Write the code and tests within the service directory (e.g., `my-service-backend`).
 2. **Update the Roadmap**: Change the status of completed items from `[ ]` to `[x]` in that service's local `ROADMAP.md`.
-3. **Commit Atomic-ly**: Commit the code changes *and* the updated `ROADMAP.md` together in a single commit:
+3. **Commit Atomically**: Commit the code changes *and* the updated `ROADMAP.md` together in a single commit:
    ```bash
    git add .
    git commit -m "feat(category): add schema & update local roadmap"
