@@ -792,3 +792,13 @@ This repository tracks codebase changes via **Service Versions (`MAJOR.MINOR.PAT
 * Prisma model database schemas and migration scripts.
 * DTO input validations and API routing configurations.
 ```
+
+---
+
+## 📄 Metadata & Copyright
+
+* **Framework:** Decoupled Specs & Distributed Roadmaps Framework
+* **Current Version:** Version 2 (Major-only)
+* **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
+* **License:** MIT
+* **Copyright:** © 2026 mfauzanfikri. All rights reserved.

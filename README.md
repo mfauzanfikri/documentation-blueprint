@@ -89,3 +89,13 @@ The central blueprint framework itself adheres strictly to **Major-only versioni
 
 * **No Minor or Patch Segments:** Minor segments (like `X.Y` or `X.Y.Z`) are never used for the blueprint framework. Formatting adjustments, typographic corrections, or minor clarifications are made directly in-place without version increments.
 * **Separation of Concerns:** Any other versioning systems used by individual projects (such as `MAJOR.MINOR` for high-level business capabilities or `MAJOR.MINOR.PATCH` for codebase release tagging) are defined and governed exclusively within the active [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md). This repository `README.md` does not duplicate or redefine those implementation rules.
+
+---
+
+## 📄 Metadata & Copyright
+
+* **Framework:** Decoupled Specs & Distributed Roadmaps Framework
+* **Current Version:** Version 2 (Major-only)
+* **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
+* **License:** MIT
+* **Copyright:** © 2026 mfauzanfikri. All rights reserved.
