@@ -1,5 +1,6 @@
 # Blueprint: Decoupled Specs & Distributed Roadmaps Documentation Approach
-**Version:** 2
+**Version:** 2  
+**Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 
 This document defines the standard requirements, structures, templates, and workflows for distributing documentation inside individual project services. Replicate this exact blueprint for all future services.
 
@@ -573,44 +574,21 @@ Avoid unnecessary process overhead.
 
 ---
 
-# 13. Blueprint Migration & Release Workflow
+# 13. Reusable Roadmap Migration & Carry-Forward Rules
 
-Upgrading a repository from Documentation Blueprint Version 1 to Version 2 requires a methodical, low-risk transition to maintain boundary safety.
+When transitioning active project documentation and local roadmaps from Version 1 to Version 2 standards:
 
-## 13.1 Root Draft/Release Convention
-To prevent upcoming framework versions from appearing officially active before approval:
-1. **Draft State:** Any proposed blueprint revisions under review must be written in a temporary `plan.v<major>.blueprint.md` file (e.g., `plan.v2.blueprint.md`).
-2. **Root Changelog Draft Tag:** In the root `CHANGELOG.md`, the version entry for the upcoming framework version must be explicitly marked as draft/unreleased (e.g., `## [2] - Draft / Under Review` or `## [2] - Pending Release`).
-3. **Official Release:** Once approved and merged, the root `CHANGELOG.md` tag is updated to `## [2] - YYYY-MM-DD` and the temporary planning file is deleted.
+## 13.1 Remove Completed Rows
+Extract all completed items (marked `[x]`) from the service's `ROADMAP.md` file.
 
-## 13.2 Concrete Migration Checklist
-When executing the migration from Version 1 to Version 2, perform the following tasks:
+## 13.2 Backfill Codebase Changelog
+* Record all completed implementations in the codebase `CHANGELOG.md` under the correct historical service/package version entry (the version in which they were actually released).
+* **Cold-Start Rule:** If no codebase `CHANGELOG.md` existed before the migration, initialize it with a baseline version entry (e.g., `[1.0.0]`) and document all completed historical implementations under it using the implementation-focused wording standard.
 
-1. **Archive the Active v1 Assets (Copy-then-Update):**
-   * Create the directory `archive/v1/` if it does not exist.
-   * Copy the active master blueprint `00_Documentation_Blueprint.md` into `archive/v1/00_Documentation_Blueprint.md`.
-   * Copy the active `./example/example_service/` directory into `archive/v1/v1_example_service/` to freeze the Version 1 reference structure.
-2. **Replace Master Blueprint:**
-   * Overwrite `00_Documentation_Blueprint.md` in the root with the finalized contents of the approved Version 2 blueprint.
-3. **Update root files:**
-   * Update root `README.md` to point to the new Version 2 active specification, update the navigation folder structure tree, and update the "Current Release State".
-   * Update the root `CHANGELOG.md` entry for `[2]` by removing the draft tag and replacing it with the active release date.
-4. **Upgrade reference examples:**
-   * Restructure the `./example/` directory to comprehensively cover all three layout patterns (Pattern A: `pattern-a-multi-repo`, Pattern B: `pattern-b-monorepo`, Pattern C: `pattern-c-monolith`).
-   * Upgrade all reference example specifications and execution boundaries to conform 100% to Version 2 standards (e.g. creating PRDs, Architecture docs, Decision Logs, Specs Changelogs, codebase READMEs, and codebase Changelogs).
-5. **Delete Temporary Plan:**
-   * Delete `plan.v2.blueprint.md` from the root directory.
-
-## 13.3 Roadmap Migration & Carry-Forward Rules
-When transitioning active local roadmaps from v1 to v2:
-1. **Remove Completed Rows:** Extract all completed items (marked `[x]`) from `ROADMAP.md`.
-2. **Backfill Codebase Changelog:**
-   * Record the completed implementations in the codebase `CHANGELOG.md` under the correct historical service/package version entry (the version in which they were released).
-   * **Cold-Start Rule:** If no codebase `CHANGELOG.md` existed before the migration, initialize it with a baseline version entry (e.g., `[1.0.0]`) and document all completed historical implementations under it using the implementation-focused wording standard.
-3. **Carry-Forward Incomplete Rows:** 
-   * Carry forward all incomplete items (marked `[ ]`) into the new v2 `ROADMAP.md`.
-   * Assign each carried-forward item a stable Verification Criteria ID (e.g., `BE-US-CAT-01-002`).
-   * Review all carried-forward tasks for validity against the updated specifications.
+## 13.3 Carry-Forward Incomplete Rows
+* Carry forward all incomplete items (marked `[ ]`) into the new v2 `ROADMAP.md`.
+* Assign each carried-forward item a stable Verification Criteria ID (e.g., `BE-US-CAT-01-002`).
+* Review all carried-forward tasks for validity against the updated specifications.
 
 ---
 

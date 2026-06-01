@@ -16,6 +16,7 @@ All notable changes to the Documentation Blueprint framework will be documented 
 - Replaced `03_Diagrams.md` with **`04_Architecture.md`** to house database ERDs, system flows, integration sequence diagrams, boundaries, and technical constraints.
 - Renamed and reordered specification files in the template hierarchy for improved logical mapping.
 - Refined `ROADMAP.md` to be strictly **future-oriented** task checklists, decoupling historical records into the new local `CHANGELOG.md`.
+- Decoupled portable service documentation rules from central repository maintenance workflows, moving repository-maintenance guidelines and archival checklists to `README.md`.
 
 ---
 

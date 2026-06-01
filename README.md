@@ -1,5 +1,7 @@
 # Central Documentation Blueprint Repository
 
+**Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
+
 Welcome to the central repository for distributing documentation templates under the **Decoupled Specs & Distributed Roadmaps** framework. 
 
 This repository serves strictly as a **central master distributor** for our organization's documentation standards. The rules, directory structures, and workflows for individual project services are defined inside the blueprint files themselves.
@@ -44,20 +46,32 @@ documentation-blueprint/
 
 ---
 
-## ⚡ Blueprint Update & Contribution Workflow
+## ⚡ Central Blueprint Update & Contribution Workflow
 
-To propose or execute a major paradigm shift to our centralized documentation standards, follow this step-by-step workflow:
+To propose or execute a major paradigm shift to our centralized documentation standards, follow this step-by-step central repository maintenance workflow:
 
-1. **Step 1: Create a temporary plan file**  
-   Create a new design file in the root of the repository named `plan.v<major>.blueprint.md` (e.g., `plan.v2.blueprint.md`). Use this file to outline, draft, and refine proposed requirements and guidelines for the next major version.
-2. **Step 2: Archive the active blueprint & active examples (Copy-then-Update)**  
-   Before modifying the active root blueprint or active example folders for a new major version, copy the active `00_Documentation_Blueprint.md` into `archive/v<previous_major>/00_Documentation_Blueprint.md` and copy the active root `./example/` pattern directories into `archive/v<previous_major>/v<previous_major>_example_service/`. This copy-before-overwrite process preserves legacy history before any root updates begin.
-3. **Step 3: Update the root blueprint & examples**  
-   Apply the finalized design changes to the root `00_Documentation_Blueprint.md`. Always update or regenerate the corresponding example implementations inside the root `./example/` directory (`pattern-a-multi-repo`, `pattern-b-monorepo`, and `pattern-c-monolith`) to be fully compliant with the new standard.
-4. **Step 4: Update central CHANGELOG**  
-   Document all additions, changes, fixes, and removals in the root `CHANGELOG.md` under the newly released version block.
-5. **Step 5: Cleanup and Release**  
-   Delete the temporary `plan.v<major>.blueprint.md` file from the repository *before* making the final release commit.
+### 1. Draft State & Naming Convention
+To prevent upcoming framework versions from appearing officially active before formal approval:
+* **Temporary Plan File:** All proposed blueprint revisions under review must be written in a temporary `plan.v<major>.blueprint.md` file (e.g., `plan.v2.blueprint.md`) at the repository root.
+* **Root Changelog Draft Tag:** In the root `CHANGELOG.md`, the version entry for the upcoming framework version must be explicitly marked as draft/unreleased (e.g., `## [2] - Draft / Under Review` or `## [2] - Pending Release`).
+
+### 2. Concrete Archival Process (Copy-then-Update)
+Before modifying active repository files for a new major version, freeze the legacy standard:
+1. Create the target archive directory `archive/v<previous_major>/` if it does not exist (e.g., `archive/v1/`).
+2. Copy the active master blueprint `00_Documentation_Blueprint.md` into `archive/v<previous_major>/00_Documentation_Blueprint.md`.
+3. Copy the active root `./example/` pattern directories into `archive/v<previous_major>/v<previous_major>_example_service/` to freeze the reference structure.
+
+### 3. Upgrading Master Specifications & Reference Examples
+Apply changes to the root master files after formal approval:
+1. Update the active root `00_Documentation_Blueprint.md` with the approved final content of the new blueprint version.
+2. Restructure and upgrade all reference example specifications and execution boundaries inside `./example/` (including `pattern-a-multi-repo`, `pattern-b-monorepo`, and `pattern-c-monolith`) to be 100% compliant with the new master specification version.
+
+### 4. Releasing and Final Cleanup
+To officially publish the new centralized standard:
+1. Update this root `README.md` to reference the new active blueprint version, update the navigation folder structure tree, and update the "Current Release State".
+2. Update the root `CHANGELOG.md` entry by removing the draft tag and replacing it with the active release date (e.g., changing `## [2] - Pending Release` to `## [2] - 2026-06-01`).
+3. Delete the temporary `plan.v<major>.blueprint.md` file from the root directory.
+4. Commit the finalized assets and publish them through the approved repository workflow.
 
 ---
 
