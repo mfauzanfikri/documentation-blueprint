@@ -79,6 +79,16 @@ Technical execution details reside exclusively within the individual codebase re
 
 ---
 
+### 3.4 Blueprint Archiving & Retrieval Standard
+
+To prevent directory clutter and maintain a single active source of truth in the root folder, this template repository implements a **Directory-Based Archiving Model**:
+
+* **Active Master:** The root `00_Documentation_Blueprint.md` file always represents the latest, active major version of the framework.
+* **Archived Versions:** Historical major versions of the blueprint framework (including their corresponding guideline files and project examples) are permanently frozen and archived under the `./archive/v*` directory (e.g., `./archive/v1/`).
+* **Retrieval & Bootstrapping:** To start or align a legacy service with a previous blueprint standard, developers or AI agents copy templates directly from the corresponding directory inside the `./archive/v*` folder.
+
+---
+
 ## 4. Contributing to the Blueprint Framework
 
 To propose updates or changes to the documentation standards:
