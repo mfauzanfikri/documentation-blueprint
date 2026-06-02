@@ -17,7 +17,7 @@ For all rules and instructions regarding how to structure, write, and version do
   * **[Pattern A: Multi-Repository Layout](./example/pattern-a-multi-repo/):** Decoupled specification and codebase repositories.
   * **[Pattern B: Single-Repository Monorepo Layout](./example/pattern-b-monorepo/):** Central `/docs/` specs with apps subpackages.
   * **[Pattern C: Single-Repository Monolith Layout](./example/pattern-c-monolith/):** Central `/docs/` specs and root codebase.
-  * *All reference examples comprehensively cover all target use cases and structural requirements of the blueprint.*
+  * *All reference examples are structured to demonstrate the key use cases and file requirements of the blueprint across each supported layout pattern.*
 * **[Archived Blueprint Directory](./archive/):** Frozen historical major versions of the blueprint framework and their corresponding example codebases.
 
 ---
@@ -43,6 +43,29 @@ documentation-blueprint/
         ├── 00_Documentation_Blueprint.md
         └── v1_example_service/   # Historical Version 1 example service
 ```
+
+---
+
+## 🚀 How to Adopt an Example
+
+To bootstrap a new project from one of the reference examples, follow these steps:
+
+| Step | Action |
+| :--- | :--- |
+| 1 | **Pick your pattern.** Choose the layout that matches your architecture (see table below). |
+| 2 | **Copy the example folder** into your new repository root. |
+| 3 | **Rename all placeholders.** Replace `product-catalog-*` with your own service name across all file paths, headings, and content. |
+| 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` (or `v2-docs/`) with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
+| 5 | **Fill in the specs.** Work through `01_BRD.md` → `02_PRD.md` → `03_User_Stories.md` → `04_Architecture.md` following the development workflow defined in Section 7 of the blueprint. |
+| 6 | **Assign Verification Criteria IDs.** Populate your service `ROADMAP.md` files with stable IDs before starting implementation (see Section 6.2 of the blueprint). |
+
+### Pattern Selection Guide
+
+| Pattern | Layout | When to Use |
+| :--- | :--- | :--- |
+| **A — Multi-Repository** | Specs and each service in separate Git repositories | Independent deployment cadences; separate team ownership per service |
+| **B — Monorepo** | Single repository with `docs/` specs and `apps/*` packages | Shared CI/CD; tightly coupled services that are still logically separate |
+| **C — Monolith** | Single repository with `docs/` specs and `src/` codebase | Single deployable application handling all concerns |
 
 ---
 
