@@ -1,28 +1,50 @@
-# Product Catalog Monolith
+# product-catalog-monolith
 
-Welcome to the central monolith repository for the Product Catalog ecosystem (Pattern C layout).
+## 1. Overview & Purpose
 
-## 📁 Repository Structure
-* **`docs/`**: Specification Boundary housing business requirements, product capabilities, and architecture schemas.
-* **`src/`**: Monolithic application source code (handling both backend and frontend UI views).
-* **`ROADMAP.md`**: Unified monolith active technical tracking roadmap.
-* **`CHANGELOG.md`**: Unified monolith technical implementation changelog.
+This is the monolith codebase boundary for the Product Catalog Service (Pattern C layout). Its responsibility is to manage the full product catalog lifecycle — including category hierarchies, product master records, and the merchandiser-facing UI — within a single deployable application.
 
-## ⚡ Global Dev Setup
-To set up and run the monolithic application:
+## 2. Technology Stack Mapping
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| Language | TypeScript | Type-safe full-stack development |
+| Framework | NestJS | REST API engine and application structure |
+| UI Layer | React | Merchandiser dashboard and form components |
+| Styling | Tailwind CSS | Utility-first responsive styling |
+| Database / ORM | Prisma / PostgreSQL | Object-Relational Mapping and data persistence |
+| Validation | class-validator / Zod | DTO and client-side form validation |
+
+## 3. Setup & Development Instructions
+
+### Prerequisites
+
+| Requirement | Minimum Version |
+| :--- | :--- |
+| Node.js | v18 or higher |
+| PostgreSQL | Active local or remote instance |
+
+### Quickstart Commands
+
 ```bash
 # Install dependencies
 npm install
 
-# Start database migrations and local dev server
+# Apply Prisma database migrations and start local dev server
 npm run dev
 
 # Run all monolith test suites
 npm test
 ```
 
-## 🧭 Specifications Navigation
-* **Master Documentation Blueprint:** [00_Documentation_Blueprint.md](./docs/00_Documentation_Blueprint.md)
-* **Business Requirements (BRD):** [01_BRD.md](./docs/01_BRD.md)
-* **Product Requirements (PRD):** [02_PRD.md](./docs/02_PRD.md)
-* **Technical Architecture:** [04_Architecture.md](./docs/04_Architecture.md)
+## 4. Documentation References
+
+| Document | Path |
+| :--- | :--- |
+| Documentation Blueprint | [00_Documentation_Blueprint.md](./docs/00_Documentation_Blueprint.md) |
+| Business Requirements (BRD) | [01_BRD.md](./docs/01_BRD.md) |
+| Product Requirements (PRD) | [02_PRD.md](./docs/02_PRD.md) |
+| User Stories | [03_User_Stories.md](./docs/03_User_Stories.md) |
+| Technical Architecture | [04_Architecture.md](./docs/04_Architecture.md) |
+| Requirement Mapping | [05_Requirement_Mapping.md](./docs/05_Requirement_Mapping.md) |
+| Decision Log | [06_Decision_Log.md](./docs/06_Decision_Log.md) |
