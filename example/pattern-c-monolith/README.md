@@ -1,10 +1,22 @@
 # product-catalog-monolith
 
-## 1. Overview & Purpose
+## 1. Service Metadata
+
+| Field | Value |
+| :--- | :--- |
+| Service / Package Name | product-catalog-monolith |
+| Execution Boundary | Monolith |
+| Service Version | 1.0.0 |
+| Compatible Project Version | 1.0 |
+| Blueprint Version | 3 |
+| Release Status | Stable Example |
+| Owner / Maintainer | Product Catalog Platform Team |
+
+## 2. Overview & Purpose
 
 This is the monolith codebase boundary for the Product Catalog Service (Pattern C layout). Its responsibility is to manage the full product catalog lifecycle — including category hierarchies, product master records, and the merchandiser-facing UI — within a single deployable application.
 
-## 2. Technology Stack Mapping
+## 3. Technology Stack Mapping
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -15,7 +27,7 @@ This is the monolith codebase boundary for the Product Catalog Service (Pattern 
 | Database / ORM | Prisma / PostgreSQL | Object-Relational Mapping and data persistence |
 | Validation | class-validator / Zod | DTO and client-side form validation |
 
-## 3. Setup & Development Instructions
+## 4. Setup & Development Instructions
 
 ### Prerequisites
 
@@ -37,7 +49,7 @@ npm run dev
 npm test
 ```
 
-## 4. Documentation References
+## 5. Documentation References
 
 | Document | Path |
 | :--- | :--- |

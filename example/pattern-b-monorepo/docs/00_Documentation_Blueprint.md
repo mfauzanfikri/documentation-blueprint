@@ -540,6 +540,7 @@ authority_level: Project capability release history.
 purpose: Explain the execution boundary, local setup, technology stack, and documentation references.
 primary_question: What is this service, package, or monolith?
 allowed_content:
+  - Service metadata
   - Service or package purpose
   - Implementation responsibilities
   - Technology stack mapping
@@ -555,6 +556,16 @@ dependencies:
 temporal_scope: Active execution-boundary operating guide.
 authority_level: Service-level implementation guide.
 ```
+
+Service metadata must include:
+
+* Service / Package Name
+* Execution Boundary
+* Service Version
+* Compatible Project Version
+* Blueprint Version
+* Release Status
+* Owner / Maintainer
 
 ## 7.9 Execution ROADMAP Contract
 
@@ -796,6 +807,7 @@ Must contain:
 Purpose:
 > What is this service, package, or monolith?
 Must contain:
+* Service metadata table
 * Service/Package purpose and responsibilities
 * Technology stack mapping table
 * Local setup, build, and test execution instructions
@@ -1336,17 +1348,28 @@ This project tracks functional specs capabilities via **Project Versions (`MAJOR
 ````markdown
 # [Service/Package Name]
 
-## 1. Overview & Purpose
+## 1. Service Metadata
+| Field | Value |
+| :--- | :--- |
+| Service / Package Name | [Service or package name] |
+| Execution Boundary | [Backend Service | Frontend UI | Monolith | Package | Workspace] |
+| Service Version | [MAJOR.MINOR.PATCH, e.g., 1.0.0] |
+| Compatible Project Version | [MAJOR.MINOR, e.g., 1.0] |
+| Blueprint Version | [Blueprint major version, e.g., 3] |
+| Release Status | [Draft | Active | Stable | Deprecated | Archived] |
+| Owner / Maintainer | [Team, role, or maintainer name] |
+
+## 2. Overview & Purpose
 [A clear description of this codebase boundary (backend, frontend, or monolith) and its implementation responsibilities. Reference master requirements instead of rewriting them.]
 
-## 2. Technology Stack Mapping
+## 3. Technology Stack Mapping
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
 | Language | [e.g., TypeScript] | Type-safe development |
 | Web Server | [e.g., NestJS / Express] | REST API engine |
 | Database / ORM | [e.g., Prisma / PostgreSQL] | Data persistence |
 
-## 3. Setup & Development Instructions
+## 4. Setup & Development Instructions
 ### Prerequisites
 * Node.js version ...
 * Database instance ...
@@ -1363,7 +1386,7 @@ npm run dev
 npm run test
 ```
 
-## 4. Documentation References
+## 5. Documentation References
 * **Documentation Blueprint:** [00_Documentation_Blueprint.md]([path-to-specs]/00_Documentation_Blueprint.md)
 * **Product Requirements (PRD):** [02_PRD.md]([path-to-specs]/02_PRD.md)
 * **Technical Architecture:** [04_Architecture.md]([path-to-specs]/04_Architecture.md)

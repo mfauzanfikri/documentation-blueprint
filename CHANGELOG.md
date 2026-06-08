@@ -16,6 +16,7 @@ All notable changes to the Documentation Blueprint framework will be documented 
 - **Project Context examples** and validation findings across all active reference patterns.
 - **BRD business flow diagram guidance** to improve readability of business processes while keeping technical sequence details in Architecture.
 - **PRD design-reference anti-fabrication rules** requiring Figma, wireframe, prototype, and external design references to be verified or explicitly provided.
+- **Service README metadata standard** requiring identity, boundary, version, compatibility, status, and ownership metadata for execution-boundary READMEs.
 
 ### Changed
 - Upgraded the blueprint framework version to **Version 3**.
