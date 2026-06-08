@@ -1,6 +1,6 @@
 # Monolith Roadmap - Product Catalog Monolith
 **Repository:** `product-catalog-monolith`
-**Latest Specifications Milestone:** `v2`
+**Latest Specifications Milestone:** `v3`
 
 This unified monolith roadmap tracks both backend and frontend active technical tasks. Completed tasks are documented in the codebase CHANGELOG.md.
 

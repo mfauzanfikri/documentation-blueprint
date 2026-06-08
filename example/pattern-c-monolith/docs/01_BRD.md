@@ -46,3 +46,23 @@ A logic group to classify products. Must have:
 A specific item offered for sale. Must have:
 * **SKU (Stock Keeping Unit):** Strict unique alphanumeric code (e.g., `PROD-CAT-001`).
 * **Price:** Base cost of the item, which cannot be negative.
+
+---
+
+## 5. Business Flow Diagrams
+
+### Flow A: Category Setup and Product Onboarding
+
+```mermaid
+flowchart TD
+    A[Merchandiser identifies catalog structure need] --> B[Create or update category hierarchy]
+    B --> C{Category is valid and active?}
+    C -->|No| D[Resolve category business rules before product assignment]
+    C -->|Yes| E[Create product master record with SKU and price]
+    E --> F{Product data passes business validation?}
+    F -->|No| G[Correct SKU, price, or category assignment]
+    F -->|Yes| H[Product becomes available as trusted catalog master data]
+    H --> I[Inventory, checkout, and downstream clients consume catalog reference data]
+```
+
+This diagram shows the business process and decision points only. Technical APIs, database operations, and UI implementation details belong in Architecture, ROADMAP, or codebase documentation.

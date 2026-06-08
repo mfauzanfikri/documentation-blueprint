@@ -8,8 +8,8 @@ This document maps target user outcomes to specific functional requirements and 
 ## Feature Module: Category Management
 
 ### US-CAT-01: Create and Manage Categories
-**As a** Merchandiser,  
-**I want to** create, update, and organize product categories,  
+**As a** Merchandiser,
+**I want to** create, update, and organize product categories,
 **So that** I can structure our catalog hierarchy logically for customer navigation.
 
 #### Acceptance Criteria:
@@ -24,8 +24,8 @@ This document maps target user outcomes to specific functional requirements and 
 ## Feature Module: Product Management
 
 ### US-PROD-01: Create Products with SKUs
-**As a** Merchandiser,  
-**I want to** create a new product and assign it to an existing category with a unique SKU,  
+**As a** Merchandiser,
+**I want to** create a new product and assign it to an existing category with a unique SKU,
 **So that** inventory systems can uniquely identify it.
 
 #### Acceptance Criteria:

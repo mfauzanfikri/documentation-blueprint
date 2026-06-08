@@ -1,6 +1,6 @@
 # Platform Roadmap - Product Catalog Monorepo
 **Workspace:** `product-catalog-monorepo`
-**Latest Specifications Milestone:** `v2`
+**Latest Specifications Milestone:** `v3`
 
 This roadmap tracks global monorepo-wide CI/CD, pipeline, and integration tasks. ROADMAPs are strictly future-oriented.
 

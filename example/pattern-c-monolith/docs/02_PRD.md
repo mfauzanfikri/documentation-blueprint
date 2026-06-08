@@ -26,5 +26,6 @@ The Product Catalog Service provides hierarchical classification (Categories) an
 2. **Product Onboarding:** Merchandiser registers a product (e.g. name: `ThinkPad X1`, SKU: `LEN-TP-X1`, price: `1200.00`) and selects `Computers` category. If the category is soft-deleted, onboarding is blocked.
 
 ## 5. UI/UX Figma & Wireframe References
-* **Figma Project Link:** `https://figma.com/file/product-catalog-reference` (Mock link for example reference)
+* **Figma Project Link:** `Not Provided`
+* **Wireframe / Prototype References:** `Not Provided`
 * **Design Guidelines:** Conforms to enterprise design standard patterns using clear classification dropdowns and active validation status indicators.

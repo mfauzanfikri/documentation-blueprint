@@ -53,13 +53,13 @@ sequenceDiagram
     UI->>Service: POST /api/products (name, sku, price, category_id)
     Service->>DB: Query Category by category_id
     DB-->>Service: Category found (deleted_at is null)
-    
+
     Service->>DB: Query Product by SKU
     DB-->>Service: No matching product found (SKU unique)
-    
+
     Service->>DB: Insert Product
     DB-->>Service: Product inserted (id, created_at)
-    
+
     Service-->>UI: 201 Created (Product Details JSON)
 ```
 

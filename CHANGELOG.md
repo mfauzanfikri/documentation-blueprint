@@ -4,6 +4,27 @@ All notable changes to the Documentation Blueprint framework will be documented 
 
 ---
 
+## [3] - 2026-06-08
+### Added
+- **Project Context** as a temporary, non-authoritative adoption input for brownfield documentation and AI-assisted context normalization.
+- **Evidence and Confidence Classification** to distinguish Explicit Facts, Derived Facts, Assumptions, Unknowns, and confidence levels in Project Context and validation findings.
+- **Central Artifact Contracts** defining purpose, allowed content, forbidden content, dependencies, temporal scope, and authority level for each required specification and execution artifact.
+- **Traceability Integrity Validation** requiring stable IDs, valid links, correct targets, supporting evidence, and temporal state.
+- **Master-Service Hierarchy Rules** clarifying that master documentation owns business intent while service documentation owns implementation context.
+- **Temporal Scope Rules** for state-sensitive artifacts including ROADMAP, CHANGELOG, Decision Log, and validation findings.
+- **Validation Framework** with finding format and lifecycle states: Open, Resolved, Accepted Risk, and Rejected.
+- **Project Context examples** and validation findings across all active reference patterns.
+- **BRD business flow diagram guidance** to improve readability of business processes while keeping technical sequence details in Architecture.
+- **PRD design-reference anti-fabrication rules** requiring Figma, wireframe, prototype, and external design references to be verified or explicitly provided.
+
+### Changed
+- Upgraded the blueprint framework version to **Version 3**.
+- Upgraded active reference examples to Version 3 and renamed Pattern A reference folders from `v2-*` to `v3-*`.
+- Archived the Version 2 master blueprint and active example set under `archive/v2/`.
+- Updated repository navigation, adoption steps, active release state, and metadata for Version 3.
+
+---
+
 ## [2] - 2026-06-01
 ### Added
 - **Product Requirements Document (PRD)** (`02_PRD.md` template) to specify functional requirements, product capabilities, and wireframe references.

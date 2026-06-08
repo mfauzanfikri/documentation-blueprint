@@ -2,7 +2,7 @@
 
 **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 
-Welcome to the central repository for distributing documentation templates under the **Decoupled Specs & Distributed Roadmaps** framework. 
+Welcome to the central repository for distributing documentation templates under the **Decoupled Specs & Distributed Roadmaps** framework.
 
 This repository serves strictly as a **central master distributor** for our organization's documentation standards. The rules, directory structures, and workflows for individual project services are defined inside the blueprint files themselves.
 
@@ -12,8 +12,8 @@ This repository serves strictly as a **central master distributor** for our orga
 
 For all rules and instructions regarding how to structure, write, and version documentation inside individual service codebases, please go directly to the active blueprint:
 
-* **[Active Master Blueprint (Version 2)](./00_Documentation_Blueprint.md):** The authoritative specification detailing directory structures, file boundaries (BRD, PRD, User Stories, Architecture, Decision Logs, Specs Changelogs), implementation roadmaps, and development workflows.
-* **Active Reference Examples:** Fully compliant active reference implementations conforming perfectly to the current active Version 2 blueprint:
+* **[Active Master Blueprint (Version 3)](./00_Documentation_Blueprint.md):** The authoritative specification detailing directory structures, file boundaries (BRD, PRD, User Stories, Architecture, Decision Logs, Specs Changelogs), Project Context usage, evidence classification, artifact contracts, validation rules, implementation roadmaps, and development workflows.
+* **Active Reference Examples:** Fully compliant active reference implementations conforming to the current active Version 3 blueprint:
   * **[Pattern A: Multi-Repository Layout](./example/pattern-a-multi-repo/):** Decoupled specification and codebase repositories.
   * **[Pattern B: Single-Repository Monorepo Layout](./example/pattern-b-monorepo/):** Central `/docs/` specs with apps subpackages.
   * **[Pattern C: Single-Repository Monolith Layout](./example/pattern-c-monolith/):** Central `/docs/` specs and root codebase.
@@ -31,7 +31,7 @@ This repository is structured as follows, adhering to explicit naming convention
 
 ```text
 documentation-blueprint/
-├── 00_Documentation_Blueprint.md  # Active master blueprint framework (Version 2)
+├── 00_Documentation_Blueprint.md  # Active master blueprint framework (Version 3)
 ├── CHANGELOG.md                  # Central history of framework upgrades (Major-only)
 ├── README.md                     # Repository entrypoint guide (this file)
 ├── example/                      # Container for active reference implementations
@@ -39,9 +39,12 @@ documentation-blueprint/
 │   ├── pattern-b-monorepo/       # Pattern B: Monorepo reference example
 │   └── pattern-c-monolith/       # Pattern C: Monolith reference example
 └── archive/                      # Historical archive directory
-    └── v1/                       # Archive of Version 1 standard
+    ├── v1/                       # Archive of Version 1 standard
+    │   ├── 00_Documentation_Blueprint.md
+    │   └── v1_example_service/   # Historical Version 1 example service
+    └── v2/                       # Archive of Version 2 standard
         ├── 00_Documentation_Blueprint.md
-        └── v1_example_service/   # Historical Version 1 example service
+        └── v2_example_service/   # Historical Version 2 example service
 ```
 
 ---
@@ -55,9 +58,10 @@ To bootstrap a new project from one of the reference examples, follow these step
 | 1 | **Pick your pattern.** Choose the layout that matches your architecture (see table below). |
 | 2 | **Copy the example folder** into your new repository root. |
 | 3 | **Rename all placeholders.** Replace `product-catalog-*` with your own service name across all file paths, headings, and content. |
-| 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` (or `v2-docs/`) with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
-| 5 | **Fill in the specs.** Work through `01_BRD.md` → `02_PRD.md` → `03_User_Stories.md` → `04_Architecture.md` following the development workflow defined in Section 7 of the blueprint. |
-| 6 | **Assign Verification Criteria IDs.** Populate your service `ROADMAP.md` files with stable IDs before starting implementation (see Section 6.2 of the blueprint). |
+| 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` (or `v3-docs/` for the Pattern A reference example) with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
+| 5 | **Fill in the specs.** Work through `01_BRD.md` → `02_PRD.md` → `03_User_Stories.md` → `04_Architecture.md` following the development workflow defined in Section 13 of the blueprint. |
+| 6 | **Assign Verification Criteria IDs.** Populate your service `ROADMAP.md` files with stable IDs before starting implementation (see Section 9.2 of the blueprint). |
+| 7 | **Validate evidence and boundaries.** Use temporary Project Context when needed, then resolve or accept validation findings before treating generated artifacts as reliable. |
 
 ### Pattern Selection Guide
 
@@ -76,7 +80,7 @@ To propose or execute a major paradigm shift to our centralized documentation st
 ### 1. Draft State & Naming Convention
 To prevent upcoming framework versions from appearing officially active before formal approval:
 * **Temporary Plan File:** All proposed blueprint revisions under review must be written in a temporary `plan.v<major>.blueprint.md` file (e.g., `plan.v2.blueprint.md`) at the repository root.
-* **Root Changelog Draft Tag:** In the root `CHANGELOG.md`, the version entry for the upcoming framework version must be explicitly marked as draft/unreleased (e.g., `## [2] - Draft / Under Review` or `## [2] - Pending Release`).
+* **Root Changelog Draft Tag:** In the root `CHANGELOG.md`, the version entry for the upcoming framework version must be explicitly marked as draft/unreleased (e.g., `## [next-major] - Draft / Under Review` or `## [next-major] - Pending Release`).
 
 ### 2. Concrete Archival Process (Copy-then-Update)
 Before modifying active repository files for a new major version, freeze the legacy standard:
@@ -92,7 +96,7 @@ Apply changes to the root master files after formal approval:
 ### 4. Releasing and Final Cleanup
 To officially publish the new centralized standard:
 1. Update this root `README.md` to reference the new active blueprint version, update the navigation folder structure tree, and update the "Current Release State".
-2. Update the root `CHANGELOG.md` entry by removing the draft tag and replacing it with the active release date (e.g., changing `## [2] - Pending Release` to `## [2] - 2026-06-01`).
+2. Update the root `CHANGELOG.md` entry by removing the draft tag and replacing it with the active release date (e.g., changing `## [next-major] - Pending Release` to `## [next-major] - YYYY-MM-DD`).
 3. Delete the temporary `plan.v<major>.blueprint.md` file from the root directory.
 4. Commit the finalized assets and publish them through the approved repository workflow.
 
@@ -100,8 +104,9 @@ To officially publish the new centralized standard:
 
 ## 📢 Current Release State
 
-* **Active Specification Version:** **Version 2**, as defined by the root master blueprint [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
-* **Active Reference Examples:** Fully conform to Version 2 standards across the three layout patterns in [example/](./example/): `pattern-a-multi-repo`, `pattern-b-monorepo`, and `pattern-c-monolith`.
+* **Active Specification Version:** **Version 3**, as defined by the root master blueprint [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
+* **Active Reference Examples:** Fully conform to Version 3 standards across the three layout patterns in [example/](./example/): `pattern-a-multi-repo`, `pattern-b-monorepo`, and `pattern-c-monolith`.
+* **Archived Release (Version 2):** Framework Version 2 is frozen and archived inside [archive/v2/](./archive/v2/).
 * **Archived Release (Version 1):** Framework Version 1 is frozen and archived inside [archive/v1/](./archive/v1/).
 
 ---
@@ -118,7 +123,7 @@ The central blueprint framework itself adheres strictly to **Major-only versioni
 ## 📄 Metadata & Copyright
 
 * **Framework:** Decoupled Specs & Distributed Roadmaps Framework
-* **Current Version:** Version 2 (Major-only)
+* **Current Version:** Version 3 (Major-only)
 * **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 * **License:** MIT
 * **Copyright:** © 2026 mfauzanfikri. All rights reserved.

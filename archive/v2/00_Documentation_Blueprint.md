@@ -1,5 +1,5 @@
 # Blueprint: Decoupled Specs & Distributed Roadmaps Documentation Approach
-**Version:** 2  
+**Version:** 2
 **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 
 This document defines the standard requirements, structures, templates, and workflows for distributing documentation inside individual project services. Replicate this exact blueprint for all future services.
@@ -196,10 +196,10 @@ my-monolith/ (Single Repository)
 ## 4.4 Example Folder Naming Scope Protection
 
 > [!IMPORTANT]
-> The `v2-docs`, `v2-backend`, and `v2-frontend` folder naming is an **example-versioning convention only** for the central distributor repository references. 
-> 
-> Production repositories and active service directories must maintain their long-term generic names (e.g., `my-service-docs`, `my-service-backend`, `my-service-frontend` under Pattern A, or `docs`, `apps/backend`, `apps/frontend` under Pattern B). 
-> 
+> The `v2-docs`, `v2-backend`, and `v2-frontend` folder naming is an **example-versioning convention only** for the central distributor repository references.
+>
+> Production repositories and active service directories must maintain their long-term generic names (e.g., `my-service-docs`, `my-service-backend`, `my-service-frontend` under Pattern A, or `docs`, `apps/backend`, `apps/frontend` under Pattern B).
+>
 > Production systems **must not** rename their repositories or folders to match the active blueprint version (e.g., changing `my-service-backend` to `v2-backend` is strictly prohibited). Doing so will break absolute paths, documentation references, external documentation links, and CI/CD automation pipelines.
 
 ---
