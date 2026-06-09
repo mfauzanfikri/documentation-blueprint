@@ -39,7 +39,8 @@ This traceability matrix maps User Stories to stable Verification Criteria IDs i
 finding: Released monolith criteria resolve to root CHANGELOG anchors and pending criteria resolve to root ROADMAP anchors.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Integrity
-evidence: Explicit Fact
+evidence: Referenced root CHANGELOG and ROADMAP anchors are present.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low, provided referenced anchors remain stable.
 recommended_fix: Re-run link validation after future monolith roadmap or changelog edits.
@@ -50,7 +51,8 @@ state: Resolved
 finding: Requirement Mapping links monolith `ML` execution evidence to master User Story IDs without forking requirement definitions.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Boundary
-evidence: Explicit Fact
+evidence: Requirement Mapping rows reference monolith ML execution evidence and master User Story IDs without forking requirement definitions.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low.
 recommended_fix: Keep monolith technical criteria tied to master User Story IDs.

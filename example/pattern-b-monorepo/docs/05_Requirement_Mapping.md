@@ -39,7 +39,8 @@ This traceability matrix maps User Stories to stable Verification Criteria IDs i
 finding: Released criteria resolve to package CHANGELOG anchors and pending criteria resolve to package ROADMAP anchors.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Integrity
-evidence: Explicit Fact
+evidence: Referenced package CHANGELOG and ROADMAP anchors are present.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low, provided referenced anchors remain stable.
 recommended_fix: Re-run link validation after future package roadmap or changelog edits.
@@ -50,7 +51,8 @@ state: Resolved
 finding: Requirement Mapping links master Product Catalog requirements to backend and frontend implementation evidence without rewriting package content.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Boundary
-evidence: Explicit Fact
+evidence: Requirement Mapping rows reference master Product Catalog requirements and package implementation evidence without rewriting package content.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low.
 recommended_fix: Keep package README and roadmap content mapped to, not rewritten from, master requirements.

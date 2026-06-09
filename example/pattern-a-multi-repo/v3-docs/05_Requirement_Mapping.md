@@ -39,7 +39,8 @@ This traceability matrix maps User Stories to stable Verification Criteria IDs i
 finding: Released criteria resolve to codebase CHANGELOG anchors and pending criteria resolve to active ROADMAP anchors.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Integrity
-evidence: Explicit Fact
+evidence: Referenced backend and frontend CHANGELOG and ROADMAP anchors are present.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low, provided referenced anchors remain stable.
 recommended_fix: Re-run link validation after future roadmap or changelog edits.
@@ -50,7 +51,8 @@ state: Resolved
 finding: Requirement Mapping links master User Story IDs to execution evidence without duplicating live checklist status.
 affected_artifact: 05_Requirement_Mapping.md
 problem_type: Traceability Boundary
-evidence: Explicit Fact
+evidence: Requirement Mapping rows reference master User Story IDs and execution evidence links without checklist state duplication.
+evidence_classification: Explicit Fact
 confidence: High
 risk: Low.
 recommended_fix: Keep execution status changes in ROADMAP or CHANGELOG only.

@@ -966,10 +966,14 @@ finding:
 affected_artifact:
 problem_type:
 evidence:
+evidence_classification:
+confidence:
 risk:
 recommended_fix:
 state:
 ```
+
+`evidence_classification` must use the Section 5.1 classification values, and `confidence` must use the Section 5.2 confidence values.
 
 ## 11.3 Finding Scope & Persistence
 
@@ -1180,7 +1184,22 @@ Extract all completed items (marked `[x]`) from the service's `ROADMAP.md` file.
 
 ## 19.2 Backfill Codebase Changelog
 * Record all completed implementations in the codebase `CHANGELOG.md` under the correct historical service/package version entry (the version in which they were actually released).
-* **Cold-Start Rule:** If no codebase `CHANGELOG.md` existed before the migration, initialize it with a baseline version entry (e.g., `[1.0.0]`) and document all completed historical implementations under it using the implementation-focused wording standard.
+* **Cold-Start Rule:** If no codebase `CHANGELOG.md` existed before the migration, do not place reconstructed history under a normal release version such as `[1.0.0]`. Create a reconstructed baseline entry that clearly separates observed current state from verified historical release chronology.
+* Normal versioned release entries begin after the migration baseline, when release chronology is known or newly produced.
+
+Example reconstructed baseline entry:
+
+```markdown
+## [Migration Baseline] - YYYY-MM-DD
+### Evidence Status
+Reconstructed from observed codebase state.
+
+### Confidence
+Low
+
+### Notes
+Exact release chronology unavailable. Listed capabilities represent observed current state during adoption, not verified historical release order.
+```
 
 ## 19.3 Carry-Forward Incomplete Rows
 * Carry forward all incomplete items (marked `[ ]`) into the current `ROADMAP.md`.
