@@ -370,12 +370,15 @@ allowed_content:
   - Stakeholders
   - Scope and out-of-scope definitions
   - Business entities
+  - Business-significant entity attributes
   - High-level business flows and business flow diagrams
   - Business constraints
   - Success criteria
 forbidden_content:
   - Detailed product behavior
   - Technical architecture
+  - Database schema fields
+  - Technical persistence metadata
   - API sequence diagrams
   - API routes
   - Implementation tasks
@@ -447,6 +450,8 @@ allowed_content:
   - ERD diagrams
   - Sequence diagrams
   - Integration diagrams
+  - Technical persistence metadata
+  - Database identifiers, relationships, audit fields, and indexes
   - High-level technical constraints
   - Technical design choices
 forbidden_content:
@@ -461,6 +466,14 @@ authority_level: Master technical design source of truth.
 temporal_scope: Approved technical direction for the current project version.
 ```
 
+### Business vs Technical Attribute Boundary
+
+BRD owns business-significant entity attributes: names, labels, identifiers meaningful to users or business processes, pricing, business state, business constraints, and other attributes required to explain business meaning.
+
+Architecture owns technical persistence metadata: database IDs, foreign keys, audit timestamps, soft-delete fields, ORM or schema names, indexes, relationships, and storage-only implementation fields.
+
+Technical attributes may appear in BRD only when they carry explicit business meaning. When included, the BRD must state the business meaning rather than presenting the attribute as database structure.
+
 ## 7.5 Requirement Mapping Contract
 
 ```yaml
@@ -472,11 +485,13 @@ allowed_content:
   - Execution boundaries
   - Relative links to ROADMAP or CHANGELOG anchors
   - Release evidence or pending state
+  - Traceability validation findings
 forbidden_content:
   - Live checklist status duplication
   - Requirements rewritten from other artifacts
   - Implementation notes without traceability purpose
   - Unverified release claims
+  - Non-traceability validation findings
 dependencies:
   - User Stories
   - Execution ROADMAP
@@ -716,6 +731,10 @@ Purpose:
 
 To strictly preserve the Specification Boundary, the Requirement Mapping must not track execution checklist checkboxes or duplicate live implementation states. Instead, it serves as a static traceability index referencing stable execution IDs and release evidence.
 
+Requirement Mapping validation findings are limited to traceability concerns. Valid Requirement Mapping findings include missing or invalid User Story IDs, Verification Criteria IDs, execution boundaries, ROADMAP or CHANGELOG links, release evidence, temporal state, or contradictions in mapped evidence.
+
+Findings about missing business objectives, missing architecture sections, missing acceptance criteria, incomplete decision rationale, or other non-traceability concerns must be recorded in the artifact being evaluated, not in `05_Requirement_Mapping.md`.
+
 ### Mapping Matrix Standards
 The Requirement Mapping file (`05_Requirement_Mapping.md`) must contain a traceability matrix with the following columns:
 
@@ -952,7 +971,24 @@ recommended_fix:
 state:
 ```
 
-## 11.3 Finding Lifecycle
+## 11.3 Finding Scope & Persistence
+
+Validation findings may only be persisted within an artifact when the finding falls within that artifact's contract scope.
+
+Persisted findings belong in the artifact being evaluated. For example, BRD findings belong in `01_BRD.md`, PRD findings belong in `02_PRD.md`, User Story findings belong in `03_User_Stories.md`, Architecture findings belong in `04_Architecture.md`, and Decision Log findings belong in `06_Decision_Log.md`.
+
+`05_Requirement_Mapping.md` may only persist traceability-related findings, including missing or invalid story IDs, verification criteria IDs, execution boundaries, links, release evidence, temporal state, or contradictions in mapped evidence.
+
+Persisted findings must remain relevant to the artifact's:
+
+- Purpose
+- Primary Question
+- Allowed Content
+- Authority Level
+
+Validation findings that do not clearly belong to a specific artifact contract should remain temporary review output rather than permanent documentation content.
+
+## 11.4 Finding Lifecycle
 
 | State | Meaning |
 | :--- | :--- |
@@ -1185,7 +1221,7 @@ To guarantee visual consistency and structure across services, all new and updat
 ## 4. Core Business Entities
 
 ### Entity A: [Entity Name]
-[Business meaning of the entity and its business-critical attributes.]
+[Business meaning of the entity and its business-significant attributes. Include attributes meaningful to users, business processes, policies, or reporting. Exclude database schema fields and technical persistence metadata such as internal IDs, foreign keys, audit timestamps, soft-delete fields, indexes, ORM names, and storage-only implementation fields; those belong in Architecture.]
 
 ## 5. Business Flow Diagrams
 
@@ -1245,6 +1281,8 @@ graph TD
 ```
 
 ## 3. Entity Relationship Diagram (ERD)
+[ERDs may include technical persistence metadata because Architecture is the technical design source of truth. Include database identifiers, foreign keys, relationships, audit timestamps, soft-delete fields, indexes, ORM/schema names, and storage-only implementation fields when they are relevant to the system design.]
+
 ```mermaid
 erDiagram
     %% Avoid using HTML tags in labels

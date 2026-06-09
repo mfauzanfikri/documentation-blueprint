@@ -47,9 +47,9 @@ state: Resolved
 ```
 
 ```yaml
-finding: Monolith execution evidence uses the `ML` prefix and does not fork master User Story definitions.
+finding: Requirement Mapping links monolith `ML` execution evidence to master User Story IDs without forking requirement definitions.
 affected_artifact: 05_Requirement_Mapping.md
-problem_type: Master-Service Hierarchy
+problem_type: Traceability Boundary
 evidence: Explicit Fact
 confidence: High
 risk: Low.

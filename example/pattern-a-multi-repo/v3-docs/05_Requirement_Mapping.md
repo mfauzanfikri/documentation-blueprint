@@ -47,9 +47,9 @@ state: Resolved
 ```
 
 ```yaml
-finding: Requirement Mapping references master User Story IDs without duplicating live execution checklist status.
+finding: Requirement Mapping links master User Story IDs to execution evidence without duplicating live checklist status.
 affected_artifact: 05_Requirement_Mapping.md
-problem_type: Boundary Fit
+problem_type: Traceability Boundary
 evidence: Explicit Fact
 confidence: High
 risk: Low.

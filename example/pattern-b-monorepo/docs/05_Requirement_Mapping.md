@@ -47,9 +47,9 @@ state: Resolved
 ```
 
 ```yaml
-finding: Master documentation owns Product Catalog requirements while backend and frontend packages own implementation evidence.
+finding: Requirement Mapping links master Product Catalog requirements to backend and frontend implementation evidence without rewriting package content.
 affected_artifact: 05_Requirement_Mapping.md
-problem_type: Master-Service Hierarchy
+problem_type: Traceability Boundary
 evidence: Explicit Fact
 confidence: High
 risk: Low.
