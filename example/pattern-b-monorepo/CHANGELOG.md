@@ -1,10 +1,10 @@
-# Platform Changelog - Product Catalog Monorepo Workspace
+# Workspace Coordination Changelog - Product Catalog Monorepo
 
-All notable platform-wide infrastructure and workspace changes are recorded here.
+All notable non-deployable workspace coordination changes are recorded here. Deployable boundary release evidence belongs in each deployable execution boundary CHANGELOG.
 
 ---
 
-## [1.0.0] - 2026-06-01
+## [Workspace Baseline] - 2026-06-01
 ### Added
 * **Technical Workspace Setup:**
   * Initialized Turborepo global configurations (`PL-WS-001`).

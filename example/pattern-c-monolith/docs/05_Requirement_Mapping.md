@@ -1,6 +1,6 @@
 # Requirement Mapping - Product Catalog Monolith
 **Version:** 1.0 (Stable Milestone)
-**Project Version:** 1.0
+**Product Version:** 1.0
 
 This traceability matrix maps User Stories to stable Verification Criteria IDs inside the monolith root roadmap, preserving strict boundary decoupling.
 
@@ -8,21 +8,21 @@ This traceability matrix maps User Stories to stable Verification Criteria IDs i
 
 ## 1. Spec-to-Execution Traceability Matrix
 
-| User Story ID | Verification Criteria ID | Execution Boundary | Execution Reference | Release Evidence |
-| :--- | :--- | :--- | :--- | :--- |
-| **US-CAT-01** | `ML-US-CAT-01-001` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-001)` | `Service v1.0.0` |
-| **US-CAT-01** | `ML-US-CAT-01-002` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-002)` | `Service v1.0.0` |
-| **US-CAT-01** | `ML-US-CAT-01-003` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-003)` | `Service v1.0.0` |
-| **US-CAT-01** | `ML-US-CAT-01-004` | Monolith | `[ROADMAP.md](../ROADMAP.md#ML-US-CAT-01-004)` | `Pending` |
-| **US-CAT-01** | `ML-US-CAT-01-005` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-005)` | `Service v1.0.0` |
-| **US-CAT-01** | `ML-US-CAT-01-006` | Monolith | `[ROADMAP.md](../ROADMAP.md#ML-US-CAT-01-006)` | `Pending` |
-| **US-CAT-01** | `ML-US-CAT-01-007` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-007)` | `Service v1.0.0` |
-| **US-PROD-01** | `ML-US-PROD-01-001` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-001)` | `Service v1.0.0` |
-| **US-PROD-01** | `ML-US-PROD-01-002` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-002)` | `Service v1.0.0` |
-| **US-PROD-01** | `ML-US-PROD-01-003` | Monolith | `[ROADMAP.md](../ROADMAP.md#ML-US-PROD-01-003)` | `Pending` |
-| **US-PROD-01** | `ML-US-PROD-01-004` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-004)` | `Service v1.0.0` |
-| **US-PROD-01** | `ML-US-PROD-01-005` | Monolith | `[ROADMAP.md](../ROADMAP.md#ML-US-PROD-01-005)` | `Pending` |
-| **US-PROD-01** | `ML-US-PROD-01-006` | Monolith | `[CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-006)` | `Service v1.0.0` |
+| Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-001` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-002` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-002) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-003` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-003) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-004` | Monolith | requirement_owner | [ROADMAP.md](../ROADMAP.md#ML-US-CAT-01-004) | `Pending` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-005` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-005) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-006` | Monolith | requirement_owner | [ROADMAP.md](../ROADMAP.md#ML-US-CAT-01-006) | `Pending` |
+| Catalog | **US-CAT-01** | `ML-US-CAT-01-007` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-CAT-01-007) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-001` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-002` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-002) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-003` | Monolith | requirement_owner | [ROADMAP.md](../ROADMAP.md#ML-US-PROD-01-003) | `Pending` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-004` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-004) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-005` | Monolith | requirement_owner | [ROADMAP.md](../ROADMAP.md#ML-US-PROD-01-005) | `Pending` |
+| Catalog | **US-PROD-01** | `ML-US-PROD-01-006` | Monolith | requirement_owner | [CHANGELOG.md](../CHANGELOG.md#ML-US-PROD-01-006) | `Boundary v1.0.0` |
 
 ---
 

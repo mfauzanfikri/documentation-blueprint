@@ -4,6 +4,24 @@ All notable changes to the Documentation Blueprint framework will be documented 
 
 ---
 
+## [4] - 2026-06-21
+### Added
+- **Product-centric terminology** replacing project-release language with Product Versions for business capability evolution.
+- **Execution Boundary model** defining boundary types, deployability, boundary roles, and ownership responsibilities across workspaces, applications, services, monoliths, packages, and infrastructure.
+- **Independent Boundary Versioning** allowing deployable boundaries to version independently while explicitly declaring Compatible Product Versions.
+- **Compatibility metadata governance** keeping current compatibility in deployable Execution Boundary README metadata, historical evidence in Execution Boundary CHANGELOG files, and product-level traceability in Requirement Mapping.
+- **Documentation Initialization guidance** for capturing topology, adoption mode, execution boundaries, deployability, and ownership before artifact generation.
+- **Distributed Specification Boundary namespace rules** for preserving `Specification Boundary + Requirement/User Story ID` identity during product-level aggregation.
+- **Distributed specification example** demonstrating multiple Specification Boundaries, collision-safe story identities, product-level aggregation, and shared execution boundaries.
+
+### Changed
+- Upgraded the blueprint framework version to **Version 4**.
+- Upgraded active reference examples to Version 4 and renamed Pattern A reference folders from `v3-*` to `v4-*`.
+- Archived the Version 3 master blueprint and active example set under `archive/v3/`.
+- Updated repository navigation, adoption steps, active release state, and metadata for Version 4.
+
+---
+
 ## [3] - 2026-06-08
 ### Added
 - **Project Context** as a temporary, non-authoritative adoption input for brownfield documentation and AI-assisted context normalization.

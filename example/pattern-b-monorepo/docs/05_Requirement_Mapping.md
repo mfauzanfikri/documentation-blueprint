@@ -1,6 +1,6 @@
 # Requirement Mapping - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
-**Project Version:** 1.0
+**Product Version:** 1.0
 
 This traceability matrix maps User Stories to stable Verification Criteria IDs inside the codebase roadmaps, preserving strict boundary decoupling.
 
@@ -8,21 +8,21 @@ This traceability matrix maps User Stories to stable Verification Criteria IDs i
 
 ## 1. Spec-to-Execution Traceability Matrix
 
-| User Story ID | Verification Criteria ID | Execution Boundary | Execution Reference | Release Evidence |
-| :--- | :--- | :--- | :--- | :--- |
-| **US-CAT-01** | `BE-US-CAT-01-001` | Backend | `[CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-001)` | `Service v1.0.0` |
-| **US-CAT-01** | `BE-US-CAT-01-002` | Backend | `[CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-002)` | `Service v1.0.0` |
-| **US-CAT-01** | `BE-US-CAT-01-003` | Backend | `[CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-003)` | `Service v1.0.0` |
-| **US-CAT-01** | `BE-US-CAT-01-004` | Backend | `[ROADMAP.md](../apps/backend/ROADMAP.md#BE-US-CAT-01-004)` | `Pending` |
-| **US-CAT-01** | `FE-US-CAT-01-001` | Frontend | `[CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-CAT-01-001)` | `Service v1.0.0` |
-| **US-CAT-01** | `FE-US-CAT-01-002` | Frontend | `[ROADMAP.md](../apps/frontend/ROADMAP.md#FE-US-CAT-01-002)` | `Pending` |
-| **US-CAT-01** | `FE-US-CAT-01-003` | Frontend | `[CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-CAT-01-003)` | `Service v1.0.0` |
-| **US-PROD-01** | `BE-US-PROD-01-001` | Backend | `[CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-PROD-01-001)` | `Service v1.0.0` |
-| **US-PROD-01** | `BE-US-PROD-01-002` | Backend | `[CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-PROD-01-002)` | `Service v1.0.0` |
-| **US-PROD-01** | `BE-US-PROD-01-003` | Backend | `[ROADMAP.md](../apps/backend/ROADMAP.md#BE-US-PROD-01-003)` | `Pending` |
-| **US-PROD-01** | `FE-US-PROD-01-001` | Frontend | `[CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-PROD-01-001)` | `Service v1.0.0` |
-| **US-PROD-01** | `FE-US-PROD-01-002` | Frontend | `[ROADMAP.md](../apps/frontend/ROADMAP.md#FE-US-PROD-01-002)` | `Pending` |
-| **US-PROD-01** | `FE-US-PROD-01-003` | Frontend | `[CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-PROD-01-003)` | `Service v1.0.0` |
+| Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Catalog | **US-CAT-01** | `BE-US-CAT-01-001` | Backend | requirement_owner | [CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `BE-US-CAT-01-002` | Backend | requirement_owner | [CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-002) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `BE-US-CAT-01-003` | Backend | requirement_owner | [CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-CAT-01-003) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `BE-US-CAT-01-004` | Backend | requirement_owner | [ROADMAP.md](../apps/backend/ROADMAP.md#BE-US-CAT-01-004) | `Pending` |
+| Catalog | **US-CAT-01** | `FE-US-CAT-01-001` | Frontend | supporting_boundary | [CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-CAT-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-CAT-01** | `FE-US-CAT-01-002` | Frontend | supporting_boundary | [ROADMAP.md](../apps/frontend/ROADMAP.md#FE-US-CAT-01-002) | `Pending` |
+| Catalog | **US-CAT-01** | `FE-US-CAT-01-003` | Frontend | supporting_boundary | [CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-CAT-01-003) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `BE-US-PROD-01-001` | Backend | requirement_owner | [CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-PROD-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `BE-US-PROD-01-002` | Backend | requirement_owner | [CHANGELOG.md](../apps/backend/CHANGELOG.md#BE-US-PROD-01-002) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `BE-US-PROD-01-003` | Backend | requirement_owner | [ROADMAP.md](../apps/backend/ROADMAP.md#BE-US-PROD-01-003) | `Pending` |
+| Catalog | **US-PROD-01** | `FE-US-PROD-01-001` | Frontend | supporting_boundary | [CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-PROD-01-001) | `Boundary v1.0.0` |
+| Catalog | **US-PROD-01** | `FE-US-PROD-01-002` | Frontend | supporting_boundary | [ROADMAP.md](../apps/frontend/ROADMAP.md#FE-US-PROD-01-002) | `Pending` |
+| Catalog | **US-PROD-01** | `FE-US-PROD-01-003` | Frontend | supporting_boundary | [CHANGELOG.md](../apps/frontend/CHANGELOG.md#FE-US-PROD-01-003) | `Boundary v1.0.0` |
 
 ---
 

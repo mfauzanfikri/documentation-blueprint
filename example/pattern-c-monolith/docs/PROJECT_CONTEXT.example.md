@@ -1,7 +1,7 @@
 # Project Context Example - Product Catalog Monolith
 
 > [!NOTE]
-> This file demonstrates Blueprint v3 Project Context usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
+> This file demonstrates Blueprint v4 Project Context and documentation initialization usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
 
 ## 1. Source Materials Reviewed
 

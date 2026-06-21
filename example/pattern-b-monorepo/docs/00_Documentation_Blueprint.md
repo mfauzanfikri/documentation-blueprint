@@ -1,8 +1,8 @@
-# Blueprint: Decoupled Specs & Distributed Roadmaps Documentation Approach
-**Version:** 3
+# Blueprint: Product-Centric Specs & Execution Boundary Documentation Approach
+**Version:** 4
 **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 
-This document defines the standard requirements, structures, templates, and workflows for distributing documentation inside individual project services. Replicate this exact blueprint for all future services.
+This document defines the standard requirements, structures, templates, and workflows for product-centric documentation with explicit execution boundary ownership. Replicate this blueprint for future projects that need clear specification boundaries, traceable implementation ownership, and lightweight governance.
 
 ---
 
@@ -10,29 +10,67 @@ This document defines the standard requirements, structures, templates, and work
 
 The blueprint must:
 
-* Preserve centralized specifications.
-* Preserve distributed implementation tracking.
+* Preserve centralized or explicitly distributed product specifications.
+* Preserve local implementation ownership inside execution boundaries.
 * Optimize for AI-assisted development.
-* Improve requirement traceability.
-* Improve onboarding experience.
-* Improve analyst-to-developer handoff.
-* Support long-term project maintenance.
+* Improve requirement traceability across specification and execution boundaries.
+* Support independent evolution of deployable boundaries.
+* Support monorepos, multi-repository systems, monoliths, packages, and infrastructure boundaries without prescribing repository structure.
+* Improve onboarding and analyst-to-developer handoff.
 * Improve brownfield adoption without inventing false requirement history.
 * Make evidence quality and confidence visible where validation requires it.
 * Enforce artifact boundaries, hierarchy, and temporal scope.
 * Remain lightweight and practical.
 
-The framework should avoid unnecessary enterprise process overhead.
+The framework standardizes concepts, responsibilities, relationships, and constraints. It does not standardize repository names, folder names, architecture styles, frameworks, deployment patterns, CI/CD tooling, infrastructure providers, or package managers.
 
 ---
 
-# 2. Documentation Philosophy
+# 2. Core Concepts
 
-## 2.1 The Blueprint (Specification Boundary)
+| Concept | Responsibility |
+| :--- | :--- |
+| Blueprint Version | Documentation framework evolution. |
+| Product Version | Business and product capability evolution. |
+| Specification Boundary | Business ownership and product intent. |
+| Execution Boundary | Implementation ownership and execution tracking. |
+| Boundary Version | Deployable revision lifecycle inside an execution boundary. |
 
-Business and product specifications are isolated within a dedicated **Specification Boundary** (a separate repository for Pattern A, or `/docs/` directories for Patterns B and C).
+Conceptual relationships:
 
-The Specification Boundary serves as the source of truth for:
+```text
+Blueprint Version
+
+Product Version
+    <-> compatible_with
+
+Boundary Version
+    <-> belongs_to
+
+Execution Boundary
+    <-> implements
+
+Specification Boundary
+```
+
+Relationship rules:
+
+* A Product Version may be implemented by multiple Execution Boundaries.
+* An Execution Boundary may implement multiple Specification Boundaries.
+* An Execution Boundary may have multiple Boundary Versions over time.
+* A Boundary Version may declare compatibility with multiple Product Versions.
+* Specification Boundaries may be centralized or distributed.
+* Compatibility relationships are explicit and many-to-many when declared.
+
+---
+
+# 3. Documentation Philosophy
+
+## 3.1 Specification Boundary
+
+Business and product specifications are isolated within one or more **Specification Boundaries**.
+
+A Specification Boundary serves as the source of truth for:
 
 * Business requirements
 * Product requirements
@@ -40,25 +78,23 @@ The Specification Boundary serves as the source of truth for:
 * Architecture
 * Requirement traceability
 * Major decisions
-* Project Version release history (Specs-level `CHANGELOG.md`)
+* Product Version release history through the Specs-level `CHANGELOG.md`
 
-The Specification Boundary must remain clean of codebase execution tracking artifacts. Under no circumstances may execution `ROADMAP.md` or codebase `CHANGELOG.md` files be placed inside the Specification Boundary, even when they reside in the same physical repository. The Specification Boundary permits only the Specs-level `CHANGELOG.md` to track Project Version release history of business capabilities.
+The Specification Boundary must remain clean of execution tracking artifacts. Under no circumstances may execution `ROADMAP.md` or execution-boundary `CHANGELOG.md` files be placed inside a Specification Boundary, even when they reside in the same physical repository. The Specification Boundary permits only the Specs-level `CHANGELOG.md` to track Product Version release history of business capabilities.
 
----
+## 3.2 Execution Boundary
 
-## 2.2 The Execution Boundary
+Implementation ownership and execution tracking remain within the **Execution Boundary**.
 
-Implementation ownership and execution tracking remain within the **Execution Boundary** (whether a service codebase, a package subfolder, or a monolith root).
+Execution Boundaries are implementation ownership units such as a workspace, application, service, monolith, package, or infrastructure boundary. They are not required to match repository boundaries.
 
-Implementation tracking must remain local to each execution boundary (e.g., at the service root or package root).
+Implementation tracking must remain local to the execution boundary responsible for the work.
 
----
+## 3.3 Specification and Execution Hierarchy
 
-## 2.3 Master-Service Hierarchy
+Specification documentation owns business intent and product meaning.
 
-Master documentation owns business intent and product meaning.
-
-Master documentation is responsible for:
+Specification documentation is responsible for:
 
 ```text
 Why
@@ -72,13 +108,16 @@ Examples:
 * Product requirements
 * User requirements
 * Acceptance criteria
+* Product release history
 
-Service-level documentation owns implementation context.
+Execution-boundary documentation owns implementation context.
 
-Service-level documentation is responsible for:
+Execution-boundary documentation is responsible for:
 
 ```text
 How
+Where
+With what evidence
 ```
 
 Examples:
@@ -86,22 +125,17 @@ Examples:
 * APIs
 * Routes
 * Database implementation
-* Service interactions
-* Technical constraints
+* Integration responsibilities
+* Boundary-specific technical constraints
+* Boundary release evidence
 
-Service-level documents should reference or map to master requirements. They must not silently rewrite, fork, or duplicate master requirements as independent truth.
-
-Service-level documentation may specialize, elaborate, and implement master requirements, but it must not:
-
-* Redefine business requirements
-* Introduce conflicting requirements
-* Replace master-level intent
+Execution-boundary documents should reference or map to specification requirements. They must not silently rewrite, fork, or duplicate specification requirements as independent truth.
 
 ---
 
-# 3. Documentation Blueprint Versioning
+# 4. Documentation Blueprint Versioning
 
-The Documentation Blueprint maintains its own version independent from project versions and service versions.
+The Documentation Blueprint maintains its own version independent from Product Versions and Boundary Versions.
 
 ## Format
 
@@ -109,9 +143,8 @@ The Documentation Blueprint maintains its own version independent from project v
 1
 2
 3
+4
 ```
-
----
 
 ## Rules
 
@@ -120,9 +153,7 @@ The Documentation Blueprint maintains its own version independent from project v
 * Patch versions are intentionally not used.
 * Blueprint versions represent significant framework evolution.
 
----
-
-## Examples
+## Version History Summary
 
 ### Blueprint Version 1
 
@@ -152,19 +183,66 @@ The Documentation Blueprint maintains its own version independent from project v
 * Validation framework and finding lifecycle
 * Brownfield adoption and business-flow discovery guidance
 
----
+### Blueprint Version 4
+
+* Product-centric version terminology
+* Execution-boundary-centric ownership terminology
+* Independent Boundary Versioning
+* Execution Boundary classification
+* Deployable and non-deployable boundary semantics
+* Requirement ownership restrictions
+* Distributed Specification Boundary namespace rules
+* Documentation initialization guidance
+* Explicit compatibility metadata governance
 
 ## Current Target
 
 The active blueprint is assigned:
 
 ```text
-Blueprint Version: 3
+Blueprint Version: 4
 ```
 
 ---
 
-# 4. Project Context
+# 5. Documentation Initialization
+
+Documentation initialization establishes topology and governance decisions before artifact generation.
+
+Initialization is required for new V4 adoptions and recommended for V3 migrations. Existing V3 projects may adopt a minimal initialization record and enrich it incrementally.
+
+Initialization captures:
+
+* Repository organization approach
+* Specification topology approach
+* Adoption mode
+* Execution boundary model
+* Deployability characteristics
+* Domain ownership model
+
+Example:
+
+```yaml
+documentation_topology:
+  repository_approach: implementation-defined
+  specification_approach: centralized
+
+adoption_mode: greenfield
+
+execution_boundaries:
+  - name: api
+    type: service
+    deployable: true
+  - name: design-system
+    type: package
+    deployable: false
+```
+
+Initialization may be recorded in Project Context, an adoption context file, or another temporary planning artifact. It does not introduce a new permanent mandatory artifact.
+
+---
+
+# 6. Project Context
 
 Project Context is a temporary input artifact used before generating or revising blueprint artifacts.
 
@@ -178,7 +256,7 @@ It is:
 
 The blueprint standardizes Project Context purpose, structure, and expected content. It does not standardize filename, storage location, or generation method. Acceptable local names include `project-context.md`, `context.md`, `adoption-context.md`, and `migration-context.md`.
 
-## 4.1 Purpose
+## 6.1 Purpose
 
 Project Context normalizes system understanding before artifact generation.
 
@@ -192,9 +270,11 @@ It should help teams capture:
 * Assumptions
 * Unknowns
 * Migration notes
+* Documentation topology
+* Execution boundary model
 * Confidence assessment
 
-## 4.2 Brownfield Role
+## 6.2 Brownfield Role
 
 For existing projects, Project Context allows codebase-first documentation without inventing requirement history.
 
@@ -210,13 +290,13 @@ Technical structures such as routes, services, APIs, entities, and tables are ev
 
 ---
 
-# 5. Evidence and Confidence Classification
+# 7. Evidence and Confidence Classification
 
 Evidence classification is mandatory in Project Context and validation findings.
 
 Evidence classification is optional in final specification artifacts. Final artifacts should remain focused on communication and specification rather than evidence bookkeeping.
 
-## 5.1 Classifications
+## 7.1 Classifications
 
 | Classification | Meaning |
 | :--- | :--- |
@@ -225,7 +305,7 @@ Evidence classification is optional in final specification artifacts. Final arti
 | Assumption | Plausible but not directly supported by evidence. |
 | Unknown | Information is unavailable or unresolved. |
 
-## 5.2 Confidence Levels
+## 7.2 Confidence Levels
 
 | Confidence | Meaning |
 | :--- | :--- |
@@ -233,7 +313,7 @@ Evidence classification is optional in final specification artifacts. Final arti
 | Medium | Supported by indirect evidence or reasonable derivation. |
 | Low | Weakly supported, incomplete, or dependent on assumptions. |
 
-## 5.3 Evidence Promotion
+## 7.3 Evidence Promotion
 
 Rules for promoting information between evidence levels are intentionally deferred.
 
@@ -241,16 +321,133 @@ The framework recognizes the need for stronger evidence classification, but rule
 
 ---
 
-# 6. Repository & Workspace Structures
+# 8. Documentation Topology
 
-The framework supports three directory layout patterns depending on codebase architecture:
+V4 supports multiple specification topology patterns:
 
-## Pattern A: Multi-Repository Layout (Decoupled Services)
-Specs and codebase packages reside in physically separate Git repositories.
+* Centralized Specification Boundaries
+* Domain-oriented Specification Boundaries
+* Multi-repository execution boundaries
+* Single-repository monorepos
+* Single-repository monoliths
+
+Topology selection must be driven by:
+
+* Business ownership
+* Domain boundaries
+* Team responsibilities
+
+Topology must not be driven by:
+
+* Repository structure
+* Directory layout
+* Technology stack
+
+Distributed specifications must support:
+
+* Product-level requirement aggregation
+* Product-level traceability reporting
+* Product-level release visibility
+
+## 8.1 Specification Boundary Namespace Rules
+
+When multiple Specification Boundaries exist, product-level aggregation must preserve the originating specification context.
+
+Canonical specification identities are:
 
 ```text
-my-service/
-├── my-service-docs/       # [Specs] Specification Boundary (Repo A)
+Specification Boundary + Requirement ID
+Specification Boundary + User Story ID
+```
+
+Examples:
+
+```text
+Catalog::US-AUTH-01
+Identity::US-AUTH-01
+```
+
+Global uniqueness is not required when namespace ownership is explicit.
+
+## 8.2 Execution Boundary Model
+
+Execution Boundaries are the primary implementation abstraction.
+
+Standard boundary types:
+
+```yaml
+boundary_type:
+  - workspace
+  - application
+  - service
+  - monolith
+  - package
+  - infrastructure
+```
+
+Organizations may define additional boundary types when responsibilities, ownership rules, deployability, and traceability behavior are documented.
+
+## 8.3 Deployability
+
+Deployability determines release obligations.
+
+```yaml
+deployable: true | false
+```
+
+Only deployable boundaries require:
+
+* Boundary Version
+* Compatible Product Version declarations
+* Boundary release evidence
+
+Deployability does not determine whether a boundary contributes work.
+
+## 8.4 Boundary Roles
+
+| Role | Description |
+| :--- | :--- |
+| `requirement_owner` | Accountable for fulfilling a requirement. |
+| `supporting_boundary` | Contributes implementation support. |
+| `evidence_source` | Produces verification evidence. |
+
+Rules:
+
+* Only deployable boundaries may be `requirement_owner`.
+* Deployable and non-deployable boundaries may be `supporting_boundary`.
+* Deployable and non-deployable boundaries may be `evidence_source`.
+* Requirement ownership must remain explicit.
+
+Example:
+
+```text
+Requirement: User Authentication
+
+Requirement Owner:
+- api
+
+Supporting Boundaries:
+- shared-auth-library
+- design-system
+
+Evidence Sources:
+- api
+- shared-auth-library
+```
+
+---
+
+# 9. Repository & Workspace Structures
+
+The framework supports multiple layout patterns. These patterns describe relationship examples, not mandatory folder names.
+
+## Pattern A: Multi-Repository Layout
+
+Specifications and execution boundaries reside in physically separate repositories.
+
+```text
+my-product/
+├── my-product-docs/       # [Specs] Specification Boundary
 │   ├── 00_Documentation_Blueprint.md
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
@@ -258,26 +455,25 @@ my-service/
 │   ├── 04_Architecture.md
 │   ├── 05_Requirement_Mapping.md
 │   ├── 06_Decision_Log.md
-│   └── CHANGELOG.md       # Specs-level Changelog (Project Version history)
+│   └── CHANGELOG.md       # Specs-level Changelog (Product Version history)
 │
-├── my-service-backend/    # [Code] Execution Boundary (Repo B: Backend)
+├── my-product-api/        # [Code] Execution Boundary
 │   ├── README.md
 │   ├── ROADMAP.md
-│   └── CHANGELOG.md       # Codebase-level Changelog
+│   └── CHANGELOG.md       # Boundary implementation history
 │
-└── my-service-frontend/   # [UI] Execution Boundary (Repo C: Frontend)
+└── my-product-web/        # [UI] Execution Boundary
     ├── README.md
     ├── ROADMAP.md
-    └── CHANGELOG.md       # Codebase-level Changelog
+    └── CHANGELOG.md       # Boundary implementation history
 ```
-
----
 
 ## Pattern B: Single-Repository Monorepo Layout
-Specs and multiple codebase packages reside in a single repository.
+
+Specifications and multiple execution boundaries reside in a single repository.
 
 ```text
-my-monorepo/ (Single Repository)
+my-monorepo/
 ├── docs/                  # [Specs] Specification Boundary
 │   ├── 00_Documentation_Blueprint.md
 │   ├── 01_BRD.md
@@ -286,33 +482,32 @@ my-monorepo/ (Single Repository)
 │   ├── 04_Architecture.md
 │   ├── 05_Requirement_Mapping.md
 │   ├── 06_Decision_Log.md
-│   └── CHANGELOG.md       # Specs-level Changelog (Project Version history)
+│   └── CHANGELOG.md       # Specs-level Changelog (Product Version history)
 │
 ├── apps/
-│   ├── backend/           # [Code] Execution Boundary (Backend Package)
+│   ├── api/               # Execution Boundary
 │   │   ├── README.md
 │   │   ├── ROADMAP.md
-│   │   └── CHANGELOG.md   # Codebase-level Changelog
+│   │   └── CHANGELOG.md
 │   │
-│   └── frontend/          # [UI] Execution Boundary (Frontend Package)
+│   └── web/               # Execution Boundary
 │       ├── README.md
 │       ├── ROADMAP.md
-│       └── CHANGELOG.md   # Codebase-level Changelog
+│       └── CHANGELOG.md
 │
-├── ROADMAP.md             # Optional root-level cross-cutting execution tasks
-├── CHANGELOG.md           # Optional root-level platform execution history
-└── README.md              # Global Monorepo Guide
+├── ROADMAP.md             # Optional workspace execution roadmap
+├── CHANGELOG.md           # Optional workspace execution history
+└── README.md              # Global workspace guide
 ```
 
-Workspace-level execution files (`ROADMAP.md` / `CHANGELOG.md` at the monorepo root) are optional and required only when there are cross-cutting workspace, CI/CD, or release coordination concerns.
-
----
+Workspace-level execution files are optional and required only when there are cross-cutting workspace, CI/CD, release coordination, or platform ownership concerns.
 
 ## Pattern C: Single-Repository Monolith Layout
-Specs and a single monolithic application codebase reside in a single repository.
+
+Specifications and one deployable monolith boundary reside in a single repository.
 
 ```text
-my-monolith/ (Single Repository)
+my-monolith/
 ├── docs/                  # [Specs] Specification Boundary
 │   ├── 00_Documentation_Blueprint.md
 │   ├── 01_BRD.md
@@ -321,28 +516,24 @@ my-monolith/ (Single Repository)
 │   ├── 04_Architecture.md
 │   ├── 05_Requirement_Mapping.md
 │   ├── 06_Decision_Log.md
-│   └── CHANGELOG.md       # Specs-level Changelog (Project Version history)
+│   └── CHANGELOG.md       # Specs-level Changelog (Product Version history)
 │
-├── src/                   # Monolith codebase source
-├── README.md              # Codebase Guide & Tech Stack
-├── ROADMAP.md             # [Code] Execution Boundary (Monolith Tracking)
-└── CHANGELOG.md           # [Code] Execution Boundary (Monolith History)
+├── src/
+├── README.md              # Execution Boundary guide
+├── ROADMAP.md             # Execution Boundary roadmap
+└── CHANGELOG.md           # Execution Boundary history
 ```
 
----
-
-## 6.4 Example Folder Naming Scope Protection
+## 9.4 Example Folder Naming Scope Protection
 
 > [!IMPORTANT]
-> The `v3-docs`, `v3-backend`, and `v3-frontend` folder naming is an **example-versioning convention only** for the central distributor repository references.
+> Versioned folder names inside this central repository's `example/` directory are example-versioning conventions only.
 >
-> Production repositories and active service directories must maintain their long-term generic names (e.g., `my-service-docs`, `my-service-backend`, `my-service-frontend` under Pattern A, or `docs`, `apps/backend`, `apps/frontend` under Pattern B).
->
-> Production systems **must not** rename their repositories or folders to match the active blueprint version (e.g., changing `my-service-backend` to `v3-backend` is strictly prohibited). Doing so will break absolute paths, documentation references, external documentation links, and CI/CD automation pipelines.
+> Production repositories and active directories should maintain durable product names and must not rename repositories or folders to match the active blueprint version. Doing so can break absolute paths, documentation references, external links, and automation pipelines.
 
 ---
 
-# 7. Artifact Contracts
+# 10. Artifact Contracts
 
 The Blueprint owns artifact contracts, scope boundaries, and ownership rules.
 
@@ -360,7 +551,7 @@ temporal_scope:
 authority_level:
 ```
 
-## 7.1 BRD Contract
+## 10.1 BRD Contract
 
 ```yaml
 purpose: Define business intent, stakeholders, scope, and success criteria.
@@ -385,11 +576,11 @@ forbidden_content:
   - Release history
 dependencies:
   - Project Context when adopting brownfield systems
-temporal_scope: Stable business intent for the current project version.
-authority_level: Master business source of truth.
+temporal_scope: Stable business intent for the current Product Version.
+authority_level: Business source of truth.
 ```
 
-## 7.2 PRD Contract
+## 10.2 PRD Contract
 
 ```yaml
 purpose: Define product capabilities, functional requirements, and user-facing behavior.
@@ -409,15 +600,15 @@ forbidden_content:
   - API implementation details
   - Framework-specific design
   - Execution checklists
-  - Code release history
+  - Boundary release history
 dependencies:
   - BRD
   - Project Context when available
-temporal_scope: Approved or proposed product scope for the current project version.
-authority_level: Master product source of truth.
+temporal_scope: Approved or proposed product scope for the current Product Version.
+authority_level: Product source of truth.
 ```
 
-## 7.3 User Stories Contract
+## 10.3 User Stories Contract
 
 ```yaml
 purpose: Translate product requirements into implementable user-centered requirements.
@@ -430,23 +621,23 @@ allowed_content:
   - Edge cases
 forbidden_content:
   - Technical task decomposition
-  - Service-specific implementation criteria
+  - Boundary-specific implementation criteria
   - Completed implementation status
   - Release evidence
 dependencies:
   - BRD
   - PRD
-temporal_scope: Requirement intent for the current project version.
-authority_level: Master requirement source of truth.
+temporal_scope: Requirement intent for the current Product Version.
+authority_level: Requirement source of truth.
 ```
 
-## 7.4 Architecture Contract
+## 10.4 Architecture Contract
 
 ```yaml
 purpose: Define system design, boundaries, data relationships, and technical constraints.
 primary_question: How is the system designed?
 allowed_content:
-  - System context and service boundaries
+  - System context and execution boundaries
   - ERD diagrams
   - Sequence diagrams
   - Integration diagrams
@@ -458,12 +649,12 @@ forbidden_content:
   - New business requirements
   - Product scope changes
   - Roadmap checklists
-  - Code release history
+  - Boundary release history
 dependencies:
   - PRD
   - User Stories
-authority_level: Master technical design source of truth.
-temporal_scope: Approved technical direction for the current project version.
+authority_level: Technical design source of truth.
+temporal_scope: Approved technical direction for the current Product Version.
 ```
 
 ### Business vs Technical Attribute Boundary
@@ -474,15 +665,18 @@ Architecture owns technical persistence metadata: database IDs, foreign keys, au
 
 Technical attributes may appear in BRD only when they carry explicit business meaning. When included, the BRD must state the business meaning rather than presenting the attribute as database structure.
 
-## 7.5 Requirement Mapping Contract
+## 10.5 Requirement Mapping Contract
 
 ```yaml
 purpose: Validate traceability between requirements, execution references, and release evidence.
 primary_question: Did we miss anything?
 allowed_content:
+  - Specification Boundary identifiers when specifications are distributed
+  - Requirement IDs
   - User Story IDs
   - Verification Criteria IDs
-  - Execution boundaries
+  - Execution Boundary names
+  - Boundary roles
   - Relative links to ROADMAP or CHANGELOG anchors
   - Release evidence or pending state
   - Traceability validation findings
@@ -495,12 +689,12 @@ forbidden_content:
 dependencies:
   - User Stories
   - Execution ROADMAP
-  - Codebase CHANGELOG
+  - Execution Boundary CHANGELOG
 temporal_scope: Current traceability state across planned and released work.
 authority_level: Traceability index, not requirement source of truth.
 ```
 
-## 7.6 Decision Log Contract
+## 10.6 Decision Log Contract
 
 ```yaml
 purpose: Record significant product, architectural, and technical decisions.
@@ -525,11 +719,11 @@ temporal_scope: State-sensitive decision history.
 authority_level: Decision source of truth.
 ```
 
-## 7.7 Specs-Level CHANGELOG Contract
+## 10.7 Specs-Level CHANGELOG Contract
 
 ```yaml
-purpose: Record chronological release history of project business capabilities.
-primary_question: What business capabilities changed in each project version?
+purpose: Record chronological release history of product business capabilities.
+primary_question: What business capabilities changed in each Product Version?
 allowed_content:
   - Planned specification scope under Unreleased or Planned
   - Released business capability entries
@@ -545,22 +739,24 @@ dependencies:
   - PRD
   - User Stories
   - Requirement Mapping
-temporal_scope: State-sensitive project version history.
-authority_level: Project capability release history.
+temporal_scope: State-sensitive Product Version history.
+authority_level: Product capability release history.
 ```
 
-## 7.8 Service README Contract
+## 10.8 Execution Boundary README Contract
 
 ```yaml
-purpose: Explain the execution boundary, local setup, technology stack, and documentation references.
-primary_question: What is this service, package, or monolith?
+purpose: Explain the execution boundary, deployability, compatibility, local setup, technology stack, and documentation references.
+primary_question: What is this execution boundary and what does it own?
 allowed_content:
-  - Service metadata
-  - Service or package purpose
+  - Boundary metadata
+  - Boundary purpose
   - Implementation responsibilities
+  - Deployability classification
+  - Compatible Product Version declarations for deployable boundaries
   - Technology stack mapping
   - Setup, build, test, and run instructions
-  - Links to master documentation
+  - Links to specification documentation
 forbidden_content:
   - Business requirements rewritten as local truth
   - Product acceptance criteria
@@ -569,20 +765,26 @@ forbidden_content:
 dependencies:
   - Specification Boundary documents
 temporal_scope: Active execution-boundary operating guide.
-authority_level: Service-level implementation guide.
+authority_level: Execution-boundary implementation guide.
 ```
 
-Service metadata must include:
+Boundary metadata must include:
 
-* Service / Package Name
-* Execution Boundary
-* Service Version
-* Compatible Project Version
+* Boundary Name
+* Boundary Type
+* Deployable
+* Boundary Version when deployable
+* Compatible Product Versions when deployable
 * Blueprint Version
 * Release Status
 * Owner / Maintainer
 
-## 7.9 Execution ROADMAP Contract
+Boundary metadata may include:
+
+* Compatibility Status
+* Compatibility Notes
+
+## 10.9 Execution ROADMAP Contract
 
 ```yaml
 purpose: Track future-oriented implementation work within an execution boundary.
@@ -591,6 +793,7 @@ allowed_content:
   - Stable Verification Criteria IDs
   - User Story ID references
   - Technical verification criteria
+  - Boundary role
   - Pending or planned execution status
 forbidden_content:
   - Completed historical work
@@ -605,7 +808,9 @@ temporal_scope: State-sensitive future execution plan.
 authority_level: Execution planning source for that boundary.
 ```
 
-## 7.10 Codebase CHANGELOG Contract
+Verification Criteria IDs are unique within an Execution Boundary. Global uniqueness is not required when the Execution Boundary namespace is explicit.
+
+## 10.10 Execution Boundary CHANGELOG Contract
 
 ```yaml
 purpose: Record technical implementation history within an execution boundary.
@@ -616,6 +821,7 @@ allowed_content:
   - Refactors
   - Dependency changes
   - Removed code, routes, packages, or databases
+  - Boundary release evidence for deployable boundaries
 forbidden_content:
   - Planned future work
   - Business capability release claims without implementation evidence
@@ -624,329 +830,105 @@ forbidden_content:
 dependencies:
   - Execution ROADMAP
   - Requirement Mapping
-temporal_scope: State-sensitive service/package version history.
+temporal_scope: State-sensitive Boundary Version history.
 authority_level: Execution-boundary implementation history.
 ```
 
 ---
 
-# 8. Documentation Responsibilities
+# 11. Traceability Rules
 
-The following summaries are quick references. The artifact contracts in Section 7 remain the source of truth for artifact scope.
-
-## 8.1 BRD
-
-Purpose:
-
-> Why are we building this?
-
-Must contain:
-
-* Business objectives
-* Stakeholders
-* Scope
-* Out-of-scope definitions
-* Business entities
-* High-level business flows and business flow diagrams
-* Business constraints
-* Success criteria
-
-Business flow diagrams should show actors, business decisions, handoffs, and outcomes. They must not include API routes, database calls, framework components, or implementation sequence details.
-
----
-
-## 8.2 PRD
-
-Purpose:
-
-> What should the product do?
-
-Must contain:
-
-* Functional requirements
-* Product capabilities
-* User flows
-* Product interaction flows
-* References to BRD business flows where needed
-* Acceptance criteria summary
-* Verified or explicitly provided wireframe references
-* Verified or explicitly provided Figma references
-* Verified or explicitly provided prototype references
-
-If design artifacts are unavailable, write `Not Provided` or `Unknown`. Do not fabricate Figma, wireframe, prototype, or external design links.
-
----
-
-## 8.3 User Stories
-
-Purpose:
-
-> What requirements must be implemented?
-
-Must contain:
-
-* Story IDs
-* User stories
-* Acceptance criteria
-* Business rules
-* Edge cases
-
-Standard format:
+Canonical verification identity:
 
 ```text
-As a ...
-I want to ...
-So that ...
+Execution Boundary + Verification Criteria ID
 ```
 
----
+Verification Criteria IDs are namespace-scoped. Global uniqueness is not required.
 
-## 8.4 Architecture
+All Execution Boundaries provide namespace scope for:
 
-Purpose:
+* Verification Criteria IDs
+* ROADMAP ownership
 
-> How is the system designed?
+Deployable Execution Boundaries additionally provide namespace scope for:
 
-Must contain:
+* CHANGELOG ownership
+* Boundary Versions
+* Boundary release evidence
 
-* ERD diagrams
-* Sequence diagrams
-* System diagrams
-* Integration diagrams
-* Service boundaries
-* Technical architecture decisions
-* High-level technical constraints
+Non-deployable boundaries may optionally maintain planning or change-tracking artifacts when useful for implementation coordination.
 
-No separate Data Model document should exist.
+Requirement Mapping must preserve:
 
-ERDs and Sequence Diagrams belong inside Architecture.
+* Specification Boundary context when specifications are distributed
+* Requirement or User Story ID
+* Execution Boundary
+* Boundary role
+* Execution reference
+* Release evidence or pending state
 
----
+Example:
 
-## 8.5 Requirement Mapping
-
-Purpose:
-
-> Did we miss anything?
-
-To strictly preserve the Specification Boundary, the Requirement Mapping must not track execution checklist checkboxes or duplicate live implementation states. Instead, it serves as a static traceability index referencing stable execution IDs and release evidence.
-
-Requirement Mapping validation findings are limited to traceability concerns. Valid Requirement Mapping findings include missing or invalid User Story IDs, Verification Criteria IDs, execution boundaries, ROADMAP or CHANGELOG links, release evidence, temporal state, or contradictions in mapped evidence.
-
-Findings about missing business objectives, missing architecture sections, missing acceptance criteria, incomplete decision rationale, or other non-traceability concerns must be recorded in the artifact being evaluated, not in `05_Requirement_Mapping.md`.
-
-### Mapping Matrix Standards
-The Requirement Mapping file (`05_Requirement_Mapping.md`) must contain a traceability matrix with the following columns:
-
-| User Story ID | Verification Criteria ID | Execution Boundary | Execution Reference | Release Evidence |
-| :--- | :--- | :--- | :--- | :--- |
-| `US-CAT-01` | `BE-US-CAT-01-001` | Backend | `[CHANGELOG.md](../my-service-backend/CHANGELOG.md#BE-US-CAT-01-001)` | `Service v1.0.0` |
-| `US-CAT-01` | `BE-US-CAT-01-004` | Backend | `[ROADMAP.md](../my-service-backend/ROADMAP.md#BE-US-CAT-01-004)` | `Pending` |
-
-* **User Story ID:** The unique story identifier from `03_User_Stories.md`.
-* **Verification Criteria ID:** The stable, unique implementation ID defined in the service's `ROADMAP.md` (see Section 9.2 for format).
-* **Execution Boundary:** The codebase where implementation occurs (e.g., `Backend`, `Frontend`, or `Monolith`).
-* **Execution Reference:** A precise relative hyperlink to the criteria verification line.
-  * For **active and incomplete tasks**, this must link to the codebase `ROADMAP.md#anchor`.
-  * For **completed and released tasks**, this must link to the codebase `CHANGELOG.md#anchor` under the appropriate release version.
-* **Release Evidence:** A record of implementation completeness.
-  * For **completed tasks**, this must show a static record of completion (e.g., the first service/package version that included the implementation like `Service v1.0.0`, a specific pull request number like `PR #12`, or a Git commit hash).
-  * For **incomplete/pending tasks**, this must be explicitly set to `Pending` (or `Planned`) and must not show completed release references.
-
-### Traceability Chain Validation
-
-Traceability validation must verify:
-
-```text
-ID
-Valid Link
-Correct Target
-Supporting Evidence
-Temporal State
-```
-
-Validation must confirm that:
-
-* IDs are stable and unique.
-* Links resolve to real targets.
-* Targets represent the correct artifact type.
-* Completed work links to static release evidence.
-* Pending work links to active execution tracking.
-* Evidence does not contradict the mapped requirement.
-
----
-
-## 8.6 Decision Log
-
-Purpose:
-
-> Why was this decision made?
-
-Must contain:
-
-* Product decisions
-* Architectural decisions
-* Technical decisions
-* Decision status
-* Decision date
-* Trade-offs
-
-Examples:
-
-* Soft delete vs hard delete
-* Monolith vs microservices
-* Event-driven vs synchronous processing
-
-Avoid logging trivial implementation details.
-
----
-
-## 8.7 Specs-level CHANGELOG.md
-
-Purpose:
-
-> What is the chronological release history of our project's business capabilities?
-
-Must contain:
-
-* The title `# Project Changelog - [Service Name] Specifications`.
-* A dedicated `[Unreleased]` or `[Planned]` section at the top of the file to draft the target scope of upcoming releases.
-* Chronological release entries formatted as `[MAJOR.MINOR] - YYYY-MM-DD` upon formal capability release approval.
-* Wording organized in Keep a Changelog categories:
-  * **Added:** New business features or capability modules.
-  * **Changed:** Modifications to existing business processes, flowcharts, or rules.
-  * **Fixed:** Strictly defined as **business or specification corrections** (e.g., correcting an incorrect business rule, fixing a flowchart gate error). Code-level bug fixes are strictly prohibited.
-  * **Removed:** Deprecated or out-of-scope business capabilities.
-
----
-
-# 9. Execution Boundary Standards
-
-## 9.1 README.md
-Purpose:
-> What is this service, package, or monolith?
-Must contain:
-* Service metadata table
-* Service/Package purpose and responsibilities
-* Technology stack mapping table
-* Local setup, build, and test execution instructions
-* Related documentation references hyperlinking back to the Specification Boundary
-
-Service README files must not redefine master business requirements.
-
----
-
-## 9.2 ROADMAP.md
-
-Purpose:
-
-> What are we planning to build within this boundary?
-
-Must contain an implementation-focused, strictly future-oriented task checklist. It tracks pending work and upcoming capabilities, not historical completions (which belong in the codebase `CHANGELOG.md`).
-
-### Stable Verification Criteria ID Standard
-Every checklist item (row) in the service `ROADMAP.md` must be assigned a unique, stable **Verification Criteria ID** to ensure accurate traceability without duplicating live checkbox statuses in the specifications.
-
-#### ID Format
-```text
-[SERVICE_PREFIX]-[STORY_ID]-[CRITERIA_NUMBER]
-```
-* **`[SERVICE_PREFIX]`**: The identifier of the execution boundary. `BE` for Backend, `FE` for Frontend, or `ML` for Monolith.
-* **`[STORY_ID]`**: The full User Story ID from the specification (e.g., `US-CAT-01`).
-* **`[CRITERIA_NUMBER]`**: A unique three-digit sequential number starting at `001` (e.g., `001`, `002`, `003`).
-
-#### Examples
-* `BE-US-CAT-01-001` (Backend database schema creation verification)
-* `BE-US-CAT-01-002` (Backend NestJS DTO validation verification)
-* `FE-US-CAT-01-001` (Frontend TypeScript interfaces verification)
-
-#### Constraints
-1. **Uniqueness:** Verification Criteria IDs must be completely unique within a service's `ROADMAP.md`.
-2. **Stability:** Once assigned, an ID is locked. If a roadmap task is deleted or modified, its ID **must not** be reused for a different task. This preserves the integrity of the Requirement Mapping references.
-
-#### Table Format Example
 ```markdown
-| Verification Criteria ID | User Story ID | Technical Verification Criteria | Status |
-| :--- | :--- | :--- | :--- |
-| `BE-US-CAT-01-001` | **US-CAT-01** | Create Prisma model `Category` with unique index on `slug` | `[ ]` |
-| `BE-US-CAT-01-002` | **US-CAT-01** | Build `POST /api/categories` endpoint and check for slug uniqueness | `[ ]` |
+| Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Catalog | US-CAT-01 | API-US-CAT-01-001 | api | requirement_owner | [CHANGELOG.md](../api/CHANGELOG.md#API-US-CAT-01-001) | Boundary v1.0.0 |
+| Catalog | US-CAT-01 | UI-US-CAT-01-001 | web | supporting_boundary | [ROADMAP.md](../web/ROADMAP.md#UI-US-CAT-01-001) | Pending |
 ```
 
 ---
 
-## 9.3 CHANGELOG.md
-Purpose:
-> What has changed in this boundary?
+# 12. Compatibility Metadata Governance
 
-Must comply with the following title and wording standards to prevent overlap with the high-level Specs CHANGELOG:
+Compatibility declarations are explicit and do not require a new permanent mandatory artifact.
 
-### Title Conventions
-* **For Service/Package Boundaries:** `# Service Changelog - [Package Name] Codebase`.
-* **For Monolith Boundaries:** `# Monolith Changelog - [Service Name] Codebase`.
-* **For Optional Monorepo Root Platforms:** `# Platform Changelog - [Workspace Name] Workspace`.
+Current-state compatibility lives in each deployable Execution Boundary README metadata table.
 
-### Wording & Content Standards
-* **Implementation-Focused Entries:** All change logs in execution boundaries must record strictly technical implementations, rather than generic product milestones.
-  * **Incorrect (Generic Product-Level):** `Added Category Management.`
-  * **Correct (Implementation-Focused):** `Added implementation support for Category Management (Prisma models, NestJS DTO validation, and API routes).`
-* **Categories:**
-  * **Added:** Technical implementation support for new features/capabilities.
-  * **Changed:** Technical optimizations, codebase refactorings, or package dependency upgrades.
-  * **Fixed:** Code-level bug fixes, exception handling, and database runtime hotfixes.
-  * **Removed:** Deprecated code files, routes, packages, or databases.
+Historical release evidence lives in the Execution Boundary CHANGELOG.
 
-CHANGELOGs are historical records. Planned work belongs in `ROADMAP.md`.
+Product-level traceability lives in Requirement Mapping.
 
----
+Required deployable boundary metadata:
 
-# 10. Temporal Scope Rules
+```yaml
+boundary_version:
+compatible_product_versions:
+```
 
-Temporal state is required only for state-sensitive artifacts.
+Optional deployable boundary metadata:
 
-State-sensitive artifacts include:
+```yaml
+compatibility_status:
+compatibility_notes:
+```
 
-* ROADMAP
-* CHANGELOG
-* Decision Log
-* Validation Findings
+Ownership rules:
 
-Temporal state is not required by default for non-state-sensitive specification artifacts such as:
+* The Specification Boundary owns Product Versions and product release history.
+* A deployable Execution Boundary owns its Boundary Version and compatibility declaration.
+* Requirement Mapping owns product-level traceability across boundaries.
+* Execution Boundary CHANGELOG entries provide historical release evidence.
 
-* BRD
-* PRD
-* User Stories
-* Architecture
+Validation rules:
 
-## 10.1 Temporal States
-
-| State | Meaning |
-| :--- | :--- |
-| Draft | Proposed but not yet accepted. |
-| Planned | Accepted for future work but not implemented. |
-| Active | Current source of truth for ongoing work. |
-| Released | Completed and included in a formal release. |
-| Historical | Preserved as past state or archive. |
-
-## 10.2 Required Outcome
-
-Blueprint v3 must prevent:
-
-* Planned work from appearing in changelogs as completed history.
-* Draft decisions from appearing as implemented decisions.
-* Initialization work from appearing as released product capability.
-* Pending execution tasks from being treated as release evidence.
+* Every deployable boundary must declare a Boundary Version.
+* Every deployable boundary must declare compatible Product Versions.
+* A Boundary Version referenced as release evidence must exist in that boundary's CHANGELOG.
+* Requirement Mapping must not claim release evidence without a matching execution reference.
+* Non-deployable boundaries must not be requirement owners or product release owners.
 
 ---
 
-# 11. Validation Framework
+# 13. Validation Framework
 
 Validation is the enforcement layer for evidence, boundaries, traceability, hierarchy, and temporal scope.
 
 Generation alone is not completion. Artifacts are usable only after validation findings are resolved or explicitly accepted.
 
-## 11.1 Validation Areas
+## 13.1 Validation Areas
 
-Blueprint v3 defines validation checks for:
+Blueprint v4 defines validation checks for:
 
 * Purpose fit
 * Boundary fit
@@ -955,9 +937,11 @@ Blueprint v3 defines validation checks for:
 * Completeness
 * Consistency
 * Temporal correctness
-* Master-service hierarchy
+* Specification and execution hierarchy
+* Deployability classification
+* Compatibility metadata
 
-## 11.2 Finding Format
+## 13.2 Finding Format
 
 Validation findings should identify:
 
@@ -973,26 +957,19 @@ recommended_fix:
 state:
 ```
 
-`evidence_classification` must use the Section 5.1 classification values, and `confidence` must use the Section 5.2 confidence values.
+`evidence_classification` must use the Section 7.1 classification values, and `confidence` must use the Section 7.2 confidence values.
 
-## 11.3 Finding Scope & Persistence
+## 13.3 Finding Scope & Persistence
 
 Validation findings may only be persisted within an artifact when the finding falls within that artifact's contract scope.
 
 Persisted findings belong in the artifact being evaluated. For example, BRD findings belong in `01_BRD.md`, PRD findings belong in `02_PRD.md`, User Story findings belong in `03_User_Stories.md`, Architecture findings belong in `04_Architecture.md`, and Decision Log findings belong in `06_Decision_Log.md`.
 
-`05_Requirement_Mapping.md` may only persist traceability-related findings, including missing or invalid story IDs, verification criteria IDs, execution boundaries, links, release evidence, temporal state, or contradictions in mapped evidence.
-
-Persisted findings must remain relevant to the artifact's:
-
-- Purpose
-- Primary Question
-- Allowed Content
-- Authority Level
+`05_Requirement_Mapping.md` may only persist traceability-related findings, including missing or invalid story IDs, verification criteria IDs, execution boundaries, boundary roles, links, release evidence, temporal state, or contradictions in mapped evidence.
 
 Validation findings that do not clearly belong to a specific artifact contract should remain temporary review output rather than permanent documentation content.
 
-## 11.4 Finding Lifecycle
+## 13.4 Finding Lifecycle
 
 | State | Meaning |
 | :--- | :--- |
@@ -1003,7 +980,7 @@ Validation findings that do not clearly belong to a specific artifact contract s
 
 ---
 
-# 12. Brownfield Adoption and Business Flow Discovery
+# 14. Brownfield Adoption and Migration
 
 When adopting an existing project, documentation must preserve uncertainty instead of inventing false history.
 
@@ -1016,18 +993,71 @@ Adoption should identify:
 * Triggering events
 * State transitions
 * External systems
+* Execution boundaries
+* Deployability characteristics
 * Known gaps and unknown intent
 
-Routes, services, entities, APIs, database tables, and UI screens may support business-flow discovery. They must be treated as evidence inputs, not automatic product requirements.
+Routes, services, entities, APIs, database tables, infrastructure modules, packages, and UI screens may support business-flow discovery. They must be treated as evidence inputs, not automatic product requirements.
 
-If business intent cannot be proven from source material or verified behavior, record it as an assumption or unknown in Project Context and resolve it before presenting it as final requirement truth.
+## 14.1 Mechanical Migration
+
+Mechanical V3-to-V4 changes:
+
+| V3 | V4 |
+| :--- | :--- |
+| Project Version | Product Version |
+| Service Version | Boundary Version |
+| Service README | Execution Boundary README |
+| Service Changelog | Execution Boundary Changelog |
+| Compatible Project Version | Compatible Product Versions |
+
+## 14.2 Classification Migration
+
+Classification migration requires human review.
+
+Activities include:
+
+* Boundary type assignment
+* Deployability classification
+* Requirement ownership assignment
+* Supporting boundary identification
+* Evidence source identification
+* Compatibility declaration definition
+* Specification topology selection
+
+## 14.3 Roadmap Carry-Forward Rules
+
+When transitioning active project documentation and local roadmaps:
+
+* Extract completed items from the execution boundary `ROADMAP.md`.
+* Record completed implementations in the execution boundary `CHANGELOG.md` under the correct historical Boundary Version when known.
+* If no execution boundary `CHANGELOG.md` existed before migration, use a reconstructed baseline entry instead of inventing release chronology.
+* Carry forward incomplete items into the current execution boundary `ROADMAP.md`.
+* Assign each carried-forward item a stable Verification Criteria ID scoped by the Execution Boundary.
+* Validate Requirement Mapping links and release evidence before treating migration as complete.
+
+Example reconstructed baseline:
+
+```markdown
+## [Migration Baseline] - YYYY-MM-DD
+### Evidence Status
+Reconstructed from observed execution boundary state.
+
+### Confidence
+Low
+
+### Notes
+Exact release chronology unavailable. Listed capabilities represent observed current state during adoption, not verified historical release order.
+```
 
 ---
 
-# 13. Development Workflow
+# 15. Development Workflow
 
 ```text
 Business Need or Brownfield Adoption Trigger
+|
+Documentation Initialization
 |
 Project Context (temporary input when needed)
 |
@@ -1043,13 +1073,13 @@ Requirement Mapping
 |
 Specs CHANGELOG (Scope Planning under [Unreleased])
 |
-Service Roadmaps (Execution Boundary)
+Execution Boundary Roadmaps
 |
-Implementation (Code & Tests)
+Implementation (Code, Configuration, Infrastructure, Tests)
 |
-Codebase CHANGELOG Updates (Execution Boundary)
+Execution Boundary CHANGELOG Updates
 |
-Specs CHANGELOG (Capability Release Approval & Versioning)
+Specs CHANGELOG (Product Release Approval & Versioning)
 |
 Validation Findings Resolved or Accepted
 ```
@@ -1058,97 +1088,95 @@ Documentation must be created before implementation when greenfield work allows 
 
 ---
 
-# 14. AI-Assisted Development Principles
+# 16. AI-Assisted Development Principles
 
 AI agents must:
 
 1. Read Documentation Blueprint first.
-2. Follow boundary structure.
+2. Follow specification and execution boundary structure.
 3. Use documentation as the primary source of context.
 4. Use Project Context when adopting or reconstructing existing systems.
 5. Preserve evidence classification in Project Context and validation findings.
 6. Use User Stories and Architecture as implementation guidance.
-7. Update ROADMAPs in the Execution Boundary when technical tasks are planned or still pending.
-8. Update codebase-level `CHANGELOG.md` files when code changes are implemented. AI agents must only update the Specs `CHANGELOG.md` if specifically instructed to publish a new Project Version release block.
-9. Preserve traceability between requirements and implementation across the Specification and Execution Boundaries.
-10. Validate purpose fit, boundary fit, evidence quality, traceability integrity, temporal correctness, and master-service hierarchy before considering artifacts complete.
+7. Update ROADMAPs in the responsible Execution Boundary when technical tasks are planned or still pending.
+8. Update execution-boundary `CHANGELOG.md` files when implementation changes are released.
+9. Update the Specs-level `CHANGELOG.md` only when specifically instructed to publish a Product Version release block.
+10. Preserve traceability between requirements and implementation across Specification and Execution Boundaries.
+11. Validate purpose fit, boundary fit, evidence quality, traceability integrity, compatibility metadata, temporal correctness, and specification/execution hierarchy before considering artifacts complete.
 
 The framework should optimize context quality rather than prompt complexity.
 
 ---
 
-# 15. Analyst-to-Developer Handoff
+# 17. Analyst-to-Developer Handoff
 
-Analysts primarily own the **Specification Boundary** (BRD, PRD, User Stories, mapping, decisions), while Developers primarily own the **Execution Boundary** (code, roadmaps, changelogs, READMEs). Both must preserve boundary responsibilities.
+Analysts primarily own the **Specification Boundary**. Developers primarily own **Execution Boundaries**. Both must preserve boundary responsibilities.
 
-* **Analysts** establish the business objectives, functional specifications, and process flows.
-* **Developers** translate approved user stories into technical criteria within execution boundaries, update traceability, and propose specification improvements.
-* **AI agents** assist in translating approved specifications into structured implementation tasks across the boundary.
+* **Analysts** establish business objectives, functional specifications, process flows, and Product Version release meaning.
+* **Developers** translate approved user stories into technical criteria within execution boundaries, update traceability, declare boundary compatibility, and propose specification improvements.
+* **AI agents** assist in translating approved specifications into structured implementation tasks across boundaries.
 
 ---
 
-# 16. Project Versioning Strategy
+# 18. Product Versioning Strategy
 
 ## Philosophy
-Project versions represent business and product capability evolution, decoupled from internal code refactorings or deployable revisions. In single-repository codebases (monorepos or monoliths), the Project Version represents the functional capabilities of the entire service ecosystem as a whole.
 
-Project versions do not represent bug fixes, code refactoring, optimizations, or internal implementation details.
+Product Versions represent business and product capability evolution, decoupled from internal code refactorings or deployable revisions.
 
----
+Product Versions do not represent bug fixes, code refactoring, optimizations, dependency updates, or internal implementation details.
 
 ## Format
+
 `MAJOR.MINOR` (e.g., `1.0`, `1.1`, `1.2`, `2.0`).
 
----
-
 ## Major Version
+
 Increase when introducing significant business changes, major workflow redesigns, breaking product changes, or large scope expansions.
 
----
-
 ## Minor Version
-Increase when introducing new feature modules or new business capabilities (e.g., Inventory Management, Reporting, Approval Workflows).
+
+Increase when introducing new feature modules or new business capabilities.
 
 ---
 
-# 17. Version Hierarchy
+# 19. Version Hierarchy
 
-The framework defines three independent version layers to prevent version lock:
+The framework defines three independent version layers to prevent version lock.
 
-## 17.1 Blueprint Version
-Identifies the documentation framework standard (e.g., `Blueprint Version: 3`).
+## 19.1 Blueprint Version
 
----
+Identifies the documentation framework standard (e.g., `Blueprint Version: 4`).
 
-## 17.2 Project Version
-Identifies the functional business capability release (e.g., `Project Version: 1.2`).
+## 19.2 Product Version
 
----
+Identifies the functional business capability release (e.g., `Product Version: 1.2`).
 
-## 17.3 Service / Package Version
-Identifies the deployable software revision within a specific execution boundary.
+## 19.3 Boundary Version
 
-* **Format:** `MAJOR.MINOR.PATCH` (e.g., `1.2.15`).
-* **Alignment Rule:** The first two segments (`MAJOR.MINOR`) **must align** with the Project Version they claim compatibility with. The third segment (`PATCH`) increments independently for bug fixes, dependency updates, and internal code refactorings.
-* **Layout Mappings:**
-  * **Pattern A (Multi-Repo) / Pattern B (Monorepo):** Each separate service codebase or monorepo package maintains its own independent Service Version (e.g., `Backend Version: 1.2.15`, `Frontend Version: 1.2.8`) aligning with their claimed Project Version compatibility.
-  * **Pattern C (Monolith):** The single monolith codebase maintains a single Service Version (e.g., `1.2.15`) that aligns with its claimed Project Version compatibility.
+Identifies the deployable software, infrastructure, or application revision within a specific deployable Execution Boundary.
 
----
+* **Format:** Implementation-defined but must be consistent within the boundary.
+* **Compatibility Rule:** Boundary Versions do not have to numerically align with Product Versions.
+* **Declaration Rule:** Deployable Boundary Versions must explicitly declare Compatible Product Versions.
+* **Non-deployable Rule:** Non-deployable boundaries are not required to maintain Boundary Versions unless useful for local coordination.
 
-## 17.4 Version Increments
-Patch increments may include:
+## 19.4 Version Increments
+
+Boundary Version increments may include:
+
 * Bug fixes
 * Refactoring
 * Performance improvements
 * Dependency updates
+* Infrastructure changes
 * Internal technical changes
 
-Patch changes must not alter the Project Version.
+Boundary Version changes must not silently alter Product Version meaning.
 
 ---
 
-# 18. Constraints
+# 20. Constraints
 
 Do not introduce additional permanent mandatory documentation artifacts beyond:
 
@@ -1160,7 +1188,7 @@ Do not introduce additional permanent mandatory documentation artifacts beyond:
 * Decision Log
 * Specs-level `CHANGELOG.md`
 
-Project Context is temporary by default and does not violate this mandatory artifact constraint.
+Project Context and documentation initialization records are temporary by default and do not violate this mandatory artifact constraint.
 
 Keep the framework lightweight.
 
@@ -1170,58 +1198,24 @@ Optimize for:
 * AI-assisted development
 * Analyst-to-developer handoff
 * Long-term maintainability
+* Incremental adoption
 
 Avoid unnecessary process overhead.
 
 ---
 
-# 19. Reusable Roadmap Migration & Carry-Forward Rules
+# 21. Core Specification & Execution Templates
 
-When transitioning active project documentation and local roadmaps to the current Blueprint standard:
+All new and updated files should conform to the templates below. Artifact scope is governed by the contracts in Section 10.
 
-## 19.1 Remove Completed Rows
-Extract all completed items (marked `[x]`) from the service's `ROADMAP.md` file.
+## 21.1 Specification Boundary Templates
 
-## 19.2 Backfill Codebase Changelog
-* Record all completed implementations in the codebase `CHANGELOG.md` under the correct historical service/package version entry (the version in which they were actually released).
-* **Cold-Start Rule:** If no codebase `CHANGELOG.md` existed before the migration, do not place reconstructed history under a normal release version such as `[1.0.0]`. Create a reconstructed baseline entry that clearly separates observed current state from verified historical release chronology.
-* Normal versioned release entries begin after the migration baseline, when release chronology is known or newly produced.
+### 21.1.1 01_BRD.md
 
-Example reconstructed baseline entry:
-
-```markdown
-## [Migration Baseline] - YYYY-MM-DD
-### Evidence Status
-Reconstructed from observed codebase state.
-
-### Confidence
-Low
-
-### Notes
-Exact release chronology unavailable. Listed capabilities represent observed current state during adoption, not verified historical release order.
-```
-
-## 19.3 Carry-Forward Incomplete Rows
-* Carry forward all incomplete items (marked `[ ]`) into the current `ROADMAP.md`.
-* Assign each carried-forward item a stable Verification Criteria ID (e.g., `BE-US-CAT-01-002`).
-* Review all carried-forward tasks for validity against the updated specifications.
-
-## 19.4 Validate Brownfield Evidence
-* Use Project Context to separate explicit facts, derived facts, assumptions, and unknowns.
-* Validate business-flow claims before moving them into BRD, PRD, or User Stories.
-* Validate Requirement Mapping links and release evidence before treating migration as complete.
-
----
-
-# 20. Core Specification & Execution Templates
-
-To guarantee visual consistency and structure across services, all new and updated files must conform to the templates below. Artifact scope is governed by the contracts in Section 7.
-
-## 20.1 Specification Boundary Templates
-
-### 20.1.1 01_BRD.md
 ````markdown
-# Business Requirements Document (BRD) - [Service Name]
+# Business Requirements Document (BRD) - [Product Name]
+
+**Product Version:** [MAJOR.MINOR]
 
 ## 1. Business Objectives & Goals
 [Describe the business problem, business goals, and expected organizational value.]
@@ -1259,20 +1253,21 @@ flowchart TD
 * **Success Criteria:** [Measurable business outcome.]
 ````
 
-### 20.1.2 02_PRD.md
+### 21.1.2 02_PRD.md
+
 ```markdown
-# Product Requirements Document (PRD) - [Service Name]
+# Product Requirements Document (PRD) - [Product Name]
+
+**Product Version:** [MAJOR.MINOR]
 
 ## 1. Introduction & Product Goals
 [Brief summary of the business problem being solved, who the users are, and high-level product value.]
 
 ## 2. Functional Requirements
-[A structured list of functional requirements, categorized by feature area. Do not include database schema or API implementation details.]
 * **FR-[MODULE]-[NUMBER]: [Feature Name]** - Detailed description of product behavior.
-  * *Example:* **FR-CAT-01: Parent Category Assignment** - The system must allow users to assign a category to a parent category, creating a multi-level hierarchy up to 3 levels deep.
 
 ## 3. Product Capabilities & Scope
-* **In-Scope:** [List of capabilities included in the current project phase.]
+* **In-Scope:** [List of capabilities included in the current product phase.]
 * **Out-of-Scope:** [List of capabilities explicitly excluded or deferred.]
 
 ## 4. User Journeys & Process Flows
@@ -1284,162 +1279,200 @@ flowchart TD
 * **Design Guidelines:** [List any specific UI system or layout constraints. If unavailable, write `Unknown`.]
 ```
 
-### 20.1.3 04_Architecture.md
-````markdown
-# Technical Architecture - [Service Name]
+### 21.1.3 03_User_Stories.md
 
-## 1. System Context & Boundaries
-[High-level overview of the service boundaries, how it fits into the global system, and dependency mappings. Do not introduce new business requirements here.]
+```markdown
+# User Stories - [Product Name]
 
-## 2. Component Diagram
-```mermaid
-graph TD
-    A[Client UI] -->|API Request| B[Gateway / Router]
-    B -->|Route| C[Backend Service]
-    C -->|ORM| D[(Database)]
+**Product Version:** [MAJOR.MINOR]
+
+## 1. User Story Index
+
+| User Story ID | Title | Product Area | Status |
+| :--- | :--- | :--- | :--- |
+| US-[AREA]-001 | [Short title] | [Capability or workflow] | [Draft | Approved | Deferred] |
+
+## 2. User Stories
+
+### US-[AREA]-001: [Story Title]
+
+**As a** [user or role],
+**I want** [capability or behavior],
+**So that** [business or product outcome].
+
+#### Acceptance Criteria
+* [Observable product behavior or rule.]
+* [Edge case or constraint that affects product behavior.]
+
+#### Business Rules
+* [Business rule, policy, or domain constraint.]
+
+#### Out of Scope
+* [Related behavior intentionally excluded from this story.]
 ```
 
-## 3. Entity Relationship Diagram (ERD)
-[ERDs may include technical persistence metadata because Architecture is the technical design source of truth. Include database identifiers, foreign keys, relationships, audit timestamps, soft-delete fields, indexes, ORM/schema names, and storage-only implementation fields when they are relevant to the system design.]
+### 21.1.4 04_Architecture.md
+
+````markdown
+# Technical Architecture - [Product Name]
+
+**Product Version:** [MAJOR.MINOR]
+
+## 1. System Context & Boundaries
+[Describe the system context, Specification Boundaries, Execution Boundaries, and major dependencies. Do not introduce new product requirements here.]
+
+## 2. Execution Boundary Model
+
+| Execution Boundary | Boundary Type | Deployable | Responsibility |
+| :--- | :--- | :--- | :--- |
+| [boundary-name] | [workspace | application | service | monolith | package | infrastructure] | [true | false] | [Implementation responsibility] |
+
+## 3. Component Diagram
+
+```mermaid
+graph TD
+    A[Client or Actor] -->|Interaction| B[Execution Boundary]
+    B -->|Reads/Writes| C[(Data Store)]
+```
+
+## 4. Entity Relationship Diagram (ERD)
+[ERDs may include technical persistence metadata because Architecture is the technical design source of truth. Include database identifiers, foreign keys, relationships, audit timestamps, soft-delete fields, indexes, ORM/schema names, and storage-only implementation fields when relevant.]
 
 ```mermaid
 erDiagram
-    %% Avoid using HTML tags in labels
-    CATEGORY ||--o{ PRODUCT : contains
-    CATEGORY {
+    ENTITY ||--o{ RELATED_ENTITY : relates_to
+    ENTITY {
         int id PK
         string name
-        string slug
-        int parent_category_id FK
-    }
-    PRODUCT {
-        int id PK
-        string sku
-        string name
-        decimal base_price
-        int category_id FK
     }
 ```
 
-## 4. Sequence Diagrams & Integration Flows
+## 5. Sequence Diagrams & Integration Flows
+
 ```mermaid
 sequenceDiagram
-    participant UI as Client UI
-    participant API as Service API
-    participant DB as Database
+    participant Actor
+    participant Boundary as Execution Boundary
+    participant Store as Data Store
 
-    UI->>API: POST /api/categories (name, parent_id)
-    API->>DB: Check parent_id exists and not deleted
-    DB-->>API: Active Parent Record Found
-    API->>DB: Create Category
-    DB-->>API: Return New Category
-    API-->>UI: 201 Created (JSON Payload)
+    Actor->>Boundary: Request product behavior
+    Boundary->>Store: Read or write data
+    Store-->>Boundary: Return result
+    Boundary-->>Actor: Return response
 ```
 
-## 5. Technical Constraints & Design Choices
-* **Database / ORM:** [e.g., PostgreSQL, Prisma ORM]
-* **Validation Strategy:** [e.g., Class-validator DTO constraints]
-* **Deletions:** [e.g., Strictly enforced soft-deletion using `deleted_at` timestamp]
+## 6. Technical Constraints & Design Choices
+* **Boundary Decision:** [Why this boundary owns the implementation.]
+* **Persistence Strategy:** [Database, storage, or state management choice.]
+* **Integration Strategy:** [External systems, APIs, queues, or scheduled work.]
 ````
 
-### 20.1.4 06_Decision_Log.md
+### 21.1.5 05_Requirement_Mapping.md
+
 ```markdown
-# Architectural & Product Decisions - [Service Name]
+# Requirement Mapping - [Product Name]
 
-## [ADR-001] [Decision Title]
-* **Status:** [Draft | Proposed | Approved | Rejected | Superseded]
-* **Date:** YYYY-MM-DD
-* **Author:** [Name / Role]
+**Product Version:** [MAJOR.MINOR]
 
-### Context & Problem Statement
-[Describe the context, technical challenge, or business constraint that requires a decision.]
-
-### Options Considered
-* **Option 1:** [Brief title / description]
-* **Option 2:** [Brief title / description]
-
-### Pros and Cons of Options
-* **Option 1:**
-  * (+) Pros: ...
-  * (-) Cons: ...
-* **Option 2:**
-  * (+) Pros: ...
-  * (-) Cons: ...
-
-### Decision Outcome
-* **Chosen Option:** [Option Name]
-* **Justification:** [Why this option satisfies constraints better than others.]
-* **Trade-offs:** [Acknowledge any compromises, security risks, or operational complexities accepted.]
+| Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| [Specification Boundary] | [US-ID] | [Boundary-scoped VC ID] | [boundary-name] | [requirement_owner/supporting_boundary/evidence_source] | [ROADMAP or CHANGELOG link] | [Pending or Boundary vX.Y.Z] |
 ```
 
-### 20.1.5 Specs-level CHANGELOG.md
+### 21.1.6 06_Decision_Log.md
+
 ```markdown
-# Project Changelog - [Service Name] Specifications
+# Architectural & Product Decisions - [Product Name]
 
-All notable changes to the functional and business specifications for the **[Service Name]** will be documented in this file.
+**Product Version:** [MAJOR.MINOR]
 
-This project tracks functional specs capabilities via **Project Versions (`MAJOR.MINOR`)**.
+## ADR-[NUMBER]: [Decision Title]
+
+* **Status:** [Draft | Proposed | Approved | Rejected | Superseded]
+* **Date:** YYYY-MM-DD
+* **Owner:** [Role, team, or maintainer]
+
+### Context & Problem Statement
+[Describe the product, architectural, or technical context that requires a decision.]
+
+### Options Considered
+* **Option 1:** [Brief title and description.]
+* **Option 2:** [Brief title and description.]
+
+### Decision Outcome
+* **Chosen Option:** [Selected option.]
+* **Justification:** [Why this option satisfies the known constraints.]
+* **Trade-offs:** [Risks, limitations, or operational considerations accepted.]
+
+### Impact
+* **Specification Impact:** [Affected requirements, stories, or product scope.]
+* **Execution Boundary Impact:** [Affected execution boundaries.]
+```
+
+### 21.1.7 Specs-level CHANGELOG.md
+
+```markdown
+# Product Changelog - [Product Name] Specifications
+
+All notable changes to the functional and business specifications for **[Product Name]** are documented here.
+
+This project tracks product capabilities via **Product Versions (`MAJOR.MINOR`)**.
 
 ---
 
 ## [Unreleased]
 ### Added
 * [Draft of planned feature additions]
-### Changed
-* [Draft of planned workflow modifications]
-### Fixed
-* [Draft of planned business rule corrections. Code bug fixes are strictly prohibited.]
 
 ---
 
 ## [1.0] - YYYY-MM-DD
 ### Added
-* Initial baseline functional specifications for [Service Name] (BRD, PRD, User Stories, Architecture, and Mapping).
+* Initial baseline functional specifications for [Product Name].
 ```
 
----
+## 21.2 Execution Boundary Templates
 
-## 20.2 Execution Boundary Templates
+### 21.2.1 Execution Boundary README.md
 
-### 20.2.1 Service README.md
 ````markdown
-# [Service/Package Name]
+# [Boundary Name]
 
-## 1. Service Metadata
+## 1. Boundary Metadata
 | Field | Value |
 | :--- | :--- |
-| Service / Package Name | [Service or package name] |
-| Execution Boundary | [Backend Service | Frontend UI | Monolith | Package | Workspace] |
-| Service Version | [MAJOR.MINOR.PATCH, e.g., 1.0.0] |
-| Compatible Project Version | [MAJOR.MINOR, e.g., 1.0] |
-| Blueprint Version | [Blueprint major version, e.g., 3] |
+| Boundary Name | [boundary-name] |
+| Boundary Type | [workspace | application | service | monolith | package | infrastructure] |
+| Deployable | [true | false] |
+| Boundary Version | [Required when deployable; optional when non-deployable] |
+| Compatible Product Versions | [Required when deployable; e.g., 1.0, 1.1] |
+| Blueprint Version | 4 |
 | Release Status | [Draft | Active | Stable | Deprecated | Archived] |
 | Owner / Maintainer | [Team, role, or maintainer name] |
+| Compatibility Status | [Optional: compatible | partial | deprecated | unknown] |
+| Compatibility Notes | [Optional notes] |
 
 ## 2. Overview & Purpose
-[A clear description of this codebase boundary (backend, frontend, or monolith) and its implementation responsibilities. Reference master requirements instead of rewriting them.]
+[Describe this execution boundary and its implementation responsibilities. Reference specification requirements instead of rewriting them.]
 
 ## 3. Technology Stack Mapping
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
-| Language | [e.g., TypeScript] | Type-safe development |
-| Web Server | [e.g., NestJS / Express] | REST API engine |
-| Database / ORM | [e.g., Prisma / PostgreSQL] | Data persistence |
+| Language | [e.g., TypeScript] | [Purpose] |
 
 ## 4. Setup & Development Instructions
 ### Prerequisites
-* Node.js version ...
-* Database instance ...
+* [Runtime or tooling requirement.]
 
 ### Quickstart Commands
 ```bash
 # Install dependencies
 npm install
 
-# Start local server
+# Start local runtime
 npm run dev
 
-# Run unit tests
+# Run tests
 npm run test
 ```
 
@@ -1448,33 +1481,33 @@ npm run test
 * **Product Requirements (PRD):** [02_PRD.md]([path-to-specs]/02_PRD.md)
 * **Technical Architecture:** [04_Architecture.md]([path-to-specs]/04_Architecture.md)
 * **Requirement Mapping:** [05_Requirement_Mapping.md]([path-to-specs]/05_Requirement_Mapping.md)
-
-*Note: Replace `[path-to-specs]` with the actual relative path to the Specification Boundary directory (e.g., `../../docs/` in Pattern B or `../my-service-docs/` in Pattern A).*
 ````
 
-### 20.2.2 Codebase CHANGELOG.md
+### 21.2.2 Execution Boundary CHANGELOG.md
+
 ```markdown
-# Service Changelog - [Service Name] Codebase
+# Execution Boundary Changelog - [Boundary Name]
 
-All notable technical changes, optimizations, and bug fixes implemented in the **[Service Name]** codebase are recorded here.
+All notable technical changes, optimizations, compatibility declarations, and bug fixes implemented in **[Boundary Name]** are recorded here.
 
-This repository tracks codebase changes via **Service Versions (`MAJOR.MINOR.PATCH`)**.
+Deployable boundaries track changes via **Boundary Versions**.
 
 ---
 
 ## [1.0.0] - YYYY-MM-DD
+### Compatibility
+* Compatible Product Versions: 1.0
+
 ### Added
-* Initial technical codebase boilerplate setup.
-* Prisma model database schemas and migration scripts.
-* DTO input validations and API routing configurations.
+* Initial technical boundary implementation.
 ```
 
 ---
 
 ## Metadata & Copyright
 
-* **Framework:** Decoupled Specs & Distributed Roadmaps Framework
-* **Current Version:** Version 3 (Major-only)
+* **Framework:** Product-Centric Specs & Execution Boundary Documentation Framework
+* **Current Version:** Version 4 (Major-only)
 * **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 * **License:** MIT
 * **Copyright:** (c) 2026 mfauzanfikri. All rights reserved.

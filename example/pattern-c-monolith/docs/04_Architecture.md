@@ -1,6 +1,6 @@
 # Technical Architecture - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
-**Project Version:** 1.0
+**Product Version:** 1.0
 
 ## 1. System Context & Boundaries
 The Product Catalog Service is a central microservice (Pattern A) interacting with merchandiser frontends and e-commerce clients. It owns category and product schemas and publishes core catalogue data.

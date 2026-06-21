@@ -1,6 +1,6 @@
 # Business Requirements Document (BRD) - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
-**Project Version:** 1.0
+**Product Version:** 1.0
 
 ---
 

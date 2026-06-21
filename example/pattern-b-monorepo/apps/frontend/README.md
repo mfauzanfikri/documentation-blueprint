@@ -1,18 +1,21 @@
 # product-catalog-frontend
 
-## 1. Service Metadata
+## 1. Boundary Metadata
 | Field | Value |
 | :--- | :--- |
-| Service / Package Name | product-catalog-frontend |
-| Execution Boundary | Frontend Package |
-| Service Version | 1.0.0 |
-| Compatible Project Version | 1.0 |
-| Blueprint Version | 3 |
+| Boundary Name | product-catalog-frontend |
+| Boundary Type | application |
+| Deployable | true |
+| Boundary Version | 1.0.0 |
+| Compatible Product Versions | 1.0 |
+| Blueprint Version | 4 |
 | Release Status | Stable Example |
 | Owner / Maintainer | Product Catalog Platform Team |
+| Compatibility Status | compatible |
+| Compatibility Notes | Example boundary compatible with Product Version 1.0. |
 
 ## 2. Overview & Purpose
-This is the frontend UI codebase boundary for the Product Catalog Service. Its primary responsibility is providing the merchandiser user interfaces for category hierarchies and product listings.
+This is the frontend execution boundary for the Product Catalog Service. Its primary responsibility is providing the merchandiser user interfaces for category hierarchies and product listings.
 
 ## 3. Technology Stack Mapping
 | Layer | Technology | Purpose |

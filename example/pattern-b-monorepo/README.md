@@ -2,6 +2,21 @@
 
 Welcome to the central monorepo for the Product Catalog Service ecosystem (Pattern B layout).
 
+## 1. Workspace Boundary Metadata
+
+| Field | Value |
+| :--- | :--- |
+| Boundary Name | product-catalog-monorepo |
+| Boundary Type | workspace |
+| Deployable | false |
+| Boundary Version | Not required |
+| Compatible Product Versions | Not required |
+| Blueprint Version | 4 |
+| Release Status | Stable Example |
+| Owner / Maintainer | Product Catalog Platform Team |
+| Compatibility Status | Not applicable |
+| Compatibility Notes | Root workspace files coordinate cross-cutting work only; deployable compatibility is declared by deployable execution boundaries. |
+
 ## 📁 Repository Structure
 
 | Path | Boundary | Description |
@@ -9,8 +24,8 @@ Welcome to the central monorepo for the Product Catalog Service ecosystem (Patte
 | `docs/` | Specification | Business requirements, product specs, architecture, and decision logs |
 | `apps/backend/` | Execution | Node.js/NestJS REST API and Prisma database migrations |
 | `apps/frontend/` | Execution | React/Tailwind merchandiser dashboard |
-| `CHANGELOG.md` | Execution (Root) | Optional platform-level execution history for cross-cutting changes |
-| `ROADMAP.md` | Execution (Root) | Optional platform-level roadmap for workspace/CI/CD concerns |
+| `CHANGELOG.md` | Execution Boundary (workspace, non-deployable) | Optional platform-level coordination history for cross-cutting changes |
+| `ROADMAP.md` | Execution Boundary (workspace, non-deployable) | Optional platform-level roadmap for workspace/CI/CD concerns |
 
 ## 🧰 Workspace Technology Overview
 

@@ -1,8 +1,8 @@
-# Monolith Changelog - Product Catalog Monolith Codebase
+# Execution Boundary Changelog - Product Catalog Monolith
 
-All notable technical changes, optimizations, and bug fixes implemented in the **product-catalog-monolith** codebase are recorded here.
+All notable technical changes, optimizations, and bug fixes implemented in the **product-catalog-monolith** boundary are recorded here.
 
-This codebase tracks changes via **Service Versions (`MAJOR.MINOR.PATCH`)**.
+This deployable boundary tracks changes via **Boundary Versions**.
 
 ---
 

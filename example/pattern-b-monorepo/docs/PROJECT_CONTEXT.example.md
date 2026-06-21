@@ -1,7 +1,7 @@
 # Project Context Example - Product Catalog Monorepo
 
 > [!NOTE]
-> This file demonstrates Blueprint v3 Project Context usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
+> This file demonstrates Blueprint v4 Project Context and documentation initialization usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
 
 ## 1. Source Materials Reviewed
 
@@ -24,7 +24,7 @@
 
 | Derived Fact | Basis | Confidence |
 | :--- | :--- | :--- |
-| Workspace-level roadmap/changelog files are optional coordination artifacts, not specification artifacts. | Blueprint v3 structure and monorepo README | High |
+| Workspace-level roadmap/changelog files are optional coordination artifacts, not specification artifacts. | Blueprint v4 structure and monorepo README | High |
 | Product Catalog behavior is implemented through coordinated backend and frontend package work. | Shared User Story IDs across execution mappings | High |
 
 ## 4. Assumptions and Unknowns

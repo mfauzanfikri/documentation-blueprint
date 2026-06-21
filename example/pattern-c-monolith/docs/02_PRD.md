@@ -1,6 +1,6 @@
 # Product Requirements Document (PRD) - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
-**Project Version:** 1.0
+**Product Version:** 1.0
 
 ## 1. Introduction & Product Goals
 The Product Catalog Service provides hierarchical classification (Categories) and catalog master details (Products) for the modular ERP platform. Its primary goal is to ensure highly structured product classification and valid SKU records for downstream inventory and checkout processes.

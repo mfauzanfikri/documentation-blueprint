@@ -1,20 +1,23 @@
 # product-catalog-monolith
 
-## 1. Service Metadata
+## 1. Boundary Metadata
 
 | Field | Value |
 | :--- | :--- |
-| Service / Package Name | product-catalog-monolith |
-| Execution Boundary | Monolith |
-| Service Version | 1.0.0 |
-| Compatible Project Version | 1.0 |
-| Blueprint Version | 3 |
+| Boundary Name | product-catalog-monolith |
+| Boundary Type | monolith |
+| Deployable | true |
+| Boundary Version | 1.0.0 |
+| Compatible Product Versions | 1.0 |
+| Blueprint Version | 4 |
 | Release Status | Stable Example |
 | Owner / Maintainer | Product Catalog Platform Team |
+| Compatibility Status | compatible |
+| Compatibility Notes | Example boundary compatible with Product Version 1.0. |
 
 ## 2. Overview & Purpose
 
-This is the monolith codebase boundary for the Product Catalog Service (Pattern C layout). Its responsibility is to manage the full product catalog lifecycle — including category hierarchies, product master records, and the merchandiser-facing UI — within a single deployable application.
+This is the monolith execution boundary for the Product Catalog Service (Pattern C layout). Its responsibility is to manage the full product catalog lifecycle — including category hierarchies, product master records, and the merchandiser-facing UI — within a single deployable application.
 
 ## 3. Technology Stack Mapping
 
