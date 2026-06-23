@@ -417,6 +417,10 @@ Rules:
 * Deployable and non-deployable boundaries may be `supporting_boundary`.
 * Deployable and non-deployable boundaries may be `evidence_source`.
 * Requirement ownership must remain explicit.
+* **Ownership Cardinality**: A canonical Requirement/User Story within a mapping scope must resolve to exactly one owning Execution Boundary (the `requirement_owner`) to avoid split accountability.
+* **Single Role per Row**: An execution reference row in the Requirement Mapping matrix must specify exactly one boundary role.
+* **Multiplicity of Support/Evidence**: A canonical Requirement/User Story may have multiple `supporting_boundary` and `evidence_source` references.
+* **Ownership Duplication Conflict**: Multiple mapping rows for the same canonical story identity are valid, but they must all point to the same owning Execution Boundary for the `requirement_owner` role. Mapping rows that assign `requirement_owner` status to different execution boundaries for the same canonical story are invalid (`FAIL`) unless the story has been explicitly split into separate, distinct canonical requirements (e.g., `US-SEC-01a` and `US-SEC-01b` with independent owners).
 
 Example:
 
@@ -450,6 +454,18 @@ Except for the central blueprint distributor repository itself, an adopted repos
 * Exactly one `00_Documentation_Blueprint.md` is allowed per adopted repository workspace.
 * Domain folders and individual specification directories must not duplicate the blueprint.
 * All specification boundaries and execution boundaries within the workspace reference the single workspace-level blueprint.
+
+## 8.7 Domain Identity Preservation
+
+When a business domain undergoes restructuring (such as renames, splits, merges, or extractions), the documentation must maintain traceability history without breaking existing links or losing historical requirement context.
+
+Rules for Domain Restructuring:
+* **Canonical ID Stability**: Existing canonical Requirement/User Story IDs must remain stable after a domain restructure to ensure historical auditability.
+* **Historical ID Resolvability**: All historical IDs must remain resolvable. Relative links in execution boundary changelogs and roadmaps must not be broken.
+* **Domain Renames**: When a domain is renamed, developers and analysts should prefer retaining the old canonical namespace prefix for existing requirements to prevent churn in mapping documents and execution boundaries. Alternatively, they may define explicit mapping overrides.
+* **Splits, Merges, and Extractions**:
+  - The restructure event must be recorded in the domain's Decision Log (`06_Decision_Log.md`), outlining the reason, scope of changes, and mapping impact.
+  - The updated Requirement Mapping (`05_Requirement_Mapping.md`) must record the relationship using `legacy_ids` or `supersedes` metadata fields to preserve the lineage without requiring a centralized registry.
 
 ---
 
@@ -1013,6 +1029,16 @@ Validation rules:
 * Mappings within a domain-distributed workspace must preserve the originating domain identity. Lost domain identity in mappings (e.g. omitting the Specification Boundary namespace prefix for User Story IDs) is prohibited.
 * Temporary, scratch, or draft files must not be placed inside `references/`. The `references/` directory must only house long-lived reference material.
 
+## 12.1 Product Release Aggregation Rules
+
+Product readiness in domain-distributed workspaces is evaluated through a unified aggregation of existing domain specifications, Requirement Mappings, Specs CHANGELOGs, and execution-boundary evidence.
+
+Aggregation rules:
+* **Product-Level Readiness**: Product-level readiness is derived from all in-scope domain requirements defined for the target Product Version (e.g., Product Version 1.0).
+* **Requirement Mapping Completeness**: Every required canonical User Story/Requirement must have resolved mapping rows in the respective domain's `05_Requirement_Mapping.md`.
+* **Execution Evidence Validation**: All required execution references must point to versioned, committed release evidence in `CHANGELOG.md` files or explicitly remain `Pending`.
+* **Release Approval Blocking**: A Product Version release block (e.g., in the Specs CHANGELOG) must not claim completed readiness while any mapped verification criteria remains unresolved, pending, or fails validation.
+
 ---
 
 # 13. Validation Framework
@@ -1039,7 +1065,31 @@ Blueprint v4 defines validation checks for:
 * Reference authority and content limits
 * Domain namespace preservation
 
-## 13.2 Finding Format
+## 13.2 Deterministic Validation Assertions
+
+Validation results must map to deterministic statuses to establish clear compliance baselines:
+
+* **PASS**: The artifact conforms to all mandatory rules and constraints defined in this blueprint.
+* **WARNING**: The artifact conforms to mandatory rules but deviates from optional best practices, contains temporary Project Context files under active review, or has low-risk anomalies that do not break traceability.
+* **FAIL**: The artifact violates a mandatory rule, has broken links, lacks required release evidence, has conflicting ownership declarations, or duplicates authoritative blueprints. A `FAIL` status blocks release readiness and must be resolved.
+
+### Deterministic Fail-Fast Checks
+
+The following conditions must be asserted as deterministic `FAIL` or `WARNING` states during validation:
+
+| Checked Condition | Severity | Description / Rule |
+| :--- | :--- | :--- |
+| **Missing Execution Reference** | `FAIL` | A requirement mapping row has an empty execution reference, or the target path does not exist. |
+| **Unresolved Anchor Link** | `FAIL` | An execution reference points to a file but the specific HTML anchor (e.g., `#BE-INV-SEC-001`) is missing or misspelled in the target file. |
+| **Missing Release Evidence** | `FAIL` | A mapping row claims a requirement is released but the reference link points to `ROADMAP.md` or a `Pending` state rather than a versioned `CHANGELOG.md` entry. |
+| **Empty Compatibility Metadata** | `FAIL` | A deployable Execution Boundary's README is missing a declared `boundary_version` or its `compatible_product_versions` metadata list. |
+| **Duplicate Requirement Owners** | `FAIL` | The same canonical Requirement/User Story ID is mapped to the `requirement_owner` role across different Execution Boundaries within the mapping scope. |
+| **Lost Domain Namespace** | `FAIL` | A domain-distributed mapping file or global reference lists User Story IDs without their domain namespace prefix (e.g., listing `US-SEC-01` instead of `Inventory::US-SEC-01`). |
+| **Duplicate Blueprint Copies** | `FAIL` | An adopted repository contains a duplicate copy of `00_Documentation_Blueprint.md` inside a domain spec directory or subfolder (violates Single Blueprint Authority). |
+| **References Overriding Specs** | `FAIL` | A document under a `references/` directory contains active product requirements or attempts to override a spec boundary or the master blueprint. |
+| **Temporary Scratch in References**| `WARNING`| A temporary, draft, or scratch file is detected inside a long-lived `references/` directory. |
+
+## 13.3 Finding Format
 
 Validation findings should identify:
 
@@ -1057,7 +1107,7 @@ state:
 
 `evidence_classification` must use the Section 7.1 classification values, and `confidence` must use the Section 7.2 confidence values.
 
-## 13.3 Finding Scope & Persistence
+## 13.4 Finding Scope & Persistence
 
 Validation findings may only be persisted within an artifact when the finding falls within that artifact's contract scope.
 
@@ -1067,7 +1117,7 @@ Persisted findings belong in the artifact being evaluated. For example, BRD find
 
 Validation findings that do not clearly belong to a specific artifact contract should remain temporary review output rather than permanent documentation content.
 
-## 13.4 Finding Lifecycle
+## 13.5 Finding Lifecycle
 
 | State | Meaning |
 | :--- | :--- |

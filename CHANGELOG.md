@@ -20,6 +20,11 @@ All notable changes to the Documentation Blueprint framework will be documented 
   - Added **Pattern B Variant: Domain-Distributed Specifications Workspace** layout representation.
   - Extended validation rules and areas to check for duplicate blueprints, reference overrides, temporary/scratch content in `references/`, and lost domain namespace context in mappings.
   - Added brownfield migration guidance on partitioning a centralized spec set into domain-owned spec folders while preserving links and traceability.
+- **V4 Clarification (Open Clarifications & Enhancements Patch):**
+  - Extended **Boundary Roles** with **Requirement Ownership Cardinality** rules (exactly one `requirement_owner` per canonical requirement ID within a mapping scope; multiple supporting/evidence sources allowed).
+  - Defined explicit **Deterministic Validation Assertions** (`PASS`, `FAIL`, `WARNING`) and fail-fast check rules within the Validation Framework.
+  - Added **Domain Identity Preservation** rules to maintain canonical ID stability and lineage tracing (`legacy_ids` / `supersedes` in mappings, ADR records in Decision Log) during domain restructuring.
+  - Formalized **Product Release Aggregation Rules** specifying that product-level readiness is derived from all required domain mapping files, blocking releases if any mapping remains unresolved or pending.
 
 ### Changed
 - Upgraded the blueprint framework version to **Version 4**.

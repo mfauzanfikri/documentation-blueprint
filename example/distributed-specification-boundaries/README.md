@@ -74,6 +74,7 @@ Validation expectations:
 * Deployable boundaries own Boundary Version release evidence.
 * Pending work links to the owning boundary `ROADMAP.md`.
 * Released work links to the owning boundary `CHANGELOG.md`.
+* Each canonical story maps to exactly one `requirement_owner` (e.g., `Identity::US-AUTH-01` is owned by `api` and supported by `web`, avoiding duplicate owners).
 
 ## 5. Compatibility Visibility
 

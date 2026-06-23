@@ -73,9 +73,19 @@ The following example mapping table preserves the `Specification Boundary + User
 | Inventory | **Inventory::US-SEC-01** | `FE-INV-SEC-001` | Frontend | supporting_boundary | [ROADMAP.md](./apps/frontend/ROADMAP.md#FE-INV-SEC-001) | `Pending` |
 | Finance | **Finance::US-SEC-01** | `BE-FIN-SEC-001` | Backend | requirement_owner | [CHANGELOG.md](./apps/backend/CHANGELOG.md#BE-FIN-SEC-001) | `Boundary v1.0.0` |
 
+## 4. Domain Identity Preservation
+
+If the `Inventory` domain undergoes a rename (e.g. to `Warehouse`), the existing canonical ID `Inventory::US-SEC-01` should retain its prefix to prevent breaking changelog reference paths.
+
+If a split occurs, we record this in `06_Decision_Log.md` and use the `supersedes` or `legacy_ids` attribute in the mapping matrix to trace the relationship:
+
+| Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Legacy IDs / Supersedes |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Inventory | **Inventory::US-SEC-01** | `BE-INV-SEC-001` | Backend | requirement_owner | [CHANGELOG.md](./apps/backend/CHANGELOG.md#BE-INV-SEC-001) | `supersedes: Inventory::US-SEC-OLD` |
+
 ---
 
-## 4. Validation Rules Summary
+## 5. Validation Rules Summary
 
 1. **No Duplicate Blueprints:** There must not be copies of `00_Documentation_Blueprint.md` inside `inventory/` or `finance/`.
 2. **Namespace Preservation:** Mappings and cross-references must prefix story IDs with their domain (e.g., `Inventory::US-SEC-01`).
