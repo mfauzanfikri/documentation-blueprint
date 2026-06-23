@@ -435,6 +435,22 @@ Evidence Sources:
 - shared-auth-library
 ```
 
+## 8.5 Domain-Distributed Specification Structures
+
+For workspaces containing multiple distinct business domains, the Specification Boundary may optionally be distributed across domain-specific folders rather than centralized in a single directory.
+
+Rules for Domain-Distributed Structures:
+* **Specification Boundaries**: Each domain-specific folder behaves as a distinct Specification Boundary. It may own its complete set of BRD, PRD, User Story, Architecture, mapping, decision log, and specifications CHANGELOG artifacts.
+* **Namespace Scope**: Each domain specification folder owns its local User Story IDs. To prevent collisions across the workspace, canonical references and mappings must preserve the domain context using the `Specification Boundary + User Story ID` namespace pattern (e.g., `Inventory::US-SEC-01` vs. `Finance::US-SEC-01`).
+* **Requirement Mapping**: Domain specifications may maintain individual domain-owned mapping files that resolve to shared execution boundaries.
+
+## 8.6 Single Blueprint Authority
+
+Except for the central blueprint distributor repository itself, an adopted repository workspace must maintain exactly one master copy of the blueprint framework.
+* Exactly one `00_Documentation_Blueprint.md` is allowed per adopted repository workspace.
+* Domain folders and individual specification directories must not duplicate the blueprint.
+* All specification boundaries and execution boundaries within the workspace reference the single workspace-level blueprint.
+
 ---
 
 # 9. Repository & Workspace Structures
@@ -501,6 +517,60 @@ my-monorepo/
 ```
 
 Workspace-level execution files are optional and required only when there are cross-cutting workspace, CI/CD, release coordination, or platform ownership concerns.
+
+### Pattern B Variant: Domain-Distributed Specifications Workspace
+
+For large monorepos with multiple business domains, specifications can be distributed into domain-owned specification folders under a single repository workspace. In this layout, the blueprint is centralized at the workspace level, while specifications are scoped to their respective domains.
+
+```text
+my-workspace/
+├── docs/
+│   ├── 00_Documentation_Blueprint.md  # Single Blueprint Authority
+│   └── references/                     # Workspace References
+│       ├── README.md
+│       └── third_party_integration_specs.md
+│
+├── inventory/                          # Specification Boundary: Inventory
+│   ├── 01_BRD.md
+│   ├── 02_PRD.md
+│   ├── 03_User_Stories.md
+│   ├── 04_Architecture.md
+│   ├── 05_Requirement_Mapping.md
+│   ├── 06_Decision_Log.md
+│   └── CHANGELOG.md
+│
+├── procurement/                        # Specification Boundary: Procurement
+│   ├── 01_BRD.md
+│   ├── 02_PRD.md
+│   ├── 03_User_Stories.md
+│   ├── 04_Architecture.md
+│   ├── 05_Requirement_Mapping.md
+│   ├── 06_Decision_Log.md
+│   └── CHANGELOG.md
+│
+├── finance/                            # Specification Boundary: Finance
+│   ├── 01_BRD.md
+│   ├── 02_PRD.md
+│   ├── 03_User_Stories.md
+│   ├── 04_Architecture.md
+│   ├── 05_Requirement_Mapping.md
+│   ├── 06_Decision_Log.md
+│   └── CHANGELOG.md
+│
+├── apps/
+│   ├── api/                            # Execution Boundary
+│   │   ├── README.md
+│   │   ├── ROADMAP.md
+│   │   └── CHANGELOG.md
+│   │
+│   └── web/                            # Execution Boundary
+│       ├── README.md
+│       ├── ROADMAP.md
+│       └── CHANGELOG.md
+│
+├── README.md                           # Workspace-level guide
+└── CHANGELOG.md                        # Workspace-level changelog
+```
 
 ## Pattern C: Single-Repository Monolith Layout
 
@@ -834,6 +904,27 @@ temporal_scope: State-sensitive Boundary Version history.
 authority_level: Execution-boundary implementation history.
 ```
 
+## 10.11 Workspace References Contract
+
+```yaml
+purpose: Formal location for long-lived workspace references.
+primary_question: What auxiliary reference materials support the specs?
+allowed_content:
+  - Technical manuals, hardware specifications, third-party API references, or external protocols.
+  - Legacy system architecture diagrams or legacy workflow references.
+  - Industry standards, compliance regulations, or policy definitions.
+  - Long-lived onboarding guides, environmental configurations, or workspace guides.
+forbidden_content:
+  - Active product requirements or domain specifications.
+  - Active user stories, active architecture details, or active business decision logs.
+  - Target system designs, execution tasks, or active release records.
+  - Temporary files, scratch pads, or draft notes.
+dependencies:
+  - None.
+temporal_scope: Long-lived reference material.
+authority_level: Explicitly non-authoritative. Reference documents must not override the master blueprint, must not override domain specifications, and must not become source-of-truth requirements.
+```
+
 ---
 
 # 11. Traceability Rules
@@ -917,6 +1008,10 @@ Validation rules:
 * A Boundary Version referenced as release evidence must exist in that boundary's CHANGELOG.
 * Requirement Mapping must not claim release evidence without a matching execution reference.
 * Non-deployable boundaries must not be requirement owners or product release owners.
+* Except for the central blueprint distributor repository, an adopted repository workspace must contain exactly one `00_Documentation_Blueprint.md` file. Duplicate Blueprint copies inside domain or subfolders are prohibited.
+* Reference documents (e.g. inside `references/`) must remain non-authoritative. They must not override the master Blueprint or domain specifications, nor define source-of-truth requirement criteria.
+* Mappings within a domain-distributed workspace must preserve the originating domain identity. Lost domain identity in mappings (e.g. omitting the Specification Boundary namespace prefix for User Story IDs) is prohibited.
+* Temporary, scratch, or draft files must not be placed inside `references/`. The `references/` directory must only house long-lived reference material.
 
 ---
 
@@ -940,6 +1035,9 @@ Blueprint v4 defines validation checks for:
 * Specification and execution hierarchy
 * Deployability classification
 * Compatibility metadata
+* Blueprint authority verification
+* Reference authority and content limits
+* Domain namespace preservation
 
 ## 13.2 Finding Format
 
@@ -1049,6 +1147,19 @@ Low
 ### Notes
 Exact release chronology unavailable. Listed capabilities represent observed current state during adoption, not verified historical release order.
 ```
+
+## 14.4 Domain-Distributed Specification Migration
+
+When migrating from a centralized specification structure (where all requirements are in a single set of files) to a domain-distributed specification structure:
+
+1. **Identify Domain Boundaries**: Group requirements and user stories by business domain to define the new Specification Boundaries.
+2. **Initialize Domain-Specific Folders**: Create independent directories for each domain (e.g., `inventory/`, `procurement/`, `finance/`).
+3. **Partition Specification Artifacts**: Move and split the central BRD, PRD, User Stories, Architecture, and Decision Log contents into their respective domain directories.
+4. **Apply Domain Namespacing**: Update all User Story IDs to be namespace-prefixed with the domain name (e.g., `Inventory::US-SEC-01` in mappings and cross-references) to avoid identity collisions.
+5. **Preserve Links and Traceability**:
+   - Update all relative links inside execution roadmaps and mapping documents to point to the new domain-specific file locations.
+   - Ensure the central or domain-level `05_Requirement_Mapping.md` explicitly uses the new namespace-prefixed canonical IDs to map requirements to execution boundaries.
+   - Audit all execution-boundary references to confirm they link back to the correct domain specification paths.
 
 ---
 

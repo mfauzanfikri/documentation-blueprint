@@ -13,6 +13,13 @@ All notable changes to the Documentation Blueprint framework will be documented 
 - **Documentation Initialization guidance** for capturing topology, adoption mode, execution boundaries, deployability, and ownership before artifact generation.
 - **Distributed Specification Boundary namespace rules** for preserving `Specification Boundary + Requirement/User Story ID` identity during product-level aggregation.
 - **Distributed specification example** demonstrating multiple Specification Boundaries, collision-safe story identities, product-level aggregation, and shared execution boundaries.
+- **V4 Clarification (Domain-Distributed Specs Patch):**
+  - Added optional **Domain-Distributed Specification Structures** for multi-domain monorepos/workspaces, enabling domain spec folders to own complete BRD/PRD/User Story/Architecture/Mapping/Decision/CHANGELOG artifact sets.
+  - Established the **Single Blueprint Authority** rule (exactly one `00_Documentation_Blueprint.md` copy per repository workspace; domain folders must not duplicate it).
+  - Defined the **Workspace References** (`docs/references/`) contract as non-authoritative long-lived workspace reference material.
+  - Added **Pattern B Variant: Domain-Distributed Specifications Workspace** layout representation.
+  - Extended validation rules and areas to check for duplicate blueprints, reference overrides, temporary/scratch content in `references/`, and lost domain namespace context in mappings.
+  - Added brownfield migration guidance on partitioning a centralized spec set into domain-owned spec folders while preserving links and traceability.
 
 ### Changed
 - Upgraded the blueprint framework version to **Version 4**.

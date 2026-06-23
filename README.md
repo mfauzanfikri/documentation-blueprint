@@ -18,6 +18,7 @@ For all rules and instructions regarding how to structure, write, and version do
   * **[Pattern B: Single-Repository Monorepo Layout](./example/pattern-b-monorepo/):** Central `/docs/` specs with multiple execution boundaries under one workspace.
   * **[Pattern C: Single-Repository Monolith Layout](./example/pattern-c-monolith/):** Central `/docs/` specs and one deployable monolith execution boundary.
   * **[Distributed Specification Boundaries](./example/distributed-specification-boundaries/):** Focused V4 example showing multiple Specification Boundaries, collision-safe story identities, product-level aggregation, and shared execution boundaries.
+  * **[Domain-Distributed Workspace Layout](./example/workspace-domain-distributed/):** Variant of Pattern B showing domain-distributed specification boundaries (`inventory/`, `finance/`) with workspace-level blueprint authority and non-authoritative references.
 * **[Archived Blueprint Directory](./archive/):** Frozen historical major versions of the blueprint framework and their corresponding example codebases.
 
 ---
@@ -38,7 +39,8 @@ documentation-blueprint/
 │   ├── distributed-specification-boundaries/
 │   ├── pattern-a-multi-repo/     # Pattern A: Multi-Repository reference example
 │   ├── pattern-b-monorepo/       # Pattern B: Monorepo reference example
-│   └── pattern-c-monolith/       # Pattern C: Monolith reference example
+│   ├── pattern-c-monolith/       # Pattern C: Monolith reference example
+│   └── workspace-domain-distributed/ # Domain-Distributed Monorepo reference example
 └── archive/                      # Historical archive directory
     ├── v1/                       # Archive of Version 1 standard
     ├── v2/                       # Archive of Version 2 standard
@@ -112,7 +114,7 @@ To officially publish the new centralized standard:
 ## Current Release State
 
 * **Active Specification Version:** **Version 4**, as defined by the root master blueprint [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
-* **Active Reference Examples:** Fully conform to Version 4 standards across the three layout patterns and the distributed-specification focused example in [example/](./example/).
+* **Active Reference Examples:** Fully conform to Version 4 standards across the three layout patterns, the distributed-specification focused example, and the domain-distributed workspace example in [example/](./example/).
 * **Archived Release (Version 3):** Framework Version 3 is frozen and archived inside [archive/v3/](./archive/v3/).
 * **Archived Release (Version 2):** Framework Version 2 is frozen and archived inside [archive/v2/](./archive/v2/).
 * **Archived Release (Version 1):** Framework Version 1 is frozen and archived inside [archive/v1/](./archive/v1/).
