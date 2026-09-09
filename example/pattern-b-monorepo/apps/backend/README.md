@@ -8,7 +8,7 @@
 | Deployable | true |
 | Boundary Version | 1.0.0 |
 | Compatible Product Versions | 1.0 |
-| Blueprint Version | 4 |
+| Blueprint Version | 5 |
 | Release Status | Stable Example |
 | Owner / Maintainer | Product Catalog Platform Team |
 | Compatibility Status | compatible |
@@ -45,8 +45,9 @@ npm test
 ```
 
 ## 5. Documentation References
+* **Documentation Map:** [METADATA.md](../../METADATA.md)
 * **Documentation Blueprint:** [00_Documentation_Blueprint.md](../../docs/00_Documentation_Blueprint.md)
-* **Product Requirements (PRD):** [02_PRD.md](../../docs/02_PRD.md)
-* **Technical Architecture:** [04_Architecture.md](../../docs/04_Architecture.md)
-* **Requirement Mapping:** [05_Requirement_Mapping.md](../../docs/05_Requirement_Mapping.md)
+* **Functional Requirements (FRD):** [05_FRD.md](../../docs/05_FRD.md)
+* **Technical Architecture:** [07_Architecture.md](../../docs/07_Architecture.md)
+* **Technical Standards:** [08_Technical_Standards.md](../../docs/08_Technical_Standards.md)
 * **Project Context Example:** [PROJECT_CONTEXT.example.md](../../docs/PROJECT_CONTEXT.example.md)

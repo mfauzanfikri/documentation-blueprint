@@ -14,4 +14,4 @@ This project tracks functional specs capabilities via **Product Versions (`MAJOR
 
 ## [1.0] - 2026-06-01
 ### Added
-* Initial baseline functional specifications for Product Catalog (BRD, PRD, User Stories, Architecture, and Mapping).
+* Initial baseline functional specifications for Product Catalog (BRD, PRD, Feature Catalogue, MVP, FRD, User Stories, Architecture, and Technical Standards).

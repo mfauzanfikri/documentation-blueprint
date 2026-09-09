@@ -1,21 +1,23 @@
 # Distributed Specification Boundaries Example
 
-This focused V4 example demonstrates product-level aggregation across multiple Specification Boundaries. It is intentionally small: it shows namespace ownership, collision-safe User Story IDs, shared execution boundaries, and product-level release visibility without prescribing a repository layout.
+This focused V5 example demonstrates product-level aggregation across multiple Specification Boundaries. It is intentionally small: it shows namespace ownership, collision-safe User Story IDs, shared execution boundaries, and machine-validated structural traceability without prescribing a repository layout.
 
 ## 1. Topology
 
 ```text
 product-docs/
+├── METADATA.md             # Project-wide documentation map & domain aggregation
 ├── catalog-specs/          # Specification Boundary: Catalog
-│   ├── 03_User_Stories.md
+│   ├── 03_Feature_Catalogue.md
+│   ├── 05_FRD.md
+│   ├── 06_User_Stories.md
 │   └── CHANGELOG.md        # Catalog Product Version history
 │
-├── identity-specs/         # Specification Boundary: Identity
-│   ├── 03_User_Stories.md
-│   └── CHANGELOG.md        # Identity Product Version history
-│
-└── product-traceability/
-    └── 05_Requirement_Mapping.md
+└── identity-specs/         # Specification Boundary: Identity
+    ├── 03_Feature_Catalogue.md
+    ├── 05_FRD.md
+    ├── 06_User_Stories.md
+    └── CHANGELOG.md        # Identity Product Version history
 
 execution/
 ├── api/                    # Execution Boundary: api, deployable service
@@ -32,7 +34,7 @@ execution/
 Topology notes:
 
 * `Catalog` and `Identity` are separate Specification Boundaries.
-* Each Specification Boundary owns its local User Story IDs.
+* Each Specification Boundary owns its local Feature and User Story IDs.
 * Local User Story IDs may collide when namespace ownership is explicit.
 * Product-level aggregation must preserve the originating Specification Boundary.
 * `api` and `web` are shared deployable Execution Boundaries that implement requirements from both Specification Boundaries.
@@ -57,7 +59,9 @@ The repeated `US-AUTH-01` value is valid because each User Story ID is owned by 
 
 Product release visibility is aggregated at the product level, but ownership remains with the originating Specification Boundary.
 
-## 4. Aggregated Requirement Mapping
+## 4. Aggregated Structural Traceability Matrix (Machine-Generated View)
+
+In V5, manual `05_Requirement_Mapping.md` tables are permanently removed. The matrix below illustrates the index view generated deterministically from `METADATA.md` and boundary structural links:
 
 | Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -75,6 +79,7 @@ Validation expectations:
 * Pending work links to the owning boundary `ROADMAP.md`.
 * Released work links to the owning boundary `CHANGELOG.md`.
 * Each canonical story maps to exactly one `requirement_owner` (e.g., `Identity::US-AUTH-01` is owned by `api` and supported by `web`, avoiding duplicate owners).
+* Generated on-demand by machine validators; never manually maintained as a static source of truth.
 
 ## 5. Compatibility Visibility
 

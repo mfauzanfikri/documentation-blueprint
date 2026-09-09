@@ -5,12 +5,12 @@
 ## 1. Introduction & Product Goals
 The Product Catalog Service provides hierarchical classification (Categories) and catalog master details (Products) for the modular ERP platform. Its primary goal is to ensure highly structured product classification and valid SKU records for downstream inventory and checkout processes.
 
-## 2. Functional Requirements
-* **FR-CAT-01: Hierarchical Categorization** - The system must allow users to organize categories in parent-child hierarchies up to 3 levels deep.
-* **FR-CAT-02: Slug Auto-generation** - Slugs must be automatically generated from category names if not provided, sanitized (lowercase, dashes), and unique.
-* **FR-CAT-03: Soft-Deletion** - Deleting a category must mark it as soft-deleted (setting a timestamp) to prevent new product assignments without breaking historical orders.
-* **FR-PROD-01: Product SKU Validation** - The system must enforce unique SKUs matching the uppercase format `^[A-Z0-9-]{3,20}$`.
-* **FR-PROD-02: Pricing Constraints** - The system must validate that the product price is a positive decimal strictly greater than zero.
+## 2. Product Capabilities Overview
+
+| Capability ID | Capability Name | Description | Related BRD Objective |
+| :--- | :--- | :--- | :--- |
+| **PC-01** | Hierarchical Categorization | Enable nested category organization and taxonomy management up to 3 levels deep with clean URI slugging. | BO-02 |
+| **PC-02** | Product Master Lifecycle | Ensure authoritative SKU registration, positive decimal pricing, and active category assignment. | BO-01 |
 
 ## 3. Product Capabilities & Scope
 * **In-Scope:**

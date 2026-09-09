@@ -1,8 +1,8 @@
 # Domain-Distributed Specifications Workspace Example
 
-This example demonstrates the **Pattern B Variant: Domain-Distributed Specifications Workspace** conforming to the Version 4 master blueprint. 
+This example demonstrates the **Pattern B Variant: Domain-Distributed Specifications Workspace** conforming to the **Version 5 master blueprint**. 
 
-It shows how a single large repository workspace containing multiple distinct business domains can structure its specifications into independent domain-specific folders while maintaining a single, centralized `00_Documentation_Blueprint.md` authority and a shared non-authoritative references directory.
+It shows how a single large repository workspace containing multiple distinct business domains can structure its specifications into independent domain-specific folders while maintaining a single, centralized `00_Documentation_Blueprint.md` authority, a root `METADATA.md` registry, and a shared non-authoritative references directory.
 
 ---
 
@@ -10,6 +10,7 @@ It shows how a single large repository workspace containing multiple distinct bu
 
 ```text
 workspace-domain-distributed/
+├── METADATA.md                    # Aggregated documentation map & multi-domain registry
 ├── docs/
 │   ├── 00_Documentation_Blueprint.md  # Single Blueprint Authority for the workspace
 │   └── references/                     # Workspace References (Non-authoritative)
@@ -18,19 +19,23 @@ workspace-domain-distributed/
 ├── inventory/                          # Specification Boundary: Inventory
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
-│   ├── 03_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
-│   ├── 04_Architecture.md
-│   ├── 05_Requirement_Mapping.md      # Inventory-focused mappings
-│   ├── 06_Decision_Log.md             # Inventory design decision log
+│   ├── 03_Feature_Catalogue.md        # Inventory feature inventory & versions
+│   ├── 05_FRD.md                      # Functional specs for Inventory features
+│   ├── 06_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
+│   ├── 07_Architecture.md
+│   ├── 08_Technical_Standards.md
+│   ├── 09_Decision_Log.md             # Inventory design decision log
 │   └── CHANGELOG.md                   # Inventory specs changelog
 │
 ├── finance/                            # Specification Boundary: Finance
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
-│   ├── 03_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
-│   ├── 04_Architecture.md
-│   ├── 05_Requirement_Mapping.md      # Finance-focused mappings
-│   ├── 06_Decision_Log.md             # Finance design decision log
+│   ├── 03_Feature_Catalogue.md        # Finance feature inventory & versions
+│   ├── 05_FRD.md                      # Functional specs for Finance features
+│   ├── 06_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
+│   ├── 07_Architecture.md
+│   ├── 08_Technical_Standards.md
+│   ├── 09_Decision_Log.md             # Finance design decision log
 │   └── CHANGELOG.md                   # Finance specs changelog
 │
 ├── apps/
@@ -47,8 +52,9 @@ workspace-domain-distributed/
 
 ### Key Topology Characteristics:
 * **Single Blueprint Authority:** Exactly one `00_Documentation_Blueprint.md` is present at the workspace level under `docs/`. No blueprint duplicates exist within the domain folders (`inventory/` or `finance/`).
+* **Root `METADATA.md` Registry:** Aggregates and validates all domain specification paths and execution boundaries.
 * **Non-Authoritative Workspace References:** The `docs/references/` directory houses long-lived documents that must not override specification boundaries or the master blueprint.
-* **Domain-Owned Specification Boundaries:** `inventory/` and `finance/` own complete BRD, PRD, User Story, Architecture, Mapping, Decision Log, and CHANGELOG sets.
+* **Domain-Owned Specification Boundaries:** `inventory/` and `finance/` own complete BRD, PRD, Feature Catalogue, FRD, User Stories, Architecture, Technical Standards, Decision Log, and CHANGELOG sets.
 
 ---
 
@@ -63,9 +69,9 @@ Because each domain folder behaves as an independent Specification Boundary, loc
 
 ---
 
-## 3. Short Requirement Mapping Example
+## 3. Aggregated Structural Traceability Matrix (Machine-Generated View)
 
-The following example mapping table preserves the `Specification Boundary + User Story ID` namespace context. This ensures traceability remains intact when domain requirements map to shared execution boundaries (e.g., a shared backend or web boundary):
+In V5, manual `05_Requirement_Mapping.md` tables are retired. The matrix below illustrates the index view generated deterministically from `METADATA.md` and boundary structural links:
 
 | Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Release Evidence |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -77,7 +83,7 @@ The following example mapping table preserves the `Specification Boundary + User
 
 If the `Inventory` domain undergoes a rename (e.g. to `Warehouse`), the existing canonical ID `Inventory::US-SEC-01` should retain its prefix to prevent breaking changelog reference paths.
 
-If a split occurs, we record this in `06_Decision_Log.md` and use the `supersedes` or `legacy_ids` attribute in the mapping matrix to trace the relationship:
+If a split occurs, we record this in `09_Decision_Log.md` and use the `supersedes` or `legacy_ids` attribute in the Feature Catalogue to trace the relationship:
 
 | Specification Boundary | User Story ID | Verification Criteria ID | Execution Boundary | Boundary Role | Execution Reference | Legacy IDs / Supersedes |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -88,5 +94,6 @@ If a split occurs, we record this in `06_Decision_Log.md` and use the `supersede
 ## 5. Validation Rules Summary
 
 1. **No Duplicate Blueprints:** There must not be copies of `00_Documentation_Blueprint.md` inside `inventory/` or `finance/`.
-2. **Namespace Preservation:** Mappings and cross-references must prefix story IDs with their domain (e.g., `Inventory::US-SEC-01`).
+2. **Namespace Preservation:** Cross-references and generated indices must prefix story IDs with their domain (e.g., `Inventory::US-SEC-01`).
 3. **Reference Authority Limits:** Documents inside `docs/references/` must not define new requirement criteria or override blueprint/domain specifications.
+4. **No Manual Mapping Tables:** Structural links between User Stories, FRD, and Execution Criteria replace static mapping tables.

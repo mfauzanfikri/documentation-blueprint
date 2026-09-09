@@ -4,6 +4,27 @@ All notable changes to the Documentation Blueprint framework will be documented 
 
 ---
 
+## [5] - 2026-09-09
+### Added
+- **Feature Catalogue as a first-class product entity** (`03_Feature_Catalogue.md`) serving as the product-wide inventory, stable identity authority (`F-XXX`), history log, and version registry across the entire product lifecycle.
+- **Semantic Feature Versioning (`MAJOR.MINOR`)** establishing `MAJOR` versions as the immutable structural traceability target, while `MINOR` versions accommodate backward-compatible refinements and clarifications without churning downstream dependencies.
+- **Bounded Delivery Increments via optional MVP artifacts** (`04_MVP.md`) explicitly selecting Feature Major Versions for release scoping.
+- **Native Collapsed no-MVP Mode** allowing simple projects to bypass artificial MVP artifacts with zero structural or validation penalties.
+- **Functional Requirements Document (FRD)** (`05_FRD.md`) providing a dedicated functional behavior specification layer (inputs, validation, state machines, business rules, exception behavior) distinct from technical architecture.
+- **Machine-Validated Structural Traceability** replacing manual `05_Requirement_Mapping.md` tables with native parent-child link hierarchies (`BRD -> PRD -> Feature Catalogue -> [MVP] -> FRD -> User Stories -> Execution ROADMAP -> CHANGELOG evidence`).
+- **Partitioned Technical Documentation Domain** separating system design and ERDs (`07_Architecture.md`) from authoritative engineering policies, API conventions, and messaging standards (`08_Technical_Standards.md`).
+- **Declarative `METADATA.md` Specification** providing a machine-validated project map and registry of document paths, versions, topologies, MVP bindings, and execution boundary compatibilities.
+- **Deterministic AI Consumption Sequence** standardizing AI agent initialization starting with `METADATA.md` and navigating explicit authority layers.
+- **Semantic V4-to-V5 Migration Guide** detailing the structured extraction, reorganization, and verification process to upgrade legacy documentation suites.
+
+### Changed
+- Upgraded the blueprint framework version to **Version 5**.
+- Upgraded active reference examples to Version 5 (`pattern-a-multi-repo`, `pattern-b-monorepo`, `pattern-c-monolith`, `distributed-specification-boundaries`, `workspace-domain-distributed`).
+- Archived the Version 4 master blueprint and active example set under `archive/v4/`.
+- Updated repository navigation, adoption steps, active release state, and metadata for Version 5.
+
+---
+
 ## [4] - 2026-06-21
 ### Added
 - **Product-centric terminology** replacing project-release language with Product Versions for business capability evolution.

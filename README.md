@@ -12,12 +12,12 @@ This repository serves strictly as a **central master distributor** for document
 
 For all rules and instructions regarding how to structure, write, and version documentation inside individual projects, go directly to the active blueprint:
 
-* **[Active Master Blueprint (Version 4)](./00_Documentation_Blueprint.md):** The authoritative specification detailing specification boundaries, execution boundaries, Product Versions, Boundary Versions, Project Context usage, documentation initialization, evidence classification, artifact contracts, compatibility metadata, validation rules, implementation roadmaps, and development workflows.
-* **Active Reference Examples:** Fully compliant active reference implementations conforming to the current active Version 4 blueprint:
+* **[Active Master Blueprint (Version 5)](./00_Documentation_Blueprint.md):** The authoritative specification detailing the Feature Catalogue, Semantic Feature Versioning (`MAJOR.MINOR`), optional MVP scoping, collapsed no-MVP mode, Functional Requirements Document (FRD), machine-validated structural traceability (retiring manual Requirement Mapping), partitioned technical documentation (Architecture & Technical Standards), `METADATA.md` declarative project mapping, execution boundaries, compatibility metadata, validation rules, and AI consumption sequence.
+* **Active Reference Examples:** Fully compliant active reference implementations conforming to the current active Version 5 blueprint:
   * **[Pattern A: Multi-Repository Layout](./example/pattern-a-multi-repo/):** Decoupled specification and execution-boundary repositories.
   * **[Pattern B: Single-Repository Monorepo Layout](./example/pattern-b-monorepo/):** Central `/docs/` specs with multiple execution boundaries under one workspace.
-  * **[Pattern C: Single-Repository Monolith Layout](./example/pattern-c-monolith/):** Central `/docs/` specs and one deployable monolith execution boundary.
-  * **[Distributed Specification Boundaries](./example/distributed-specification-boundaries/):** Focused V4 example showing multiple Specification Boundaries, collision-safe story identities, product-level aggregation, and shared execution boundaries.
+  * **[Pattern C: Single-Repository Monolith Layout](./example/pattern-c-monolith/):** Central `/docs/` specs and one deployable monolith execution boundary demonstrating collapsed no-MVP mode.
+  * **[Distributed Specification Boundaries](./example/distributed-specification-boundaries/):** V5 example showing multiple Specification Boundaries, collision-safe story identities, product-level aggregation, and shared execution boundaries.
   * **[Domain-Distributed Workspace Layout](./example/workspace-domain-distributed/):** Variant of Pattern B showing domain-distributed specification boundaries (`inventory/`, `finance/`) with workspace-level blueprint authority and non-authoritative references.
 * **[Archived Blueprint Directory](./archive/):** Frozen historical major versions of the blueprint framework and their corresponding example codebases.
 
@@ -32,19 +32,20 @@ This repository is structured as follows, adhering to explicit naming convention
 
 ```text
 documentation-blueprint/
-├── 00_Documentation_Blueprint.md  # Active master blueprint framework (Version 4)
+├── 00_Documentation_Blueprint.md  # Active master blueprint framework (Version 5)
 ├── CHANGELOG.md                  # Central history of framework upgrades (Major-only)
 ├── README.md                     # Repository entrypoint guide (this file)
 ├── example/                      # Container for active reference implementations
 │   ├── distributed-specification-boundaries/
 │   ├── pattern-a-multi-repo/     # Pattern A: Multi-Repository reference example
 │   ├── pattern-b-monorepo/       # Pattern B: Monorepo reference example
-│   ├── pattern-c-monolith/       # Pattern C: Monolith reference example
+│   ├── pattern-c-monolith/       # Pattern C: Monolith reference example (Collapsed MVP)
 │   └── workspace-domain-distributed/ # Domain-Distributed Monorepo reference example
 └── archive/                      # Historical archive directory
     ├── v1/                       # Archive of Version 1 standard
     ├── v2/                       # Archive of Version 2 standard
-    └── v3/                       # Archive of Version 3 standard
+    ├── v3/                       # Archive of Version 3 standard
+    └── v4/                       # Archive of Version 4 standard
 ```
 
 ---
@@ -55,14 +56,14 @@ To bootstrap a new project from one of the reference examples, follow these step
 
 | Step | Action |
 | :--- | :--- |
-| 1 | **Pick your pattern.** Choose the layout that matches your product and execution topology. |
+| 1 | **Pick your pattern.** Choose the layout that matches your product and execution topology (Pattern A, B, C, or Domain-Distributed). |
 | 2 | **Copy the example folder** into your new repository or workspace root. |
 | 3 | **Rename all placeholders.** Replace `product-catalog-*` and placeholder product names with your own product and boundary names across paths, headings, and content. |
-| 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` or `v4-docs/` with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
-| 5 | **Initialize documentation topology.** Capture the specification topology, adoption mode, execution boundaries, deployability, and ownership model before generating artifacts. |
-| 6 | **Fill in the specs.** Work through `01_BRD.md` -> `02_PRD.md` -> `03_User_Stories.md` -> `04_Architecture.md` following the development workflow defined in the blueprint. |
+| 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` or `v5-docs/` with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
+| 5 | **Initialize documentation topology & `METADATA.md`.** Capture the specification topology, MVP mode (`enabled` vs. `collapsed`), execution boundaries, deployability, and ownership model in root `METADATA.md`. |
+| 6 | **Fill in the specs.** Work through `01_BRD.md` -> `02_PRD.md` -> `03_Feature_Catalogue.md` -> [`04_MVP.md`] -> `05_FRD.md` -> `06_User_Stories.md` -> `07_Architecture.md` -> `08_Technical_Standards.md` following the development workflow defined in the blueprint. |
 | 7 | **Assign Verification Criteria IDs.** Populate execution-boundary `ROADMAP.md` files with stable IDs scoped by boundary before starting implementation. |
-| 8 | **Validate evidence, compatibility, and boundaries.** Use temporary Project Context when needed, then resolve or accept validation findings before treating generated artifacts as reliable. |
+| 8 | **Validate structural traceability and metadata.** Ensure all parent-child relationships resolve deterministically without manual mapping tables before treating generated artifacts as reliable. |
 
 ### Pattern Selection Guide
 
@@ -70,7 +71,7 @@ To bootstrap a new project from one of the reference examples, follow these step
 | :--- | :--- | :--- |
 | **A — Multi-Repository** | Specs and each execution boundary in separate Git repositories | Independent deployment cadences; separate ownership per boundary |
 | **B — Monorepo** | Single repository with `docs/` specs and multiple execution boundaries | Shared workspace; multiple applications, services, packages, or infrastructure boundaries |
-| **C — Monolith** | Single repository with `docs/` specs and one deployable application boundary | Single deployable product implementation handling all concerns |
+| **C — Monolith** | Single repository with `docs/` specs and one deployable application boundary | Single deployable product implementation; ideal for collapsed no-MVP mode |
 
 ---
 
@@ -113,8 +114,9 @@ To officially publish the new centralized standard:
 
 ## Current Release State
 
-* **Active Specification Version:** **Version 4**, as defined by the root master blueprint [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
-* **Active Reference Examples:** Fully conform to Version 4 standards across the three layout patterns, the distributed-specification focused example, and the domain-distributed workspace example in [example/](./example/).
+* **Active Specification Version:** **Version 5**, as defined by the root master blueprint [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md).
+* **Active Reference Examples:** Fully conform to Version 5 standards across the layout patterns, the distributed-specification focused example, and the domain-distributed workspace example in [example/](./example/).
+* **Archived Release (Version 4):** Framework Version 4 is frozen and archived inside [archive/v4/](./archive/v4/).
 * **Archived Release (Version 3):** Framework Version 3 is frozen and archived inside [archive/v3/](./archive/v3/).
 * **Archived Release (Version 2):** Framework Version 2 is frozen and archived inside [archive/v2/](./archive/v2/).
 * **Archived Release (Version 1):** Framework Version 1 is frozen and archived inside [archive/v1/](./archive/v1/).
@@ -123,7 +125,7 @@ To officially publish the new centralized standard:
 
 ## Framework Versioning Rules
 
-The central blueprint framework itself adheres strictly to **Major-only versioning** (e.g. `1`, `2`, `3`, `4`).
+The central blueprint framework itself adheres strictly to **Major-only versioning** (e.g. `1`, `2`, `3`, `4`, `5`).
 
 * **No Minor or Patch Segments:** Minor segments such as `X.Y` or `X.Y.Z` are never used for the blueprint framework. Formatting adjustments, typographic corrections, or minor clarifications are made directly in-place without version increments.
 * **Separation of Concerns:** Any other versioning systems used by individual projects, Product Versions, or Boundary Versions are defined and governed exclusively within the active [00_Documentation_Blueprint.md](./00_Documentation_Blueprint.md). This repository `README.md` does not duplicate or redefine those implementation rules.
@@ -133,7 +135,7 @@ The central blueprint framework itself adheres strictly to **Major-only versioni
 ## Metadata & Copyright
 
 * **Framework:** Product-Centric Specs & Execution Boundary Documentation Framework
-* **Current Version:** Version 4 (Major-only)
+* **Current Version:** Version 5 (Major-only)
 * **Author:** [@mfauzanfikri](https://github.com/mfauzanfikri)
 * **License:** MIT
 * **Copyright:** (c) 2026 mfauzanfikri. All rights reserved.

@@ -7,9 +7,9 @@
 ## 1. Business Objectives & Goals
 The Product Catalog Service is the foundational core of the modular ERP platform. Its primary objective is to manage hierarchical product groupings (Categories) and the metadata of standard products (Products) sold by the enterprise.
 
-* **Objective 1:** Establish a single source of truth for the product master data.
-* **Objective 2:** Standardize inventory categorization for accurate downstream financial and supply chain reporting.
-* **Objective 3:** Enable real-time, low-latency search and listing of products across active channels.
+* **BO-01:** Establish a single source of truth for the product master data.
+* **BO-02:** Standardize inventory categorization for accurate downstream financial and supply chain reporting.
+* **BO-03:** Enable real-time, low-latency search and listing of products across active channels.
 
 ---
 
