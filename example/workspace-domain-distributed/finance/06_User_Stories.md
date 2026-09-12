@@ -1,9 +1,24 @@
+---
+document_id: USER-STORIES-FIN
+document_type: user_stories
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-FINANCE
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-FINANCE
+authority: implementation_requirement
+owner: Finance Engineering
+last_updated: "2026-09-09"
+---
 # User Stories - Finance Domain
 
 **Specification Boundary:** Finance
 **Product Version:** 1.0
-**Scoped FRD:** [05_FRD.md](./05_FRD.md)
-**Status:** Active
+**Scoped FRD:** [FRD-001.md](./frd/FRD-001.md)
+**Status:** active
 
 ---
 
@@ -11,14 +26,14 @@
 
 | User Story ID | Title | Scoped Feature | Scoped FRD Requirement | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **US-SEC-01** | Multi-Factor Ledger Adjustments | F-FIN-001 v1 | FR-FIN-001-01 | Active |
+| **FIN-US-SEC-01** | Multi-Factor Ledger Adjustments | F-FIN-001 v1 | FR-FIN-001-01 | active |
 
 ---
 
 ## 2. User Stories
 
-### US-SEC-01: Multi-Factor Ledger Adjustments
-* **Canonical Identity:** `Finance::US-SEC-01`
+### FIN-US-SEC-01: Multi-Factor Ledger Adjustments
+* **Canonical Identity:** `Finance::FIN-US-SEC-01`
 * **Scoped Feature:** `F-FIN-001 v1`
 * **Scoped Functional Requirement:** `FR-FIN-001-01`
 

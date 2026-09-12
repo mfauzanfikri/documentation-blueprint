@@ -1,7 +1,7 @@
 # Project Context Example - Product Catalog Monorepo
 
 > [!NOTE]
-> This file demonstrates Blueprint v4 Project Context and documentation initialization usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
+> This file demonstrates Blueprint v5 brownfield migration from a v4 baseline, including Project Context and documentation initialization. It is temporary, non-authoritative, and not a mandatory retained artifact. After Feature Catalogue, FRD, User Stories, Architecture, Technical Standards, metadata, and validation results are accepted, a real project may delete this working file.
 
 ## 1. Source Materials Reviewed
 
@@ -18,7 +18,7 @@
 | :--- | :--- | :--- |
 | The monorepo keeps master specifications in `docs/`. | Repository structure | High |
 | Backend and frontend packages are separate execution boundaries. | `apps/backend` and `apps/frontend` structure | High |
-| Requirement Mapping links master User Stories to package-level ROADMAP and CHANGELOG evidence. | `docs/05_Requirement_Mapping.md` | High |
+| Historical Requirement Mapping previously linked master User Stories to package-level ROADMAP and CHANGELOG evidence (now superseded by V5 structural traceability and METADATA.md). | Historical archived Requirement Mapping | High |
 
 ## 3. Derived Facts
 

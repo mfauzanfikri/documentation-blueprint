@@ -20,7 +20,8 @@ workspace-domain-distributed/
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
 │   ├── 03_Feature_Catalogue.md        # Inventory feature inventory & versions
-│   ├── 05_FRD.md                      # Functional specs for Inventory features
+│   ├── frd/
+│   │   └── FRD-001.md                 # Functional specs for Inventory features
 │   ├── 06_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
 │   ├── 07_Architecture.md
 │   ├── 08_Technical_Standards.md
@@ -31,7 +32,8 @@ workspace-domain-distributed/
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
 │   ├── 03_Feature_Catalogue.md        # Finance feature inventory & versions
-│   ├── 05_FRD.md                      # Functional specs for Finance features
+│   ├── frd/
+│   │   └── FRD-001.md                 # Functional specs for Finance features
 │   ├── 06_User_Stories.md             # Localized User Story IDs (e.g., US-SEC-01)
 │   ├── 07_Architecture.md
 │   ├── 08_Technical_Standards.md

@@ -1,13 +1,13 @@
 # Project Context Example - Product Catalog Service
 
 > [!NOTE]
-> This file demonstrates Blueprint v4 Project Context and documentation initialization usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
+> This file demonstrates Blueprint v5 brownfield migration from a v4 baseline, including Project Context and documentation initialization. It is temporary, non-authoritative, and not a mandatory retained artifact. After Feature Catalogue, FRD, User Stories, Architecture, Technical Standards, metadata, and validation results are accepted, a real project may delete this working file.
 
 ## 1. Source Materials Reviewed
 
 | Source | Boundary | Evidence Classification | Confidence |
 | :--- | :--- | :--- | :--- |
-| Existing BRD, PRD, User Stories, Architecture, and Requirement Mapping | Specification | Explicit Fact | High |
+| Existing BRD, PRD, User Stories, Architecture, and historical archived Requirement Mapping | Specification | Explicit Fact | High |
 | Backend ROADMAP and CHANGELOG | Execution | Explicit Fact | High |
 | Frontend ROADMAP and CHANGELOG | Execution | Explicit Fact | High |
 | Product Catalog example workflow reconstruction | Adoption Input | Derived Fact | Medium |
@@ -18,14 +18,14 @@
 | :--- | :--- | :--- |
 | Product Catalog has separate docs, backend, and frontend execution boundaries. | Pattern A folder structure | High |
 | Category and Product are the two modeled business entities in the example. | BRD and PRD entity sections | High |
-| Some implementation criteria are released and some remain pending. | Requirement Mapping links to CHANGELOG and ROADMAP | High |
+| Some implementation criteria are released and some remain pending. | Historical Requirement Mapping previously linked to CHANGELOG and ROADMAP | High |
 
 ## 3. Derived Facts
 
 | Derived Fact | Basis | Confidence |
 | :--- | :--- | :--- |
 | Merchandiser catalog setup is the primary business workflow demonstrated by the example. | BRD stakeholders, PRD journeys, and User Stories | Medium |
-| Backend and frontend execution boundaries jointly implement the same master Product Catalog requirements. | Requirement Mapping references both boundaries for shared User Story IDs | High |
+| Backend and frontend execution boundaries jointly implement the same master Product Catalog requirements. | Historical Requirement Mapping referenced both boundaries for shared User Story IDs | High |
 
 ## 4. Assumptions and Unknowns
 

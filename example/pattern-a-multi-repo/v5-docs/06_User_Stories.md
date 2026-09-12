@@ -1,8 +1,23 @@
+---
+document_id: USER-STORIES
+document_type: user_stories
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-CATALOG
+authority: implementation_requirement
+owner: Engineering Team
+last_updated: "2026-09-09"
+---
 # User Stories - Product Catalog Service
 
 **Product Version:** 1.0
-**Scoped FRD:** [05_FRD.md](./05_FRD.md)
-**Status:** Active
+**Scoped FRD:** [FRD-001.md](./frd/FRD-001.md)
+**Status:** active
 
 ---
 
@@ -10,8 +25,8 @@
 
 | User Story ID | Title | Scoped Feature | Scoped FRD Requirement | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **US-CAT-01** | Create and Manage Categories | F-001 v1 | FR-001-01, FR-001-02, FR-001-03 | Active |
-| **US-PROD-01** | Create Products with SKUs | F-002 v1 | FR-002-01, FR-002-02, FR-002-03 | Active |
+| **US-CAT-01** | Create and Manage Categories | F-001 v1 | FR-001-01, FR-001-02, FR-001-03 | active |
+| **US-PROD-01** | Create Products with SKUs | F-002 v1 | FR-002-01, FR-002-02, FR-002-03 | active |
 
 ---
 

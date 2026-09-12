@@ -1,7 +1,22 @@
+---
+document_id: FEATURE-CATALOGUE
+document_type: feature_catalogue
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG-MONOLITH
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-CATALOG-MONOLITH
+authority: feature_inventory
+owner: Product Architecture
+last_updated: "2026-09-09"
+---
 # Feature Catalogue - Product Catalog Service
 
 **Product Version:** 1.0
-**Status:** Active
+**Status:** active
 
 This catalogue serves as the product-wide inventory and registry for feature identity, history, and version governance.
 
@@ -11,8 +26,8 @@ This catalogue serves as the product-wide inventory and registry for feature ide
 
 | Feature ID | Feature Name | Current Version | Status | Primary Capability |
 | :--- | :--- | :--- | :--- | :--- |
-| **F-001** | Category Hierarchy Management | v1.0 | Active | PC-01 |
-| **F-002** | Product Master Management | v1.0 | Active | PC-02 |
+| **F-001** | Category Hierarchy Management | v1.0 | active | PC-01 |
+| **F-002** | Product Master Management | v1.0 | active | PC-02 |
 
 ---
 
@@ -21,7 +36,7 @@ This catalogue serves as the product-wide inventory and registry for feature ide
 ### F-001: Category Hierarchy Management
 * **Description:** Manages hierarchical product categories, parent-child taxonomies, automated slug generation, and safe soft-deletion lifecycle.
 * **Current Version:** v1.0
-* **Status:** Active
+* **Status:** active
 
 #### Version History
 | Version | Date | Change Summary | Change Type | Active in MVP / Product |
@@ -33,7 +48,7 @@ This catalogue serves as the product-wide inventory and registry for feature ide
 ### F-002: Product Master Management
 * **Description:** Manages standard product master records, uppercase SKU formatting, decimal pricing constraints, and category association validation.
 * **Current Version:** v1.0
-* **Status:** Active
+* **Status:** active
 
 #### Version History
 | Version | Date | Change Summary | Change Type | Active in MVP / Product |

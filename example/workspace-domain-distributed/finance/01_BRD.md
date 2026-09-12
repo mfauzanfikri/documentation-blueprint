@@ -1,3 +1,18 @@
+---
+document_id: BRD-FIN-001
+document_type: brd
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-FINANCE
+product_version: "1.0"
+status: approved
+scope:
+  kind: product
+  id: PROD-FINANCE
+authority: business
+owner: Finance Domain Team
+last_updated: "2026-09-09"
+---
 # Business Requirements Document (BRD) - Finance Domain
 **Specification Boundary:** Finance
 **Product Version:** 1.0

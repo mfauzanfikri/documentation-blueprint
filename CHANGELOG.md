@@ -22,6 +22,18 @@ All notable changes to the Documentation Blueprint framework will be documented 
 - Upgraded active reference examples to Version 5 (`pattern-a-multi-repo`, `pattern-b-monorepo`, `pattern-c-monolith`, `distributed-specification-boundaries`, `workspace-domain-distributed`).
 - Archived the Version 4 master blueprint and active example set under `archive/v4/`.
 - Updated repository navigation, adoption steps, active release state, and metadata for Version 5.
+- **Corrective Version 5 Implementation Hardening:**
+  - Enforced Common Document Identity Contract frontmatter across all active specification artifacts.
+  - Standardized canonical MVP and FRD directory layouts (`docs/mvp/MVP-001.md`, `docs/frd/FRD-001.md`, and specs-root `mvp/` and `frd/`).
+  - Normalized `METADATA.md` to a single normative `documents:` registry format for both enabled and collapsed modes.
+  - Clarified execution boundary ownership cardinality (single owning boundary per user story) and reconciled evidence resolution.
+  - Reconciled released Product 1.0 criteria with verified release evidence and moved unfinished tasks to unreleased future scope.
+  - Removed all stale v4 milestone declarations and retired `REQUIREMENT_MAPPING.md` references from active examples.
+  - Aligned unreleased Product Version changelog lifecycle language (`### Scoped`, active MVP, scoped feature versions) across all specification changelogs.
+  - Reconciled distributed execution criterion `API-US-AUTH-01-002` to Product Version `1.1` matching the requirement aggregation matrix.
+  - Corrected Section 13 subsection numbering (`13.3 Schema Validation Rules`) and eliminated obsolete `documentation.mvp` schema references.
+  - Canonicalized template machine-status examples (`planned, in_progress, or released`, `active, deprecated, or retired`), eliminated raw pipe collisions within table cells, and normalized status casing.
+  - Strengthened deterministic validation in `scripts/validate-v5.ps1` with unreleased changelog lifecycle checks, distributed story-to-roadmap version aggregation assertions, blueprint Section 13 structure checks, and template status scanning.
 
 ---
 

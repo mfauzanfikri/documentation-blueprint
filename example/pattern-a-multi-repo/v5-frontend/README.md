@@ -43,7 +43,7 @@ npm test
 ## 5. Documentation References
 * **Documentation Map:** [METADATA.md](../v5-docs/METADATA.md)
 * **Documentation Blueprint:** [00_Documentation_Blueprint.md](../v5-docs/00_Documentation_Blueprint.md)
-* **Functional Requirements (FRD):** [05_FRD.md](../v5-docs/05_FRD.md)
+* **Functional Requirements (FRD):** [FRD-001.md](../v5-docs/frd/FRD-001.md)
 * **Technical Architecture:** [07_Architecture.md](../v5-docs/07_Architecture.md)
 * **Technical Standards:** [08_Technical_Standards.md](../v5-docs/08_Technical_Standards.md)
 * **Project Context Example:** [PROJECT_CONTEXT.example.md](../v5-docs/PROJECT_CONTEXT.example.md)

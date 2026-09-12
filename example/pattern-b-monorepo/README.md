@@ -57,8 +57,8 @@ npm run dev
 | Business Requirements (BRD) | [01_BRD.md](./docs/01_BRD.md) |
 | Product Requirements (PRD) | [02_PRD.md](./docs/02_PRD.md) |
 | Feature Catalogue | [03_Feature_Catalogue.md](./docs/03_Feature_Catalogue.md) |
-| MVP Increment Scope | [04_MVP.md](./docs/04_MVP.md) |
-| Functional Requirements (FRD) | [05_FRD.md](./docs/05_FRD.md) |
+| MVP Increment Scope | [MVP-001.md](./docs/mvp/MVP-001.md) |
+| Functional Requirements (FRD) | [FRD-001.md](./docs/frd/FRD-001.md) |
 | User Stories | [06_User_Stories.md](./docs/06_User_Stories.md) |
 | Technical Architecture | [07_Architecture.md](./docs/07_Architecture.md) |
 | Technical Standards | [08_Technical_Standards.md](./docs/08_Technical_Standards.md) |

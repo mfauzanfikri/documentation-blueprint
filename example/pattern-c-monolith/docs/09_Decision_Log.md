@@ -1,12 +1,27 @@
+---
+document_id: DECISION-LOG
+document_type: decision_log
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG-MONOLITH
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-CATALOG-MONOLITH
+authority: decision_governance
+owner: Systems Architecture
+last_updated: "2026-09-09"
+---
 # Architectural & Product Decisions - Product Catalog Service
 
 **Product Version:** 1.0
-**Status:** Active
+**Status:** active
 
 ---
 
 ## [ADR-001] Soft-delete Strategy for Category Entities
-* **Status:** Approved
+* **Status:** approved
 * **Date:** 2026-06-01
 * **Author:** Lead Product Architect
 

@@ -19,7 +19,7 @@
 
 This is the monolith execution boundary for the Product Catalog Service (Pattern C layout). Its responsibility is to manage the full product catalog lifecycle — including category hierarchies, product master records, and the merchandiser-facing UI — within a single deployable application.
 
-Under **Collapsed MVP Mode**, the project does not maintain an intermediate `04_MVP.md` file; the Functional Requirements Document (`05_FRD.md`) directly scopes features from the Feature Catalogue for Product Version 1.0.
+Under **Collapsed MVP Mode**, the project does not maintain an intermediate `04_MVP.md` file; the Functional Requirements Document (`docs/frd/FRD-001.md`) directly scopes features from the Feature Catalogue for Product Version 1.0.
 
 ## 3. Technology Stack Mapping
 
@@ -63,7 +63,7 @@ npm test
 | Business Requirements (BRD) | [01_BRD.md](./docs/01_BRD.md) |
 | Product Requirements (PRD) | [02_PRD.md](./docs/02_PRD.md) |
 | Feature Catalogue | [03_Feature_Catalogue.md](./docs/03_Feature_Catalogue.md) |
-| Functional Requirements (FRD) | [05_FRD.md](./docs/05_FRD.md) |
+| Functional Requirements (FRD) | [FRD-001.md](./docs/frd/FRD-001.md) |
 | User Stories | [06_User_Stories.md](./docs/06_User_Stories.md) |
 | Technical Architecture | [07_Architecture.md](./docs/07_Architecture.md) |
 | Technical Standards | [08_Technical_Standards.md](./docs/08_Technical_Standards.md) |

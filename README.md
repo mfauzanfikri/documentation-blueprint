@@ -61,7 +61,7 @@ To bootstrap a new project from one of the reference examples, follow these step
 | 3 | **Rename all placeholders.** Replace `product-catalog-*` and placeholder product names with your own product and boundary names across paths, headings, and content. |
 | 4 | **Sync the blueprint copy.** Replace the `00_Documentation_Blueprint.md` inside `docs/` or `v5-docs/` with a fresh copy of the current root `00_Documentation_Blueprint.md` from this repository. |
 | 5 | **Initialize documentation topology & `METADATA.md`.** Capture the specification topology, MVP mode (`enabled` vs. `collapsed`), execution boundaries, deployability, and ownership model in root `METADATA.md`. |
-| 6 | **Fill in the specs.** Work through `01_BRD.md` -> `02_PRD.md` -> `03_Feature_Catalogue.md` -> [`04_MVP.md`] -> `05_FRD.md` -> `06_User_Stories.md` -> `07_Architecture.md` -> `08_Technical_Standards.md` following the development workflow defined in the blueprint. |
+| 6 | **Fill in the specs.** Work through `01_BRD.md` -> `02_PRD.md` -> `03_Feature_Catalogue.md` -> [`docs/mvp/MVP-001.md`] -> `docs/frd/FRD-001.md` -> `06_User_Stories.md` -> `07_Architecture.md` -> `08_Technical_Standards.md` following the development workflow defined in the blueprint. |
 | 7 | **Assign Verification Criteria IDs.** Populate execution-boundary `ROADMAP.md` files with stable IDs scoped by boundary before starting implementation. |
 | 8 | **Validate structural traceability and metadata.** Ensure all parent-child relationships resolve deterministically without manual mapping tables before treating generated artifacts as reliable. |
 

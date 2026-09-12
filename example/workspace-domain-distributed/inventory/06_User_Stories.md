@@ -1,9 +1,24 @@
+---
+document_id: USER-STORIES-INV
+document_type: user_stories
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-INVENTORY
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-INVENTORY
+authority: implementation_requirement
+owner: Inventory Engineering
+last_updated: "2026-09-09"
+---
 # User Stories - Inventory Domain
 
 **Specification Boundary:** Inventory
 **Product Version:** 1.0
-**Scoped FRD:** [05_FRD.md](./05_FRD.md)
-**Status:** Active
+**Scoped FRD:** [FRD-001.md](./frd/FRD-001.md)
+**Status:** active
 
 ---
 
@@ -11,14 +26,14 @@
 
 | User Story ID | Title | Scoped Feature | Scoped FRD Requirement | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **US-SEC-01** | Secure Stock Room Access Control | F-INV-001 v1 | FR-INV-001-01 | Active |
+| **INV-US-SEC-01** | Secure Stock Room Access Control | F-INV-001 v1 | FR-INV-001-01 | active |
 
 ---
 
 ## 2. User Stories
 
-### US-SEC-01: Secure Stock Room Access Control
-* **Canonical Identity:** `Inventory::US-SEC-01`
+### INV-US-SEC-01: Secure Stock Room Access Control
+* **Canonical Identity:** `Inventory::INV-US-SEC-01`
 * **Scoped Feature:** `F-INV-001 v1`
 * **Scoped Functional Requirement:** `FR-INV-001-01`
 

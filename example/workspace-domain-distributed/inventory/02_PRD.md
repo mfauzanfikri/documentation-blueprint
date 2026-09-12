@@ -1,3 +1,18 @@
+---
+document_id: PRD-INV-001
+document_type: prd
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-INVENTORY
+product_version: "1.0"
+status: approved
+scope:
+  kind: product
+  id: PROD-INVENTORY
+authority: product
+owner: Inventory Domain Team
+last_updated: "2026-09-09"
+---
 # Product Requirements Document (PRD) - Inventory Domain
 **Specification Boundary:** Inventory
 **Product Version:** 1.0

@@ -1,3 +1,18 @@
+---
+document_id: PRD-001
+document_type: prd
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG
+product_version: "1.0"
+status: approved
+scope:
+  kind: product
+  id: PROD-CATALOG
+authority: product
+owner: Product Management
+last_updated: "2026-09-09"
+---
 # Product Requirements Document (PRD) - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
 **Product Version:** 1.0

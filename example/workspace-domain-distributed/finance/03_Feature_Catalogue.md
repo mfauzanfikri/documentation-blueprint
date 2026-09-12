@@ -1,8 +1,23 @@
+---
+document_id: FEATURE-CATALOGUE-FIN
+document_type: feature_catalogue
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-FINANCE
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-FINANCE
+authority: feature_inventory
+owner: Finance Architecture
+last_updated: "2026-09-09"
+---
 # Feature Catalogue - Finance Domain
 
 **Specification Boundary:** Finance
 **Product Version:** 1.0
-**Status:** Active
+**Status:** active
 
 ---
 
@@ -10,7 +25,7 @@
 
 | Feature ID | Feature Name | Current Version | Status | Primary Capability |
 | :--- | :--- | :--- | :--- | :--- |
-| **F-FIN-001** | Multi-Factor Ledger Adjustments | v1.0 | Active | Ledger Security & MFA |
+| **F-FIN-001** | Multi-Factor Ledger Adjustments | v1.0 | active | Ledger Security & MFA |
 
 ---
 
@@ -19,7 +34,7 @@
 ### F-FIN-001: Multi-Factor Ledger Adjustments
 * **Description:** Enforces secondary multi-factor authentication (MFA) challenges before finalizing high-value adjustments to historical accounting ledger records.
 * **Current Version:** v1.0
-* **Status:** Active
+* **Status:** active
 
 #### Version History
 | Version | Date | Change Summary | Change Type | Active in Product |

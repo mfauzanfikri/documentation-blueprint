@@ -12,56 +12,104 @@ topology:
   pattern: pattern-a-multi-repo
   mvp_mode: enabled
 
-documentation:
-  brd:
-    version: "1.0"
+documents:
+  - id: BRD-001
+    type: brd
     path: 01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
     status: approved
-  prd:
-    version: "1.0"
+  - id: PRD-001
+    type: prd
     path: 02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
     status: approved
-  feature_catalogue:
-    version: "1.0"
+  - id: FEATURE-CATALOGUE
+    type: feature_catalogue
     path: 03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
     status: active
-  mvp:
-    active_id: MVP-001
-    version: "1.0"
-    path: 04_MVP.md
+  - id: MVP-001
+    type: mvp
+    path: mvp/MVP-001.md
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
     status: in_progress
-  frd:
-    active_id: FRD-001
-    version: "1.0"
-    path: 05_FRD.md
+  - id: FRD-001
+    type: frd
+    path: frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
     status: approved
-  user_stories:
-    version: "1.0"
+  - id: USER-STORIES
+    type: user_stories
     path: 06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
     status: active
-  technical:
-    architecture:
-      version: "1.0"
-      path: 07_Architecture.md
-      status: approved
-    standards:
-      version: "1.0"
-      path: 08_Technical_Standards.md
-      status: active
-  decision_log:
+  - id: ARCHITECTURE
+    type: architecture
+    path: 07_Architecture.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
+    status: approved
+  - id: TECHNICAL-STANDARDS
+    type: technical_standards
+    path: 08_Technical_Standards.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
+    status: active
+  - id: DECISION-LOG
+    type: decision_log
     path: 09_Decision_Log.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
     status: active
+  - id: CHANGELOG
+    type: changelog
+    path: CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-CATALOG
+    product_version: "1.0"
+    status: active
+
+navigation:
+  active_mvp_id: MVP-001
+  active_frd_id: FRD-001
 
 mvp_scope:
   MVP-001:
     product_version: "1.0"
     status: in_progress
-    frd: 05_FRD.md
+    frd: frd/FRD-001.md
     features:
       - id: F-001
         major_version: v1
+        resolved_minor_version: v1.0
       - id: F-002
         major_version: v1
+        resolved_minor_version: v1.0
 
 components:
   product-catalog-backend:

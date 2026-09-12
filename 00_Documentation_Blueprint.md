@@ -283,7 +283,7 @@ An Execution Boundary is an implementation ownership unit:
 * **Deployable (`deployable: true`):** Can be built, containerized, and deployed independently. Owns an independent **Boundary Version**, declares `compatible_product_versions`, and maintains an execution `CHANGELOG.md`.
 * **Non-Deployable (`deployable: false`):** Internal packages, shared configs, documentation boundaries. Does not require independent SemVer releases.
 * **Boundary Roles in Traceability:**
-  - `requirement_owner`: The primary execution boundary responsible for satisfying the user story. Exactly one `requirement_owner` exists per user story.
+  - `requirement_owner`: The primary execution boundary responsible for satisfying the user story. Exactly one execution boundary is the `requirement_owner` for a user story. Multiple criteria inside that owning boundary may carry `requirement_owner`, but no other execution boundary may claim `requirement_owner` for the same story.
   - `supporting_boundary`: A boundary providing auxiliary services (e.g., frontend calling a backend API, infrastructure provisioning database).
   - `evidence_source`: A boundary providing test or verification evidence.
 
@@ -304,19 +304,20 @@ Specifications and each execution boundary live in separate Git repositories.
 ```text
 product-specs/ (Repository 1)
 ├── METADATA.md                    # Project documentation map & version registry
-├── docs/
-│   ├── 00_Documentation_Blueprint.md
-│   ├── 01_BRD.md
-│   ├── 02_PRD.md
-│   ├── 03_Feature_Catalogue.md    # Product-wide feature registry & versions
-│   ├── docs/mvp/MVP-001.md                  # active MVP increment scope (optional)
-│   ├── docs/frd/FRD-001.md                  # active functional requirements
-│   ├── 06_User_Stories.md         # Sliced user stories
-│   ├── 07_Architecture.md         # Technical system design & ERDs
-│   ├── 08_Technical_Standards.md  # Engineering rules & API conventions
-│   ├── 09_Decision_Log.md         # ADRs
-│   ├── CHANGELOG.md               # Product capability release history
-│   └── references/                # Non-authoritative reference materials
+├── 00_Documentation_Blueprint.md
+├── 01_BRD.md
+├── 02_PRD.md
+├── 03_Feature_Catalogue.md        # Product-wide feature registry & versions
+├── mvp/
+│   └── MVP-001.md                 # active MVP increment scope (optional)
+├── frd/
+│   └── FRD-001.md                 # active functional requirements
+├── 06_User_Stories.md             # Sliced user stories
+├── 07_Architecture.md             # Technical system design & ERDs
+├── 08_Technical_Standards.md      # Engineering rules & API conventions
+├── 09_Decision_Log.md             # ADRs
+├── CHANGELOG.md                   # Product capability release history
+├── references/                    # Non-authoritative reference materials
 └── README.md
 
 product-backend/ (Repository 2)
@@ -344,8 +345,10 @@ product-monorepo/
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
 │   ├── 03_Feature_Catalogue.md
-│   ├── docs/mvp/MVP-001.md                  # Optional increment scope
-│   ├── docs/frd/FRD-001.md
+│   ├── mvp/
+│   │   └── MVP-001.md             # Optional increment scope
+│   ├── frd/
+│   │   └── FRD-001.md
 │   ├── 06_User_Stories.md
 │   ├── 07_Architecture.md
 │   ├── 08_Technical_Standards.md
@@ -385,15 +388,18 @@ enterprise-workspace/
 │   │   ├── 01_BRD.md
 │   │   ├── 02_PRD.md
 │   │   ├── 03_Feature_Catalogue.md
-│   │   ├── docs/mvp/MVP-001.md
-│   │   ├── docs/frd/FRD-001.md
+│   │   ├── mvp/
+│   │   │   └── MVP-001.md
+│   │   ├── frd/
+│   │   │   └── FRD-001.md
 │   │   ├── 06_User_Stories.md
 │   │   └── CHANGELOG.md
 │   └── billing/
 │       ├── 01_BRD.md
 │       ├── 02_PRD.md
 │       ├── 03_Feature_Catalogue.md
-│       ├── docs/frd/FRD-001.md              # Collapsed no-MVP mode
+│       ├── frd/
+│       │   └── FRD-001.md         # Collapsed no-MVP mode
 │       ├── 06_User_Stories.md
 │       └── CHANGELOG.md
 └── apps/
@@ -413,7 +419,8 @@ monolith-product/
 │   ├── 01_BRD.md
 │   ├── 02_PRD.md
 │   ├── 03_Feature_Catalogue.md    # Product feature inventory
-│   ├── docs/frd/FRD-001.md                  # Scopes features directly for Product Version
+│   ├── frd/
+│   │   └── FRD-001.md             # Scopes features directly for Product Version
 │   ├── 06_User_Stories.md
 │   ├── 07_Architecture.md
 │   ├── 08_Technical_Standards.md
@@ -456,9 +463,11 @@ scope:
   kind: product
   id: PROD-NAME
 authority: business
+owner: [team-or-role]
+last_updated: YYYY-MM-DD
 ---
 ```
-Each artifact template specifies its `document_type`, `scope.kind`, `scope.id`, and `authority`.
+Each artifact template specifies its `document_type`, `scope.kind`, `scope.id`, and `authority`. Artifacts with `scope.kind: workspace` govern shared technical foundations across multiple products (e.g. Pattern B Variant workspace architecture or shared standards); they declare `scope.id: [workspace-id]` and list applicable `product_ids` (or set `product_id: MULTI-PRODUCT`).
 
 ## 10.1 `METADATA.md` Contract
 ```yaml
@@ -531,7 +540,7 @@ primary_question: What features make up the product universe?
 allowed_content:
   - Stable Canonical Feature IDs (F-XXX)
   - Feature names and high-level functional summaries
-  - Feature lifecycle state (Proposed, active, deprecated, retired)
+  - Feature lifecycle state (proposed, active, deprecated, retired)
   - Feature version history table tracking MAJOR.MINOR versions
   - Summary of changes, change types (Major/Minor), and active MVP/Product Version bindings
   - High-level feature-to-feature dependencies
@@ -652,7 +661,7 @@ purpose: Record significant product, architectural, and engineering decisions al
 primary_question: Why was this decision made?
 allowed_content:
   - Decision Identifier (ADR-XXX)
-  - Status (draft, Proposed, approved, Rejected, superseded)
+  - Status (draft, proposed, approved, rejected, superseded)
   - Decision date and responsible owner
   - Context and problem statement
   - Alternatives considered and trade-off evaluation
@@ -711,11 +720,13 @@ primary_question: What are we planning to build within this boundary?
 allowed_content:
   - Stable Verification Criteria IDs (boundary-scoped)
   - User Story ID references (US-XXX)
+  - Boundary role (requirement_owner, supporting_boundary, evidence_source)
+  - Product Version
+  - MVP ID (optional in collapsed mode)
   - Technical verification task descriptions
-  - Boundary role (requirement_owner, supporting_boundary)
-  - Status (Pending, in_progress)
+  - Status (planned, in_progress)
 forbidden_content:
-  - Completed historical tasks (must be moved to local CHANGELOG.md)
+  - Completed historical tasks (must be moved to local CHANGELOG.md upon release)
   - Product specifications rewritten as local truth
   - released changelog entries
 dependencies: User Stories, Architecture
@@ -729,8 +740,9 @@ purpose: Record technical implementation history and release evidence within an 
 primary_question: What technical changes have been released in this boundary?
 allowed_content:
   - Boundary Version release blocks (SemVer)
-  - Declared Compatible Product Versions
-  - Completed Verification Criteria IDs with commit or PR evidence
+  - Declared Compatible Product Versions (and Product IDs if multi-product)
+  - Completed Verification Criteria IDs with commit, PR, or documentation evidence
+  - Feature Major Version and resolved minor snapshot where applicable
   - Code-level bug fixes, refactors, dependency updates, and migrations
 forbidden_content:
   - Future planned work or pending tasks
@@ -790,7 +802,7 @@ A Minor Feature Version represents a **backward-compatible refinement or clarifi
 
 ## 11.3 Feature Lifecycle States
 Inside the Feature Catalogue, each feature maintains a lifecycle state:
-* **`Proposed`:** Feature is under review; not yet approved for active increment scoping.
+* **`proposed`:** Feature is under review; not yet approved for active increment scoping.
 * **`active`:** Feature is officially approved and implemented or scheduled for implementation.
 * **`deprecated`:** Feature remains operational but is targeted for retirement; new increments should not adopt it.
 * **`retired`:** Feature is permanently removed from the active product.
@@ -836,45 +848,20 @@ INFRA-US-001-01 (Infrastructure boundary, Story US-001, task 01)
 Automated tooling or AI validators assert the following deterministic invariants:
 1. **Vertical Completeness:** Every active User Story must reference a valid `FR-XXX-YY` in the active FRD.
 2. **Scope Adherence:** Every `FR-XXX-YY` must reference a Feature Major Version explicitly selected by the active MVP (or registered in the Feature Catalogue if MVP mode is collapsed).
-3. **Execution Ownership:** Every active User Story must have exactly one execution boundary task designated as `role: requirement_owner`.
-4. **Evidence Resolution:** Every completed Verification Criteria ID in `ROADMAP.md` must resolve to an exact anchor tag in the corresponding boundary's `CHANGELOG.md`.
+3. **Execution Ownership:** Every active User Story must have exactly one execution boundary designated as `requirement_owner`. Multiple criteria inside that owning boundary may carry `requirement_owner`, but no other execution boundary may claim `requirement_owner` for the same story.
+4. **Evidence Resolution:** Validators evaluate the union of active `ROADMAP.md` criteria and released `CHANGELOG.md` evidence. When a criterion is completed and released, it moves from `ROADMAP.md` to `CHANGELOG.md` with an exact anchor tag and commit, PR, or documentation evidence; released criteria must not remain as completed rows in `ROADMAP.md`.
 5. **Bidirectional Coverage:** Every active FRD requirement references an existing scoped Feature Major Version; every scoped Feature Major Version has at least one FRD requirement unless `intentionally_deferred` with rationale; every executable requirement has at least one User Story.
-6. **Ownership and Evidence:** Every active User Story references one or more valid FRD requirements and exactly one `requirement_owner`; criteria declare story, boundary, Product Version, and optional MVP, and completed criteria resolve to exactly one changelog anchor.
-7. **No Orphan Requirements:** A Product Version release block must not be marked released in `CHANGELOG.md` if any constituent Verification Criteria ID remains `Pending`.
+6. **Ownership and Evidence:** Every active User Story references one or more valid FRD requirements and has exactly one owning execution boundary (`requirement_owner`); criteria declare story, boundary role, Product Version, and optional MVP; and released criteria resolve to exactly one changelog anchor with verifiable evidence.
+7. **No Orphan Requirements:** A Product Version release block must not be marked released in `CHANGELOG.md` if any constituent Verification Criteria ID remains `planned` or `in_progress`.
 
 ---
 
 # 13. `METADATA.md` Specification
 
-`METADATA.md` is the declarative project-level document registry and version map.
+`METADATA.md` is the declarative project-level document registry and version map. It uses a single normative `documents:` registry list to record all documentation artifacts, their versions, and their scopes. The `navigation:` block is an optional, non-authoritative convenience pointer for human and agent navigation.
 
-## 13.1 Declarative YAML Schema
-The registry is repeatable and preserves active, superseded, archived, and domain-scoped history. IDs are unique, paths are repository-relative, and navigation is non-authoritative convenience only.
-
-```yaml
-documents:
-  - id: BRD-001
-    type: brd
-    path: docs/01_BRD.md
-    document_version: "1.0"
-    scope_kind: product
-    scope_id: PROD-NAME
-    product_version: "1.0"
-    status: approved
-  - id: FRD-001
-    type: frd
-    path: docs/frd/FRD-001.md
-    document_version: "1.0"
-    scope_kind: mvp
-    scope_id: MVP-001
-    product_version: "1.0"
-    status: approved
-navigation:
-  active_mvp_id: MVP-001
-  active_frd_id: FRD-001
-```
-Collapsed mode has exactly one product-scoped FRD for the active Product Version and no MVP document or registry entry.
-
+## 13.1 Enabled Mode Schema (Multi-Increment)
+Used when a product is delivered via bounded increments (MVPs).
 
 ```yaml
 ---
@@ -884,64 +871,111 @@ schema_version: 1.0
 product:
   id: PROD-[NAME]
   name: [Product Display Name]
-  version: "MAJOR.MINOR"
+  version: "1.0"
   status: active # active | maintenance | deprecated
 
 topology:
   pattern: pattern-b-monorepo # pattern-a-multi-repo | pattern-b-monorepo | pattern-c-monolith | domain-distributed
-  mvp_mode: enabled           # enabled | collapsed
+  mvp_mode: enabled
 
-documentation:
-  brd:
-    version: "1.0"
+documents:
+  - id: BRD-001
+    type: brd
     path: docs/01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: approved
-  prd:
-    version: "1.0"
+  - id: PRD-001
+    type: prd
     path: docs/02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: approved
-  feature_catalogue:
-    version: "1.0"
+  - id: FEATURE-CATALOGUE
+    type: feature_catalogue
     path: docs/03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
-  mvp:
-    # Omitted or set to null when mvp_mode == collapsed
-    active_id: MVP-001
-    version: "1.0"
+  - id: MVP-001
+    type: mvp
     path: docs/mvp/MVP-001.md
-    status: in_progress
-  frd:
-    active_id: FRD-001
-    version: "1.0"
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
+    status: released
+  - id: FRD-001
+    type: frd
     path: docs/frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
     status: approved
-  user_stories:
-    version: "1.0"
+  - id: USER-STORIES
+    type: user_stories
     path: docs/06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
-  technical:
-    architecture:
-      version: "1.0"
-      path: docs/07_Architecture.md
-      status: approved
-    standards:
-      version: "1.0"
-      path: docs/08_Technical_Standards.md
-      status: active
-  decision_log:
+  - id: ARCHITECTURE
+    type: architecture
+    path: docs/07_Architecture.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: TECHNICAL-STANDARDS
+    type: technical_standards
+    path: docs/08_Technical_Standards.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: DECISION-LOG
+    type: decision_log
     path: docs/09_Decision_Log.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
+  - id: CHANGELOG
+    type: changelog
+    path: docs/CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+
+navigation:
+  active_mvp_id: MVP-001
+  active_frd_id: FRD-001
 
 mvp_scope:
   MVP-001:
     product_version: "1.0"
-    status: in_progress
+    status: released
     frd: docs/frd/FRD-001.md
     features:
       - id: F-001
         major_version: v1
+        resolved_minor_version: v1.0
       - id: F-002
         major_version: v1
+        resolved_minor_version: v1.0
 
 components:
   [boundary-name]:
@@ -953,11 +987,125 @@ components:
 ---
 ```
 
-## 13.2 Schema Validation Rules
+## 13.2 Collapsed Mode Schema (No-MVP / Direct Scope)
+Used when a project delivers features directly for the Product Version without MVP artifacts. It omits all MVP documents and pointers, containing exactly one product-scoped FRD.
+
+```yaml
+---
+blueprint_version: 5
+schema_version: 1.0
+
+product:
+  id: PROD-[NAME]
+  name: [Product Display Name]
+  version: "1.0"
+  status: active
+
+topology:
+  pattern: pattern-c-monolith # pattern-b-monorepo | pattern-c-monolith | domain-distributed
+  mvp_mode: collapsed
+
+documents:
+  - id: BRD-001
+    type: brd
+    path: docs/01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: PRD-001
+    type: prd
+    path: docs/02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: FEATURE-CATALOGUE
+    type: feature_catalogue
+    path: docs/03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: FRD-001
+    type: frd
+    path: docs/frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: USER-STORIES
+    type: user_stories
+    path: docs/06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: ARCHITECTURE
+    type: architecture
+    path: docs/07_Architecture.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: TECHNICAL-STANDARDS
+    type: technical_standards
+    path: docs/08_Technical_Standards.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: DECISION-LOG
+    type: decision_log
+    path: docs/09_Decision_Log.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: CHANGELOG
+    type: changelog
+    path: docs/CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+
+navigation:
+  active_frd_id: FRD-001
+
+product_scope:
+  features:
+    - id: F-001
+      major_version: v1
+      resolved_minor_version: v1.0
+    - id: F-002
+      major_version: v1
+      resolved_minor_version: v1.0
+
+components:
+  [boundary-name]:
+    type: monolith
+    deployable: true
+    version: "1.0.0"
+    path: .
+    compatible_product_versions: ["1.0"]
+---
+```
+
+## 13.3 Schema Validation Rules
 * **Path Existence:** All declared `path` values must resolve to valid, readable files or directories.
-* **Version Synchrony:** Declared `version` strings must match the header metadata of the target documents.
+* **Version Synchrony:** Every registered `document_version` must exactly match the `document_version` in the target artifact's frontmatter.
 * **Feature Integrity:** All features listed by each MVP document must exist in `03_Feature_Catalogue.md`.
-* **Topology Fit:** When `mvp_mode: collapsed`, omit the MVP document and `documentation.mvp` registry; the product-scoped FRD is authoritative.
+* **Topology Fit:** When `mvp_mode: collapsed`, the `documents:` registry must not contain an entry with `type: mvp`, no MVP document may exist in the active topology, `navigation.active_mvp_id` must be absent, and exactly one active product-scoped FRD must exist for each active Product Version.
 
 ---
 
@@ -989,8 +1137,8 @@ Validation is the deterministic enforcement layer of the Blueprint. Generation a
 | **Blueprint Authority** | `FAIL` | Repository contains more than one `00_Documentation_Blueprint.md` copy. |
 | **`METADATA.md` Integrity** | `FAIL` | Registered file path does not exist, or internal version does not match `METADATA.md`. |
 | **Structural Traceability** | `FAIL` | User Story lacks valid `FR-XXX-YY` reference, or FRD references undeclared Feature Major Version. |
-| **Requirement Owner Cardinality**| `FAIL` | User Story lacks exactly one `requirement_owner` execution boundary task. |
-| **Evidence Resolution** | `FAIL` | Completed criteria in `ROADMAP.md` cannot be resolved to an anchor in boundary `CHANGELOG.md`. |
+| **Requirement Owner Cardinality**| `FAIL` | User Story lacks exactly one `requirement_owner` execution boundary (multiple criteria inside that owning boundary may carry `requirement_owner`, but no other boundary may claim `requirement_owner` for the story). |
+| **Evidence Resolution** | `FAIL` | Released criteria in `CHANGELOG.md` lack valid anchor or evidence, or criteria remain as completed rows in `ROADMAP.md` instead of moving to `CHANGELOG.md`. |
 | **Scope Boundary Enforcement** | `FAIL` | Architectural database schema fields placed in BRD, or task checklists placed in PRD/FRD. |
 | **Reference Authority** | `FAIL` | Files in `references/` attempt to define authoritative requirements or override Blueprint rules. |
 
@@ -1058,7 +1206,7 @@ Step 7: Requirement Mapping Retirement
    │
 8. Implementation Slicing: User Stories (06_User_Stories.md)
    │
-9. Execution Planning: Boundary ROADMAP.md (Pending Verification Criteria)
+9. Execution Planning: Boundary ROADMAP.md (pending Verification Criteria)
    │
 10. Implementation (Code, Infrastructure, Automated Tests)
    │
@@ -1154,63 +1302,111 @@ schema_version: 1.0
 product:
   id: PROD-[NAME]
   name: [Product Name]
-  version: "[MAJOR.MINOR]"
+  version: "1.0"
   status: active
 
 topology:
   pattern: pattern-b-monorepo # pattern-a-multi-repo | pattern-b-monorepo | pattern-c-monolith | domain-distributed
   mvp_mode: enabled           # enabled | collapsed
 
-documentation:
-  brd:
-    version: "1.0"
+documents:
+  - id: BRD-001
+    type: brd
     path: docs/01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: approved
-  prd:
-    version: "1.0"
+  - id: PRD-001
+    type: prd
     path: docs/02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: approved
-  feature_catalogue:
-    version: "1.0"
+  - id: FEATURE-CATALOGUE
+    type: feature_catalogue
     path: docs/03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
-  mvp:
-    active_id: MVP-001
-    version: "1.0"
+  - id: MVP-001
+    type: mvp
     path: docs/mvp/MVP-001.md
-    status: in_progress
-  frd:
-    active_id: FRD-001
-    version: "1.0"
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
+    status: released
+  - id: FRD-001
+    type: frd
     path: docs/frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: mvp
+    scope_id: MVP-001
+    product_version: "1.0"
     status: approved
-  user_stories:
-    version: "1.0"
+  - id: USER-STORIES
+    type: user_stories
     path: docs/06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
-  technical:
-    architecture:
-      version: "1.0"
-      path: docs/07_Architecture.md
-      status: approved
-    standards:
-      version: "1.0"
-      path: docs/08_Technical_Standards.md
-      status: active
-  decision_log:
+  - id: ARCHITECTURE
+    type: architecture
+    path: docs/07_Architecture.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: approved
+  - id: TECHNICAL-STANDARDS
+    type: technical_standards
+    path: docs/08_Technical_Standards.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+  - id: DECISION-LOG
+    type: decision_log
     path: docs/09_Decision_Log.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
     status: active
+  - id: CHANGELOG
+    type: changelog
+    path: docs/CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-[NAME]
+    product_version: "1.0"
+    status: active
+
+navigation:
+  active_mvp_id: MVP-001
+  active_frd_id: FRD-001
 
 mvp_scope:
   MVP-001:
     product_version: "1.0"
-    status: in_progress
+    status: released
     frd: docs/frd/FRD-001.md
     features:
       - id: F-001
         major_version: v1
+        resolved_minor_version: v1.0
       - id: F-002
         major_version: v1
+        resolved_minor_version: v1.0
 
 components:
   backend:
@@ -1237,11 +1433,17 @@ Consult the declarative YAML block above for machine-readable paths, versions, a
 
 ````markdown
 ---
+document_id: BRD-001
+document_type: brd
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: BRD-001
 product_version: "1.0"
 status: draft
+scope:
+  kind: product
+  id: [product-id]
+authority: business
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1285,11 +1487,17 @@ flowchart TD
 
 ````markdown
 ---
+document_id: PRD-001
+document_type: prd
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: PRD-001
 product_version: "1.0"
 status: draft
+scope:
+  kind: product
+  id: [product-id]
+authority: product
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1321,11 +1529,17 @@ last_updated: YYYY-MM-DD
 
 ````markdown
 ---
+document_id: FEATURE-CATALOGUE
+document_type: feature_catalogue
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: FEATURE-CATALOGUE
 product_version: "1.0"
 status: active
+scope:
+  kind: product
+  id: [product-id]
+authority: feature_inventory
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1376,13 +1590,19 @@ This catalogue serves as the product-wide inventory and registry for feature ide
 
 ````markdown
 ---
+document_id: MVP-001
+document_type: mvp
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: MVP-001
 product_version: "1.0"
 mvp_id: MVP-001
 frd_id: FRD-001
 status: planned
+scope:
+  kind: mvp
+  id: MVP-001
+authority: increment_scope
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1416,12 +1636,18 @@ last_updated: YYYY-MM-DD
 
 ````markdown
 ---
+document_id: FRD-001
+document_type: frd
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: FRD-001
 product_version: "1.0"
 mvp_id: MVP-001
 status: draft
+scope:
+  kind: mvp
+  id: MVP-001
+authority: functional
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1487,11 +1713,17 @@ stateDiagram-v2
 
 ````markdown
 ---
+document_id: USER-STORIES
+document_type: user_stories
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: USER-STORIES
 product_version: "1.0"
 status: active
+scope:
+  kind: product
+  id: [product-id]
+authority: implementation_requirement
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1507,8 +1739,8 @@ last_updated: YYYY-MM-DD
 
 | Story ID | Title | Scoped Feature | Scoped FRD Requirement | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **US-001** | [User Story Title] | F-001 v1 | FR-001-01 | [planned | in_progress | Done] |
-| **US-002** | [User Story Title] | F-002 v1 | FR-002-01 | [planned | in_progress | Done] |
+| **US-001** | [User Story Title] | F-001 v1 | FR-001-01 | planned, in_progress, or released |
+| **US-002** | [User Story Title] | F-002 v1 | FR-002-01 | planned, in_progress, or released |
 
 ---
 
@@ -1537,11 +1769,17 @@ last_updated: YYYY-MM-DD
 
 ````markdown
 ---
+document_id: ARCHITECTURE
+document_type: architecture
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: ARCHITECTURE
 product_version: "1.0"
 status: draft
+scope:
+  kind: product
+  id: [product-id]
+authority: technical_design
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1605,11 +1843,17 @@ sequenceDiagram
 
 ````markdown
 ---
+document_id: TECHNICAL-STANDARDS
+document_type: technical_standards
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: TECHNICAL-STANDARDS
 product_version: "1.0"
 status: active
+scope:
+  kind: product
+  id: [product-id]
+authority: technical_standards
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1656,11 +1900,17 @@ This document defines authoritative, workspace-wide technical standards that all
 
 ````markdown
 ---
+document_id: DECISION-LOG
+document_type: decision_log
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: DECISION-LOG
 product_version: "1.0"
 status: active
+scope:
+  kind: product
+  id: [product-id]
+authority: decision_governance
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1673,7 +1923,7 @@ last_updated: YYYY-MM-DD
 
 ## ADR-001: [Decision Title]
 
-* **Status:** [approved | Proposed | superseded]
+* **Status:** [approved | proposed | superseded]
 * **Date:** YYYY-MM-DD
 * **Author:** [@author]
 
@@ -1698,11 +1948,17 @@ last_updated: YYYY-MM-DD
 
 ````markdown
 ---
+document_id: CHANGELOG
+document_type: changelog
+document_version: "1.0"
 blueprint_version: 5
 product_id: [product-id]
-document_id: CHANGELOG
 product_version: "1.0"
 status: active
+scope:
+  kind: product
+  id: [product-id]
+authority: release_history
 owner: [team-or-role]
 last_updated: YYYY-MM-DD
 ---
@@ -1740,7 +1996,7 @@ This project tracks product capability releases via **Product Versions (`MAJOR.M
 | **Boundary Version** | [e.g., 1.0.0 (Required when deployable)] |
 | **Compatible Product Versions** | [e.g., "1.0", "1.1" (Required when deployable)] |
 | **Blueprint Version** | 5 |
-| **Release Status** | [active \| Maintenance \| deprecated] |
+| **Release Status** | active, deprecated, or retired |
 | **Owner / Maintainer** | [Team or Engineer Name] |
 
 ## 2. Overview & Implementation Responsibilities
@@ -1763,8 +2019,8 @@ npm run dev
 ## 5. Documentation References
 * **Documentation Map:** [METADATA.md](../../METADATA.md)
 * **Master Blueprint:** [00_Documentation_Blueprint.md](../../docs/00_Documentation_Blueprint.md)
-* **Functional Requirements:** [FRD-001.md](../docs/frd/FRD-001.md)
-* **Technical Standards:** [08_Technical_Standards.md](../docs/08_Technical_Standards.md)
+* **Functional Requirements:** [FRD-001.md](../../docs/frd/FRD-001.md)
+* **Technical Standards:** [08_Technical_Standards.md](../../docs/08_Technical_Standards.md)
 ````
 
 ## 22.13 Execution Boundary ROADMAP.md Template
@@ -1779,13 +2035,13 @@ This roadmap tracks future-oriented, pending technical verification criteria for
 
 ---
 
-## active & Pending Implementation Tasks
+## Active & Planned Implementation Tasks
 
-| Verification Criteria ID | User Story ID | Boundary Role | Task Description | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| `BE-US-001-01` | `US-001` | requirement_owner | Implement REST POST endpoint for resource creation | Pending |
-| `BE-US-001-02` | `US-001` | requirement_owner | Add database migration and index for resource lookup | Pending |
-| `BE-US-002-01` | `US-002` | supporting_boundary | Expose internal verification query for billing boundary | Pending |
+| Verification Criteria ID | User Story ID | Boundary Role | Product Version | MVP ID | Task Description | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| `BE-US-001-01` | `US-001` | requirement_owner | 1.0 | MVP-001 | Implement REST POST endpoint for resource creation | planned |
+| `BE-US-001-02` | `US-001` | requirement_owner | 1.0 | MVP-001 | Add database migration and index for resource lookup | planned |
+| `BE-US-002-01` | `US-002` | requirement_owner | 1.0 | MVP-001 | Expose internal verification query for billing boundary | planned |
 ````
 
 ## 22.14 Execution Boundary CHANGELOG.md Template
@@ -1803,9 +2059,9 @@ Deployable boundaries track releases via **Boundary Versions (SemVer)**.
 ### Compatibility Declaration
 * **Compatible Product Versions:** `1.0`
 
-### released Verification Criteria
-* <a id="BE-US-001-01"></a>**[BE-US-001-01]** Implemented REST POST endpoint for resource creation (`commit: 8a7f1bc`).
-* <a id="BE-US-001-02"></a>**[BE-US-001-02]** Added database migration and index for resource lookup (`commit: 9c4d2ef`).
+### Released Verification Criteria
+* <a id="BE-US-001-01"></a>**[BE-US-001-01]** (Story: US-001, role: requirement_owner) Implemented REST POST endpoint for resource creation (`commit: 8a7f1bc` or `evidence: documentation-example; commit: eb00ef5`).
+* <a id="BE-US-001-02"></a>**[BE-US-001-02]** (Story: US-001, role: requirement_owner) Added database migration and index for resource lookup (`commit: 9c4d2ef` or `evidence: documentation-example; commit: eb00ef5`).
 
 ### Added
 * Initial boundary service release.

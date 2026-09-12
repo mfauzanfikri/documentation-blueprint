@@ -1,3 +1,18 @@
+---
+document_id: BRD-001
+document_type: brd
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG-MONOLITH
+product_version: "1.0"
+status: approved
+scope:
+  kind: product
+  id: PROD-CATALOG-MONOLITH
+authority: business
+owner: Product Management
+last_updated: "2026-09-09"
+---
 # Business Requirements Document (BRD) - Product Catalog Service
 **Version:** 1.0 (Stable Milestone)
 **Product Version:** 1.0

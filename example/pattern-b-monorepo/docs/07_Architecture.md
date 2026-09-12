@@ -1,7 +1,22 @@
+---
+document_id: ARCHITECTURE
+document_type: architecture
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG
+product_version: "1.0"
+status: approved
+scope:
+  kind: product
+  id: PROD-CATALOG
+authority: technical_design
+owner: Systems Architecture
+last_updated: "2026-09-09"
+---
 # Technical Architecture - Product Catalog Service
 
 **Product Version:** 1.0
-**Status:** Approved
+**Status:** approved
 
 ## 1. System Context & Execution Boundaries
 

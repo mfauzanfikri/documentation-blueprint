@@ -1,7 +1,7 @@
 # Project Context Example - Product Catalog Monolith
 
 > [!NOTE]
-> This file demonstrates Blueprint v4 Project Context and documentation initialization usage. It is temporary, non-authoritative, and not a mandatory retained artifact. After BRD, PRD, User Stories, Architecture, Requirement Mapping, and validation findings are accepted, a real project may delete this working file.
+> This file demonstrates Blueprint v5 brownfield migration from a v4 baseline, including Project Context and documentation initialization. It is temporary, non-authoritative, and not a mandatory retained artifact. After Feature Catalogue, FRD, User Stories, Architecture, Technical Standards, metadata, and validation results are accepted, a real project may delete this working file.
 
 ## 1. Source Materials Reviewed
 
@@ -17,8 +17,8 @@
 | Fact | Evidence | Confidence |
 | :--- | :--- | :--- |
 | The monolith keeps specifications in `docs/` and execution tracking at the repository root. | Pattern C structure | High |
-| Monolith Verification Criteria IDs use the `ML` prefix. | Root ROADMAP and Requirement Mapping | High |
-| Released implementation evidence is stored in the root codebase CHANGELOG. | Requirement Mapping release links | High |
+| Monolith Verification Criteria IDs use the `ML` prefix. | Root ROADMAP and historical Requirement Mapping | High |
+| Released implementation evidence is stored in the root codebase CHANGELOG. | Historical Requirement Mapping release links | High |
 
 ## 3. Derived Facts
 

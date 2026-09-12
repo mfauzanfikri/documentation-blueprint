@@ -2,42 +2,163 @@
 blueprint_version: 5
 schema_version: 1.0
 
-product:
-  id: PROD-ENTERPRISE-WORKSPACE
+workspace:
+  id: WS-ENTERPRISE
   name: Enterprise Multi-Domain Workspace
-  version: "1.0"
-  status: active
 
 topology:
   pattern: domain-distributed
   mvp_mode: collapsed
 
-documentation:
-  blueprint:
-    version: "5.0"
-    path: docs/00_Documentation_Blueprint.md
+products:
+  - id: PROD-INVENTORY
+    name: Inventory Domain Product
+    version: "1.0"
+    status: active
+    mvp_mode: collapsed
+  - id: PROD-FINANCE
+    name: Finance Domain Product
+    version: "1.0"
+    status: active
+    mvp_mode: collapsed
+
+documents:
+  # Inventory Product Specifications
+  - id: BRD-INV-001
+    type: brd
+    path: inventory/01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
     status: approved
-  domains:
-    inventory:
-      brd: inventory/01_BRD.md
-      prd: inventory/02_PRD.md
-      feature_catalogue: inventory/03_Feature_Catalogue.md
-      frd: inventory/05_FRD.md
-      user_stories: inventory/06_User_Stories.md
-      architecture: inventory/07_Architecture.md
-      technical_standards: inventory/08_Technical_Standards.md
-      decision_log: inventory/09_Decision_Log.md
-      changelog: inventory/CHANGELOG.md
-    finance:
-      brd: finance/01_BRD.md
-      prd: finance/02_PRD.md
-      feature_catalogue: finance/03_Feature_Catalogue.md
-      frd: finance/05_FRD.md
-      user_stories: finance/06_User_Stories.md
-      architecture: finance/07_Architecture.md
-      technical_standards: finance/08_Technical_Standards.md
-      decision_log: finance/09_Decision_Log.md
-      changelog: finance/CHANGELOG.md
+  - id: PRD-INV-001
+    type: prd
+    path: inventory/02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
+    status: approved
+  - id: FEATURE-CATALOGUE-INV
+    type: feature_catalogue
+    path: inventory/03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
+    status: active
+  - id: FRD-INV-001
+    type: frd
+    path: inventory/frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
+    status: approved
+  - id: USER-STORIES-INV
+    type: user_stories
+    path: inventory/06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
+    status: active
+  - id: CHANGELOG-INV
+    type: changelog
+    path: inventory/CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-INVENTORY
+    product_version: "1.0"
+    status: active
+
+  # Finance Product Specifications
+  - id: BRD-FIN-001
+    type: brd
+    path: finance/01_BRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: approved
+  - id: PRD-FIN-001
+    type: prd
+    path: finance/02_PRD.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: approved
+  - id: FEATURE-CATALOGUE-FIN
+    type: feature_catalogue
+    path: finance/03_Feature_Catalogue.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: active
+  - id: FRD-FIN-001
+    type: frd
+    path: finance/frd/FRD-001.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: approved
+  - id: USER-STORIES-FIN
+    type: user_stories
+    path: finance/06_User_Stories.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: active
+  # Workspace Shared Technical Foundations
+  - id: ARCHITECTURE-ENTERPRISE
+    type: architecture
+    path: docs/07_Architecture.md
+    document_version: "1.0"
+    scope_kind: workspace
+    scope_id: WS-ENTERPRISE
+    product_version: "1.0"
+    status: approved
+  - id: TECHNICAL-STANDARDS-ENTERPRISE
+    type: technical_standards
+    path: docs/08_Technical_Standards.md
+    document_version: "1.0"
+    scope_kind: workspace
+    scope_id: WS-ENTERPRISE
+    product_version: "1.0"
+    status: active
+  - id: DECISION-LOG-ENTERPRISE
+    type: decision_log
+    path: docs/09_Decision_Log.md
+    document_version: "1.0"
+    scope_kind: workspace
+    scope_id: WS-ENTERPRISE
+    product_version: "1.0"
+    status: active
+  - id: CHANGELOG-FIN
+    type: changelog
+    path: finance/CHANGELOG.md
+    document_version: "1.0"
+    scope_kind: product
+    scope_id: PROD-FINANCE
+    product_version: "1.0"
+    status: active
+
+product_scope:
+  PROD-INVENTORY:
+    features:
+      - id: F-INV-001
+        major_version: v1
+        resolved_minor_version: v1.0
+  PROD-FINANCE:
+    features:
+      - id: F-FIN-001
+        major_version: v1
+        resolved_minor_version: v1.0
 
 components:
   backend:
@@ -45,13 +166,21 @@ components:
     deployable: true
     version: "1.0.0"
     path: apps/backend
-    compatible_product_versions: ["1.0"]
+    compatible_product_versions:
+      - product_id: PROD-INVENTORY
+        version: "1.0"
+      - product_id: PROD-FINANCE
+        version: "1.0"
   frontend:
     type: application
     deployable: true
     version: "1.0.0"
     path: apps/frontend
-    compatible_product_versions: ["1.0"]
+    compatible_product_versions:
+      - product_id: PROD-INVENTORY
+        version: "1.0"
+      - product_id: PROD-FINANCE
+        version: "1.0"
 ---
 
 # Documentation Map - Enterprise Multi-Domain Workspace

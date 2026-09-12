@@ -1,7 +1,22 @@
+---
+document_id: TECHNICAL-STANDARDS
+document_type: technical_standards
+document_version: "1.0"
+blueprint_version: 5
+product_id: PROD-CATALOG-MONOLITH
+product_version: "1.0"
+status: active
+scope:
+  kind: product
+  id: PROD-CATALOG-MONOLITH
+authority: technical_standards
+owner: Engineering Standards Committee
+last_updated: "2026-09-09"
+---
 # Technical Standards - Product Catalog Service
 
 **Version:** 1.0
-**Status:** Active
+**Status:** active
 
 This document defines authoritative, workspace-wide technical standards that all execution boundary implementations must follow.
 

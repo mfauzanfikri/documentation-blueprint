@@ -9,13 +9,13 @@ product-docs/
 ├── METADATA.md             # Project-wide documentation map & domain aggregation
 ├── catalog-specs/          # Specification Boundary: Catalog
 │   ├── 03_Feature_Catalogue.md
-│   ├── 05_FRD.md
+│   ├── frd/FRD-001.md
 │   ├── 06_User_Stories.md
 │   └── CHANGELOG.md        # Catalog Product Version history
 │
 └── identity-specs/         # Specification Boundary: Identity
     ├── 03_Feature_Catalogue.md
-    ├── 05_FRD.md
+    ├── frd/FRD-001.md
     ├── 06_User_Stories.md
     └── CHANGELOG.md        # Identity Product Version history
 
@@ -68,8 +68,8 @@ In V5, manual `05_Requirement_Mapping.md` tables are permanently removed. The ma
 | Identity | Identity::US-AUTH-01 | API-US-AUTH-01-001 | api | requirement_owner | [api/CHANGELOG.md](./execution/api/CHANGELOG.md#API-US-AUTH-01-001) | Boundary v1.0.0 |
 | Identity | Identity::US-AUTH-01 | WEB-US-AUTH-01-001 | web | supporting_boundary | [web/CHANGELOG.md](./execution/web/CHANGELOG.md#WEB-US-AUTH-01-001) | Boundary v1.0.0 |
 | Catalog | Catalog::US-CAT-01 | API-US-CAT-01-001 | api | requirement_owner | [api/CHANGELOG.md](./execution/api/CHANGELOG.md#API-US-CAT-01-001) | Boundary v1.0.0 |
-| Catalog | Catalog::US-CAT-01 | WEB-US-CAT-01-001 | web | supporting_boundary | [web/ROADMAP.md](./execution/web/ROADMAP.md#WEB-US-CAT-01-001) | Pending |
-| Catalog | Catalog::US-AUTH-01 | API-US-AUTH-01-002 | api | requirement_owner | [api/ROADMAP.md](./execution/api/ROADMAP.md#API-US-AUTH-01-002) | Pending |
+| Catalog | Catalog::US-CAT-01 | WEB-US-CAT-01-001 | web | supporting_boundary | [web/ROADMAP.md](./execution/web/ROADMAP.md#WEB-US-CAT-01-001) | planned |
+| Catalog | Catalog::US-AUTH-01 | API-US-AUTH-01-002 | api | requirement_owner | [api/ROADMAP.md](./execution/api/ROADMAP.md#API-US-AUTH-01-002) | planned |
 
 Validation expectations:
 
